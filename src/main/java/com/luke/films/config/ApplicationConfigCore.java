@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -18,6 +19,16 @@ import com.luke.films.security.SecurityConfig;
 @ComponentScan(basePackages = { "com.luke.films.*" })
 @Import(value = { SecurityConfig.class })
 public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
+	
+	@Bean(name = "dataSource")
+	public DriverManagerDataSource dataSource(){
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/films");
+		dataSource.setUsername("root");
+		dataSource.setPassword("lucas7");
+		return dataSource;
+	}
 
 	/*
 	 * Configure TilesConfigurer to deal with Apache Tiles

@@ -17,7 +17,10 @@ public class HomeController {
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
 	public ModelAndView denied(Principal user) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("user", user.getName());
+		if(user != null) {
+			model.addObject("user", user.getName());
+		}
+		
 		return model;
 	}
 	@RequestMapping(value = "/error")

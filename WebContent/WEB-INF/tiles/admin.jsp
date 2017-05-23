@@ -19,4 +19,5 @@
 		Welcome : ${pageContext.request.userPrincipal.name} | <a
 			href="javascript:formSubmit()"> Logout</a>
 	</h2>
+	<p>this is custom made form</p>
 </c:if>
