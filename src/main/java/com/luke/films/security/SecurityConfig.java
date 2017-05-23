@@ -25,9 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		//auth.inMemoryAuthentication().withUser("lucaskos").password("lucakos").roles("ADMIN");
-		//auth.inMemoryAuthentication().withUser("kudlaty").password("lucaskos").roles("USER");
-		auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("select username,password,enabled from users where username=?")
+		//Quering DB
+		auth.jdbcAuthentication().dataSource(dataSource)
+		.usersByUsernameQuery("select username,password,enabled from users where username=?")
 		.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
 	}
 	
@@ -45,6 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().accessDeniedPage("/denied")
 			.and()
 			    .csrf();
+	    
+	    http.authorizeRequests()
+	    	.antMatchers("/addfilm").authenticated()
+	    	.and()
+	    		.exceptionHandling().accessDeniedPage("/denied");
 
 	}
 	

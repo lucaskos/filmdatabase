@@ -30,7 +30,7 @@
 
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
-		<a href="<c:url value='/createaccount'/>">Create Account</a>
+		<a href="<c:url value='/newaccount'/>">Create Account</a>
 	</form>
 </div>
 <!-- 

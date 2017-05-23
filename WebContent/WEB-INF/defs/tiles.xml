@@ -62,9 +62,9 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp"></put-attribute>
 	</definition>
 	<!-- Create Account -->
-		<definition name="createaccount" extends="library-base">
+		<definition name="newaccount" extends="library-base">
 		<put-attribute name="title" value="Create Account"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/createaccount.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/newaccount.jsp"></put-attribute>
 	</definition>
 		<!-- Account created -->
 		<definition name="accountcreated" extends="library-base">
