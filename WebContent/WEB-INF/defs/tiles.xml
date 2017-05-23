@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="library-base" template="/WEB-INF/tiles/defaultLayout.jsp">
+		<put-attribute name="title" value="Offers Homepage"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp"></put-attribute>
+		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jsp"></put-attribute>
+		<put-attribute name="content" value=""></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
+	</definition>
+
+	<!-- HOME PAGE -->
+	<definition name="home" extends="library-base">
+		<put-attribute name="title" value="Welcome"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
+	</definition>
+
+	<!-- Films List -->
+	<definition name="filmslist" extends="library-base">
+		<put-attribute name="title" value="List of all films"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/filmslist.jsp"></put-attribute>
+	</definition>
+
+	<!-- Add book -->
+	<definition name="addfilm" extends="library-base">
+		<put-attribute name="title" value="Add film"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/addfilm.jsp"></put-attribute>
+	</definition>
+
+	<!-- Book created -->
+	<definition name="filmcreated" extends="library-base">
+		<put-attribute name="title" value="Success"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/filmcreated.jsp"></put-attribute>
+	</definition>
+
+	<!-- Login page -->
+	<definition name="login" extends="library-base">
+		<put-attribute name="title" value="Log in"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/login.jsp"></put-attribute>
+	</definition>
+	<!-- Logout Page -->
+	<definition name="logout" extends="library-base">
+		<put-attribute name="title" value="Logout Page"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/logout.jsp"></put-attribute>
+	</definition>
+	<!-- Admin page -->
+	<definition name="admin" extends="library-base">
+		<put-attribute name="title" value="Admin Page"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/admin.jsp"></put-attribute>
+	</definition>
+	<!-- Denied page -->
+	<definition name="denied" extends="library-base">
+		<put-attribute name="title" value="Access Denied"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/denied.jsp"></put-attribute>
+	</definition>
+	<!-- Error page -->
+	<definition name="error" extends="library-base">
+		<put-attribute name="title" value="Error page"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp"></put-attribute>
+	</definition>
+	<!-- Create Account -->
+		<definition name="createaccount" extends="library-base">
+		<put-attribute name="title" value="Create Account"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/createaccount.jsp"></put-attribute>
+	</definition>
+		<!-- Account created -->
+		<definition name="accountcreated" extends="library-base">
+		<put-attribute name="title" value="Success"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/accountcreated.jsp"></put-attribute>
+	</definition>
+	<!-- <definition name="home" extends="offers.base"> <put-attribute name="title" 
+		value="Offers Homepage"></put-attribute> <put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute> 
+		</definition> -->
+</tiles-definitions>
