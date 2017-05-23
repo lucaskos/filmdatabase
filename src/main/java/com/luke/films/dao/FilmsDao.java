@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-@Component("booksDao")
+@Component("filmsDao")
 public class FilmsDao {
 
 	public List<Film> getFilms() {
@@ -15,6 +15,13 @@ public class FilmsDao {
 			}
 		};
 		return list;
+	}
+	
+	public boolean addFilm(Film film) {
+		
+		
+		
+		return false;
 	}
 	
 	

@@ -3,8 +3,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <a href="<c:url value='/' />">Home</a>
-<a href="<c:url value='/filmslist' />">Book List</a>
-<a href="<c:url value='/addfilm' />">Add book</a>
+<a href="<c:url value='/filmslist' />">Films List</a>
+<a href="<c:url value='/addfilm' />">Add film</a>
 
 	<sec:authorize access="!isAuthenticated() or isAnonymous()">
 		<a class="login" href="<c:url value='/login' />">Log in</a>
