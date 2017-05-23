@@ -47,25 +47,31 @@ footer p {
 	font-size: x-small;
 }
 
-table.booklist {
+.booklist {
 	padding: 10px;
 	width: 600px;
 }
 
-table.booklist tr {
+.booklist tr {
 	height: 40px;
 	vertical-align: bottom;
 }
 
-table.booklist th, td {
+.booklist th, td {
 	text-align: left;
 	border-bottom: 1px solid #ddd;
 }
 
-table.booklist tr:hover {
+.booklist tr:hover {
 	background-color: #f5f5f5
+}
+.adduserform td{
+	border: none;
+	padding: 10px;
 }
 .errors{
 	color:red;
+	font-weight: 100;
+	padding: 10px;
 	
 }

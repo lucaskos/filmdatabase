@@ -34,4 +34,11 @@ public class UserDao {
 		
 		return jdbc.update(sql	, params) == 1;
 	}
+	
+	public boolean checkUserExist(User user) {
+		
+		String sql = "SELECT COUNT(*) FROM users WHERE username=:username";
+		
+		return jdbc.queryForObject(sql, new MapSqlParameterSource("username", user.getUsername()), Integer.class) > 0;
+	}
 }

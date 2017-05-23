@@ -89,15 +89,19 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/createaccount", method = RequestMethod.POST)
-	public String registerUser(@Valid User user, BindingResult result, Locale locale) {
+	public String registerUser(@Valid User user, BindingResult result) {
 		if (result.hasErrors()) {
 
 			return "newaccount";
 		}
 
-		user.setEnabled(true);
-
-		usersService.createUser(user);
+		if (usersService.checkUsername(user) == true) { // if user exists
+			result.rejectValue("username", "DuplicateKey.user");
+			return "newaccount";
+		} else {
+			user.setEnabled(true);
+			usersService.createUser(user);
+		}
 
 		return "accountcreated";
 	}

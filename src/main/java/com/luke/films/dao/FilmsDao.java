@@ -11,9 +11,7 @@ public class FilmsDao {
 	public List<Film> getFilms() {
 		List<Film> list = new ArrayList<Film>(){
 			{
-			add(new Film("Harry Poter", "333", new Author("rowing")));
-			add(new Film("Short history of Time", "333", new Author("Hawking")));
-			add(new Film("Shining", "666", new Author("King")));
+			add(new Film());
 			}
 		};
 		return list;
