@@ -21,12 +21,23 @@
 	</h2>
 	<p>this is custom made form</p>
 </c:if>
-
-<c:forEach var="users" items="${users}">
+<table>
+	<tr>
+		<th>Id</th>
+		<th>Username</th>
+		<th>Password</th>
+		<th>Email</th>
+		<th>Roles</th>
+	</tr>
+	<c:forEach var="users" items="${users}">
 		<tr>
-		<td><c:out value="${users.id }"/></td>
-		<td><c:out value="${users.username }"/></td>
-		<td><c:out value="${users.password }"/></td>
-		<td><c:out value="${users.email }"/></td>
+			<td><c:out value="${users.id }" /></td>
+			<td><c:out value="${users.username }" /></td>
+			<td><c:out value="${users.password }" /></td>
+			<td><c:out value="${users.email }" /></td>
+			<c:forEach var="roles" items="${users.usersRoles }">
+				<td><c:out value="${roles.role }" /></td>
+			</c:forEach>
 		</tr>
 	</c:forEach>
+</table>

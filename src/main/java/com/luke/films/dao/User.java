@@ -53,7 +53,7 @@ public class User {
 
 	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
-	private Collection<UserRole> users_roles;
+	private Collection<UserRole> usersRoles;
 
 	public User() {
 
@@ -105,18 +105,18 @@ public class User {
 		this.email = email;
 	}
 
-	public Collection<UserRole> getUsers_roles() {
-		return users_roles;
+	public Collection<UserRole> getUsersRoles() {
+		return usersRoles;
 	}
 
-	public void setUsers_roles(Collection<UserRole> users_roles) {
-		this.users_roles = users_roles;
+	public void setUsersRoles(Collection<UserRole> usersRoles) {
+		this.usersRoles = usersRoles;
 	}
 
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", id=" + id + ", password=" + password + ", enabled=" + enabled
-				+ ", email=" + email + ", users_roles=" + users_roles + "]";
+				+ ", email=" + email + ", users_roles=" + usersRoles + "]";
 	}
 
 

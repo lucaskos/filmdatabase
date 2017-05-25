@@ -30,7 +30,7 @@ public class UserRole {
 
 	// mapped to userRoles in the user.class
 
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "users_roles")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersRoles")
 	private java.util.Set<User> usersSet;
 
 	public UserRole() {
