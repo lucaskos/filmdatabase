@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,7 +51,7 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
 	private Collection<UserRole> users_roles;
 

@@ -42,7 +42,7 @@ public class UserDao {
 		params.addValue("email", user.getEmail());
 		params.addValue("enabled", user.isEnabled());
 		String sql = "INSERT INTO users (username, password, email, enabled) values (:username, :password, :email, :enabled)";
-		//session().save(user);
+		session().save(user);
 		// return jdbc.update(sql , params) == 1;
 	}
 
@@ -55,9 +55,6 @@ public class UserDao {
 @Transactional
 	public List<User> getAllUsers() {
 		 List<User> list = session().createQuery("from User").list();
-		for(User u : list)
-			System.out.println(u);
 		return list;
-		// return null;
 	}
 }

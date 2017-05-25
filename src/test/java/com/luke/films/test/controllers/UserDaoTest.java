@@ -31,7 +31,7 @@ public class UserDaoTest {
 	public void getUser() {
 		List<User> userList = userDao.getAllUsers();
 		for(User u : userList) 
-			System.out.println(u);
+			System.out.println("\n"+u+"\n");
 		 Assert.assertEquals("Hello world!", "Hello world!");
 		 
 	}
