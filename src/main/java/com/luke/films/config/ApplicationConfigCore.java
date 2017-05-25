@@ -77,37 +77,4 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 		return messageSource;
 	}
 
-	@Resource
-	private Environment env;
-
-//	@Bean
-//	public LocalSessionFactoryBean sessionFactory() {
-//		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-//		sessionFactory.setDataSource(dataSource());
-//		sessionFactory.setPackagesToScan(new String[] { "com.luke.films.dao" });
-//		sessionFactory.setHibernateProperties(hibernateProperties());
-//		return sessionFactory;
-//	}
-//
-//	private Properties hibernateProperties() {
-//		Properties properties = new Properties();
-//		// properties.put("hibernate.dialect",
-//		// env.getRequiredProperty("org.hibernate.dialect.MySQL5InnoDBDialect"));
-//		// properties.put("hibernate.show_sql",
-//		// env.getRequiredProperty("true"));
-//		// properties.put("hibernate.format_sql",
-//		// env.getRequiredProperty("true"));
-//		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-//		properties.put("hibernate.show_sql", "true");
-//		return properties;
-//	}
-//
-//	@Bean
-//	@Autowired
-//	public HibernateTransactionManager transactionManager() {
-//		HibernateTransactionManager txManager = new HibernateTransactionManager();
-//		txManager.setSessionFactory(sessionFactory().getObject());
-//		return txManager;
-//	}
-
 }
