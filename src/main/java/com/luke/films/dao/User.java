@@ -1,7 +1,11 @@
 package com.luke.films.dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,9 +50,9 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToMany
-	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	private Collection<UserRole> roles;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
+	private Collection<UserRole> users_roles;
 
 	public User() {
 
@@ -58,14 +62,6 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.email = email;
-	}
-
-	public Collection<UserRole> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Collection<UserRole> roles) {
-		this.roles = roles;
 	}
 
 	public int getId() {
@@ -108,10 +104,21 @@ public class User {
 		this.email = email;
 	}
 
+	public Collection<UserRole> getUsers_roles() {
+		return users_roles;
+	}
+
+	public void setUsers_roles(Collection<UserRole> users_roles) {
+		this.users_roles = users_roles;
+	}
+
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", email=" + email
-				+ "]";
+		return "User [username=" + username + ", id=" + id + ", password=" + password + ", enabled=" + enabled
+				+ ", email=" + email + ", users_roles=" + users_roles + "]";
 	}
+
+
+
 
 }

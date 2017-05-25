@@ -1,32 +1,40 @@
 package com.luke.films.dao;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="roles")
+@Table(name = "roles")
 public class UserRole {
-	
+
 	@Id
-	@GeneratedValue()
+	@GeneratedValue
+	@Column(name="id")
 	private int id;
-	
+
 	@Column(name="role")
 	private String role;
+
+	//mapped to userRoles in the user.class
 	
-	@ManyToMany(mappedBy = "roles")
-	private Collection<User> users;
-	
+	//@ManyToMany(mappedBy="userRoles")
+	//private java.util.Set<User> usersSet;
+
 	public UserRole() {
-		
+
 	}
-	
+
 	public UserRole(String role) {
 		this.role = role;
 	}
@@ -46,7 +54,13 @@ public class UserRole {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
-	
+
+
+
+	@Override
+	public String toString() {
+		return "UserRole [id=" + id + ", role=" + role + "]";
+	}
+
+
 }
