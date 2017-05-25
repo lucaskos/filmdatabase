@@ -15,15 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class UserDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	private NamedParameterJdbcTemplate jdbc;
-	
+
 	/*
-	 * We can't directly autwired field of dataSource because
-	 * it must be passed to jdbc template in order to work
+	 * We can't directly autwired field of dataSource because it must be passed
+	 * to jdbc template in order to work
 	 */
 	@Autowired
 	public void setDataSource(DataSource jdbc) {
@@ -34,7 +34,8 @@ public class UserDao {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public boolean createUser(User user){
+	@Transactional
+	public void createUser(User user) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("username", user.getUsername());
 		params.addValue("password", user.getPassword());
@@ -42,19 +43,19 @@ public class UserDao {
 		params.addValue("enabled", user.isEnabled());
 		System.out.println(user);
 		String sql = "INSERT INTO users (username, password, email, enabled) values (:username, :password, :email, :enabled)";
-		
-		return jdbc.update(sql	, params) == 1;
+		session().save(user);
+		// return jdbc.update(sql , params) == 1;
 	}
-	
+
 	public boolean checkUserExist(User user) {
-		
+
 		String sql = "SELECT COUNT(*) FROM users WHERE username=:username";
-		
+
 		return jdbc.queryForObject(sql, new MapSqlParameterSource("username", user.getUsername()), Integer.class) > 0;
 	}
-	
-	public List<User> getAllUsers(){
+
+	public List<User> getAllUsers() {
 		return session().createQuery("from User").list();
-		//return null;
+		// return null;
 	}
 }

@@ -3,6 +3,7 @@ package com.luke.films.dao;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -16,29 +17,28 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class User {
 	@NotBlank
 	@NotEmpty
-	@Size(min=5, max=45)
-	@Column(name="username")
+	@Size(min = 5, max = 45)
+	@Column(name = "username")
 	private String username;
-	
+
 	@Id
-	@GeneratedValue
-	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
-	
-	
+
 	@NotBlank
 	@NotEmpty
 	@Size(min = 5, max = 20)
-	@Column(name="password")
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="enabled")
+
+	@Column(name = "enabled")
 	private boolean enabled;
-	
+
 	@NotBlank
 	@NotEmpty
 	@Email
-	@Column(name="email")
+	@Column(name = "email")
 	private String email;
 
 	public User() {
@@ -46,7 +46,6 @@ public class User {
 	}
 
 	public User(String username, String password, String email) {
-		super();
 		this.username = username;
 		this.password = password;
 		this.email = email;
