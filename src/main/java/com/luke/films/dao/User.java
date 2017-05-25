@@ -1,10 +1,15 @@
 package com.luke.films.dao;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -22,7 +27,7 @@ public class User {
 	private String username;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
 
@@ -41,6 +46,10 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
+	@ManyToMany
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	private Collection<UserRole> roles;
+
 	public User() {
 
 	}
@@ -49,6 +58,14 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+	}
+
+	public Collection<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<UserRole> roles) {
+		this.roles = roles;
 	}
 
 	public int getId() {
