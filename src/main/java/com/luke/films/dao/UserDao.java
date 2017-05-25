@@ -1,7 +1,11 @@
 package com.luke.films.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -9,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserDao {
+	
+	@Autowired
+	private SessionFactory sessionFactory;
 	
 	private NamedParameterJdbcTemplate jdbc;
 	
@@ -21,7 +28,9 @@ public class UserDao {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
-
+	public Session session() {
+		return sessionFactory.getCurrentSession();
+	}
 
 	public boolean createUser(User user){
 		MapSqlParameterSource params = new MapSqlParameterSource();
@@ -40,5 +49,9 @@ public class UserDao {
 		String sql = "SELECT COUNT(*) FROM users WHERE username=:username";
 		
 		return jdbc.queryForObject(sql, new MapSqlParameterSource("username", user.getUsername()), Integer.class) > 0;
+	}
+	
+	public List<User> getAllUsers(){
+		return null;
 	}
 }

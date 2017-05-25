@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		//Quering DB
 		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery("select username,password,enabled from users where username=?")
+		.usersByUsernameQuery("select id, username,password, enabled from users where username=?")
 		.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
 	}
 	
@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    	.antMatchers("/addfilm").authenticated()
 	    	.and()
 	    		.exceptionHandling().accessDeniedPage("/denied");
-
+	    http.authorizeRequests().antMatchers("/static/**").permitAll();
 	}
 	
 }

@@ -1,13 +1,22 @@
 package com.luke.films.config;
 
+import java.util.Properties;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -18,13 +27,14 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 import com.luke.films.security.SecurityConfig;
 
 @Configuration
+@EnableWebSecurity
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.luke.films.*" })
-@Import(value = { SecurityConfig.class })
+@Import(value = { SecurityConfig.class , HibernateConfig.class})
 public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
-	
+
 	@Bean(name = "dataSource")
-	public DriverManagerDataSource dataSource(){
+	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/films");
@@ -39,7 +49,7 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 	@Bean
 	public TilesConfigurer getTilesConfigurer() {
 		TilesConfigurer configurer = new TilesConfigurer();
-		configurer.setDefinitions(new String[] { "WEB-INF/defs/tiles.xml" });
+		configurer.setDefinitions(new String[] { "/WEB-INF/defs/tiles.xml" });
 		configurer.setCheckRefresh(true);
 		return configurer;
 	}
@@ -59,12 +69,45 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
 	}
-	
+
 	@Bean("messageSource")
-	public MessageSource getMessageSource(){
+	public MessageSource getMessageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setBasename("classpath:messages");
 		return messageSource;
 	}
+
+	@Resource
+	private Environment env;
+
+//	@Bean
+//	public LocalSessionFactoryBean sessionFactory() {
+//		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//		sessionFactory.setDataSource(dataSource());
+//		sessionFactory.setPackagesToScan(new String[] { "com.luke.films.dao" });
+//		sessionFactory.setHibernateProperties(hibernateProperties());
+//		return sessionFactory;
+//	}
+//
+//	private Properties hibernateProperties() {
+//		Properties properties = new Properties();
+//		// properties.put("hibernate.dialect",
+//		// env.getRequiredProperty("org.hibernate.dialect.MySQL5InnoDBDialect"));
+//		// properties.put("hibernate.show_sql",
+//		// env.getRequiredProperty("true"));
+//		// properties.put("hibernate.format_sql",
+//		// env.getRequiredProperty("true"));
+//		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+//		properties.put("hibernate.show_sql", "true");
+//		return properties;
+//	}
+//
+//	@Bean
+//	@Autowired
+//	public HibernateTransactionManager transactionManager() {
+//		HibernateTransactionManager txManager = new HibernateTransactionManager();
+//		txManager.setSessionFactory(sessionFactory().getObject());
+//		return txManager;
+//	}
 
 }
