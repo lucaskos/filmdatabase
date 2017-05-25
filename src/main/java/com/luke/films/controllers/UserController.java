@@ -55,12 +55,12 @@ public class UserController {
 	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
 	public ModelAndView adminPage() {
-
+		
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
 		model.addObject("message", "This is protected page!");
 		model.setViewName("admin");
-
+		model.addObject("users", usersService.getAllUsers());
 		return model;
 
 	}

@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class UserDao {
 	
 	@Autowired
@@ -52,6 +54,7 @@ public class UserDao {
 	}
 	
 	public List<User> getAllUsers(){
-		return null;
+		return session().createQuery("from User").list();
+		//return null;
 	}
 }

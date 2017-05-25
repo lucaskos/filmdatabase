@@ -1,5 +1,7 @@
 package com.luke.films.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +22,7 @@ public class UsersService {
 		return usersDao.checkUserExist(user);
 	}
 	
+	public List<User> getAllUsers() {
+		return usersDao.getAllUsers();
+	}
 }
