@@ -33,6 +33,7 @@ public class UserDaoTest {
 		for(User u : userList) 
 			System.out.println("\n"+u+"\n");
 		 Assert.assertEquals("Hello world!", "Hello world!");
+		 System.out.println("\n\nhibernate template : " + userDao.getUser("lucaskos"));
 		 
 	}
 }

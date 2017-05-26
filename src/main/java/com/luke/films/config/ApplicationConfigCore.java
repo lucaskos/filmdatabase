@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,7 +31,7 @@ import com.luke.films.security.SecurityConfig;
 @EnableWebSecurity
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.luke.films.*" })
-@Import(value = { SecurityConfig.class , HibernateConfig.class})
+@Import(value = { SecurityConfig.class, HibernateConfig.class })
 public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 
 	@Bean(name = "dataSource")

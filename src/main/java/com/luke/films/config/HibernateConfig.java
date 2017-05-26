@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -15,10 +16,20 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
-	
+
 	@Autowired
 	private DataSource dataSource;
-	
+
+	/*
+	 * HibernateTemplate - helper class to interact with db. converts hibernate
+	 * exceptiopins to data access exceptions. can be used in DAO classes to get
+	 * data from db
+	 */
+	@Bean
+	public HibernateTemplate hibernateTemplate() {
+		return new HibernateTemplate(sessionFactory().getObject());
+	}
+
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -28,6 +39,9 @@ public class HibernateConfig {
 		return sessionFactory;
 	}
 
+	/*
+	 * returns hibernate properties
+	 */
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");

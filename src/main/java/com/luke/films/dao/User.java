@@ -64,6 +64,14 @@ public class User {
 		this.password = password;
 		this.email = email;
 	}
+	
+	
+
+	public User(String username, String password, Collection<UserRole> usersRoles) {
+		this.username = username;
+		this.password = password;
+		this.usersRoles = usersRoles;
+	}
 
 	public int getId() {
 		return id;

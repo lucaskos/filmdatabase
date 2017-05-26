@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,9 @@ public class UserDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private HibernateTemplate hibernateTemplate;
 
 	private NamedParameterJdbcTemplate jdbc;
 
@@ -59,7 +63,13 @@ public class UserDao {
 		return list;
 	}
 
-	public void getUser(String username) {
-		
+	public User getUser(String username) {
+		User activeUser = new User();
+		//List<?> list = session().createQuery("from User where username = :username").setString("username", username).list();
+		List<?> list = hibernateTemplate.find("FROM User where username = ?", username);
+		if(!list.isEmpty()) {
+			activeUser = (User) list.get(0);
+		}
+		return activeUser;
 	}
 }
