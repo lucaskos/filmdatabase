@@ -1,4 +1,4 @@
-package com.luke.films.test.controllers;
+package com.luke.films.test.dao;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -21,6 +23,7 @@ import com.luke.films.dao.Role;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ApplicationConfigCore.class, HibernateConfig.class})
 @WebAppConfiguration("WebContent")
+@ActiveProfiles(profiles = "test")
 public class UserDaoTest {
 
 	@Autowired
@@ -34,9 +37,8 @@ public class UserDaoTest {
 		for(User u : userList) 
 			System.out.println("\n"+u+"\n");
 		 Assert.assertEquals("Hello world!", "Hello world!");
-		 System.out.println("\n\nhibernate template : " + userDao.getUser("lucaskos"));
-		 //System.out.println(userDao.getUser("lucaskos"));
+		 System.out.println("\n\nhibernate template : " + userDao.getUser("test"));
 		 
-		 System.out.println(userDao.getUser("nowyuser").getUsersRoles());
+		 System.out.println(userDao.getUser("test").getUsersRoles());
 	}
 }
