@@ -19,7 +19,7 @@ public class UserDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 
@@ -57,6 +57,7 @@ public class UserDao {
 		return jdbc.queryForObject(sql, new MapSqlParameterSource("username", user.getUsername()), Integer.class) > 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<User> getAllUsers() {
 		List<User> list = session().createQuery("from User").list();
@@ -65,9 +66,8 @@ public class UserDao {
 
 	public User getUser(String username) {
 		User activeUser = new User();
-		//List<?> list = session().createQuery("from User where username = :username").setString("username", username).list();
-		List<?> list = hibernateTemplate.find("FROM User where username = ?", username);
-		if(!list.isEmpty()) {
+		List<?> list = session().createQuery("from User where username=?").setParameter(0, username).list();
+		if (!list.isEmpty()) {
 			activeUser = (User) list.get(0);
 		}
 		return activeUser;

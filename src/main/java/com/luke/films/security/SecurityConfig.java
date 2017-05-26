@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	    http.userDetailsService(userDetailsService)
+	    http
 	    .authorizeRequests()
 			.antMatchers("/addfilm").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 			.and()
