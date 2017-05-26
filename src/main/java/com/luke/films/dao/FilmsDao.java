@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,5 +27,13 @@ public class FilmsDao {
 		sessionFactory.getCurrentSession().save(film);
 	}
 	
+	public void deleteFilm(Film film) {
+		sessionFactory.getCurrentSession().remove(film);
+	}
+	
+	public Film deleteById(int id) {
+		List<Film> list = sessionFactory.getCurrentSession().createQuery("from Film where id=?").setParameter(0, id).list();
+		return list.get(0);
+	}
 	
 }
