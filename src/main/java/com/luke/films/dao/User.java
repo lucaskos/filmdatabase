@@ -1,8 +1,5 @@
 package com.luke.films.dao;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -38,7 +35,7 @@ public class User {
 
 	@NotBlank
 	@NotEmpty
-	@Size(min = 5, max = 20)
+	@Size(min = 5, max = 80)
 	@Column(name = "password")
 	private String password;
 

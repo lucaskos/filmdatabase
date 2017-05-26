@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +24,8 @@ public class UserDao {
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
-
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	private NamedParameterJdbcTemplate jdbc;
 
 	/*
@@ -46,6 +49,7 @@ public class UserDao {
 		params.addValue("email", user.getEmail());
 		params.addValue("enabled", user.isEnabled());
 		String sql = "INSERT INTO users (username, password, email, enabled) values (:username, :password, :email, :enabled)";
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		session().save(user);
 		// return jdbc.update(sql , params) == 1;
 	}
