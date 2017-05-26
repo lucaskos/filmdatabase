@@ -52,9 +52,14 @@ public class UserDao {
 
 		return jdbc.queryForObject(sql, new MapSqlParameterSource("username", user.getUsername()), Integer.class) > 0;
 	}
-@Transactional
+
+	@Transactional
 	public List<User> getAllUsers() {
-		 List<User> list = session().createQuery("from User").list();
+		List<User> list = session().createQuery("from User").list();
 		return list;
+	}
+
+	public void getUser(String username) {
+		
 	}
 }
