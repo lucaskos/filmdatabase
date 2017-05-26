@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.luke.films.dao.UserDao;
-import com.luke.films.dao.UserRole;
+import com.luke.films.dao.Role;
 
 @Service
 
@@ -40,12 +40,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 			user.isEnabled(), true, true, true, authorities);
 	}
 
-	private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+	private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
 
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
 		// Build user's authorities
-		for (UserRole userRole : userRoles) {
+		for (Role userRole : userRoles) {
 			setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
 		}
 

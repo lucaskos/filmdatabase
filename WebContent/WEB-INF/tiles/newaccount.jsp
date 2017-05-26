@@ -1,12 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<p>Create user</p>
-<sf:form class='adduserform' name='adduserform' modelAttribute='user'
+
+<sf:form class='register' name='adduserform' modelAttribute='user'
 	action="${pageContext.request.contextPath }/createaccount"
 	method='POST'>
-
+<h2>Create user</h2>
 	<table>
+	
 		<tr>
 			<td>Username:</td>
 			<td><sf:input type='text' name='username' path='username' />

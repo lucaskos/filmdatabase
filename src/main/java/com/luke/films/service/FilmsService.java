@@ -17,4 +17,8 @@ public class FilmsService {
 	public List<Film> getFilms(){
 		return filmsDao.getFilms();
 	}
+	
+	public void addFilm(Film film){
+		filmsDao.addFilm(film);
+	}
 }

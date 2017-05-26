@@ -1,35 +1,44 @@
 package com.luke.films.dao;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "roles")
 public class Role {
-	private Film film;
-	private Actor actor;
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int id;
+
+	@Column(name = "role")
 	private String role;
-	
-	public Role(){
-		
+
+	// mapped to userRoles in the user.class
+
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersRoles")
+	private java.util.Set<User> usersSet;
+
+	public Role() {
+
 	}
 
-	public Role(Film film, Actor actor, String role) {
-		super();
-		this.film = film;
-		this.actor = actor;
+	public Role(String role) {
 		this.role = role;
 	}
 
-	public Film getFilm() {
-		return film;
+	public int getId() {
+		return id;
 	}
 
-	public void setFilm(Film film) {
-		this.film = film;
-	}
-
-	public Actor getActor() {
-		return actor;
-	}
-
-	public void setActor(Actor actor) {
-		this.actor = actor;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getRole() {
@@ -39,7 +48,18 @@ public class Role {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
-	
+
+	public java.util.Set<User> getUsersSet() {
+		return usersSet;
+	}
+
+	public void setUsersSet(java.util.Set<User> usersSet) {
+		this.usersSet = usersSet;
+	}
+
+	@Override
+	public String toString() {
+		return "UserRole [role=" + role + "]";
+	}
+
 }

@@ -1,10 +1,11 @@
 package com.luke.films.dao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,15 @@ public class UserDao {
 		params.addValue("enabled", user.isEnabled());
 		String sql = "INSERT INTO users (username, password, email, enabled) values (:username, :password, :email, :enabled)";
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		
+		
+		List list = session().createQuery("from Role").list();
+		Set<Role> ur = new HashSet<>();
+		ur.add((Role) list.get(1));//save new user with the permission of ROLE_USER
+		user.setUsersRoles(ur);
+		
+		user.setUsersRoles(ur);
+		
 		session().save(user);
 		// return jdbc.update(sql , params) == 1;
 	}

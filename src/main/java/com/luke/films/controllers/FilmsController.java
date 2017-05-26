@@ -1,12 +1,17 @@
 package com.luke.films.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.luke.films.dao.Film;
 import com.luke.films.service.FilmsService;
 
 @Controller
@@ -22,13 +27,19 @@ public class FilmsController {
 	}
 	
 	@RequestMapping(value="/addfilm")
-	@Secured("hasRole('USER')")
-	public String addFilm() {
+	public String addFilm(Model model) {
+		
+	model.addAttribute("film", new Film());
 		return "addfilm";
 	}
 	
 	@RequestMapping(value="/docreate", method=RequestMethod.POST)
-	public String filmAdded(){
+	public String filmAdded(@Valid Film film, BindingResult results){
+		if(results.hasErrors()) {
+			return "addfilm";
+		}
+		System.out.println(film);
+		filmsService.addFilm(film);
 		return "filmcreated";
 	}
 

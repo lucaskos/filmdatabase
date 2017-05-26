@@ -17,6 +17,7 @@ import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
 import com.luke.films.dao.User;
 import com.luke.films.dao.UserDao;
+import com.luke.films.dao.Role;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ApplicationConfigCore.class, HibernateConfig.class})
 @WebAppConfiguration("WebContent")
@@ -24,8 +25,8 @@ public class UserDaoTest {
 
 	@Autowired
 	private UserDao userDao;
-	//@Autowired
-	//private DataSource dataSource;
+	
+
 
 	@Test
 	public void getUser() {
@@ -34,6 +35,8 @@ public class UserDaoTest {
 			System.out.println("\n"+u+"\n");
 		 Assert.assertEquals("Hello world!", "Hello world!");
 		 System.out.println("\n\nhibernate template : " + userDao.getUser("lucaskos"));
+		 //System.out.println(userDao.getUser("lucaskos"));
 		 
+		 System.out.println(userDao.getUser("nowyuser").getUsersRoles());
 	}
 }

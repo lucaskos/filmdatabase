@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	    http
+		http
 	    .authorizeRequests()
 			.antMatchers("/addfilm").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 			.and()
@@ -93,6 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().accessDeniedPage("/denied")
 			.and()
 			    .csrf();
+	    
 	    http.authorizeRequests().antMatchers("/static/**").permitAll();
 	}
 	

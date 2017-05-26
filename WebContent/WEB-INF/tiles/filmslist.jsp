@@ -1,17 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h1>this is gonna be list of books</h1>
+<h1>Films  list</h1>
 
 <table class="booklist">
 	<tr>
 		<th>Title</th>
-		<th>Author</th>
-		<th>Isbn</th>
+		<th>Year</th>
+		<th>Description</th>
+		<th>Rating</th>
 	</tr>
-	<c:forEach var="books" items="${books}">
+	<c:forEach var="film" items="${film}">
 		<tr>
-		<td><c:out value="${books.title }"/></td>
-		<td><c:out value="${books.author.firstName }"/></td>
-		<td><c:out value="${books.isbn }"/></td>
+		<td><c:out value="${film.title }"/></td>
+		<td><c:out value="${film.year }"/></td>
+		<td><c:out value="${film.description }"/></td>
+		<td><c:out value="${film.rating }"/></td>
+		<c:forEach var="actors" items="${film.actors }">
+			<c:out value="${actors.name}"></c:out>
+		</c:forEach>
 		</tr>
 	</c:forEach>
 </table>
