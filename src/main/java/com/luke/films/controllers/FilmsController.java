@@ -22,7 +22,7 @@ public class FilmsController {
 	
 	@RequestMapping(value="/filmslist", method=RequestMethod.GET)
 	public String showBookList(Model model) {
-		model.addAttribute("film" ,filmsService.getFilms());
+		model.addAttribute("film" ,filmsService.getAllFilms());
 		return "filmslist";
 	}
 	
