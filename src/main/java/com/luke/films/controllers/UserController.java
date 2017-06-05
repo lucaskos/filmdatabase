@@ -1,7 +1,5 @@
 package com.luke.films.controllers;
 
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,8 +56,6 @@ public class UserController {
 		model.addObject("title", "Spring Security Custom Login Form");
 		model.addObject("message", "This is protected page!");
 		model.setViewName("admin");
-		List<User> allUsers = usersService.getAllUsers();
-		for(User u : allUsers)
 		model.addObject("users", usersService.getAllUsers());
 		return model;
 
