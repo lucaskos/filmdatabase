@@ -68,7 +68,6 @@ public class UserController {
 	@RequestMapping(value = "/logout")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("Before" + auth);
 		if (auth != null) {
 			auth.setAuthenticated(false);
 			SecurityContextHolder.getContextHolderStrategy().clearContext();

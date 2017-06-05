@@ -41,4 +41,8 @@ public class FilmsService {
 	public List<Film> getFilmsByYear(int year) {
 		return filmsDao.getFilmsByYear(year);
 	}
+	
+	public List<Film> findFilms(int max, int count){
+		return filmsDao.findFilms(max, count);
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,9 +39,14 @@ public class FilmsController {
 		if(results.hasErrors()) {
 			return "addfilm";
 		}
-		System.out.println(film);
 		filmsService.addFilm(film);
 		return "filmcreated";
+	}
+	
+	@RequestMapping(value="/{filmId}", method=RequestMethod.GET)
+	public String getFilm(@PathVariable int filmId, Model model){
+		model.addAttribute(filmsService.getFilmById(filmId));
+		return "film";
 	}
 
 }

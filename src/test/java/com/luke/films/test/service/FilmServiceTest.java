@@ -44,44 +44,76 @@ public class FilmServiceTest {
 		filmsDao.addFilm(film3);
 
 		List<Film> allFilms = filmsDao.getAllFilms();
-		
-		//check if film equals the one created in db
+
+		// check if film equals the one created in db
 		assertEquals(film1, allFilms.get(0));
 		assertEquals(allFilms.get(1), film2);
 
 		// list should NOT be empty
 		assertNotNull(allFilms);
-		
-		//checking if films added to db have the same title as one in db
+
+		// checking if films added to db have the same title as one in db
 		assertEquals(film1, filmsDao.getFilmByTitle(film1.getTitle()));
 		assertEquals(film2, filmsDao.getFilmByTitle(film2.getTitle()));
 
 		List<Film> filmsByYearFromDb = filmsDao.getFilmsByYear(film3.getYear());
-		
+
 		assertNotNull(filmsByYearFromDb);
 		List<Film> filmsByYear = new ArrayList<>();
 		filmsByYear.add(film2);
 		filmsByYear.add(film3);
-		
-		//checking if 2 films of the same year equal those in db
+
+		// checking if 2 films of the same year equal those in db
 		assertEquals(filmsByYearFromDb, filmsByYear);
-		
+
 		// removing the films by Film object
 		for (Film f : allFilms)
 			filmsDao.deleteFilm(f);
-		
+
 		// adding test Film objects to db again
 		filmsDao.addFilm(film1);
 		filmsDao.addFilm(film2);
-		
+
 		allFilms = filmsDao.getAllFilms();
-		
-		//removing films by Film id
-		for(Film f : allFilms)
+
+		// removing films by Film id
+		for (Film f : allFilms)
 			filmsDao.deleteById(f.getId());
+
+		assertNull(filmsDao.getAllFilms());
+
+		int filmsNumber = 50;
+		List<Film> films = createFilms(filmsNumber);
+
+		// adding filmsNumber of films to db
+		for (Film f : films)
+			filmsDao.addFilm(f);
+		
+		List<Film> findFilms = filmsDao.findFilms(5, 10);
+		
+		for(Film f : findFilms)
+			System.out.println(f);
+		
+		// removing everything from db
+		for (Film f : films)
+			filmsDao.deleteFilm(f);
 		
 		assertNull(filmsDao.getAllFilms());
-		
+
+		// findFilm(films, 4, 10);
+	}
+
+	private List<Film> createFilms(int filmsNumber) {
+		List<Film> list = new ArrayList<>();
+
+		for (int i = 0; i < filmsNumber; i++) {
+			Film temp = new Film();
+			temp.setId(i);
+			temp.setTitle("TITLE :" + i);
+			temp.setYear(1900 + i);
+			list.add(temp);
+		}
+		return list;
 	}
 
 }

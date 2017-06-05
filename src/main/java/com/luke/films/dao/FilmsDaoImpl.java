@@ -41,6 +41,7 @@ public class FilmsDaoImpl implements FilmsDao {
 	public void deleteFilm(Film film) {
 		sessionFactory.getCurrentSession().delete(film);
 	}
+
 	@Override
 	public void deleteById(int id) {
 		Film f = getFilmById(id);
@@ -61,21 +62,41 @@ public class FilmsDaoImpl implements FilmsDao {
 	@Override
 	public Film getFilmByTitle(String title) {
 		String query = "from Film where title = ?1";
-		 List<?> list = sessionFactory.getCurrentSession().createQuery(query).setParameter("1", title).list();
-		 if(!list.isEmpty())
-			 return (Film) list.get(0);
-		 else 
-			 return null;
+		List<?> list = sessionFactory.getCurrentSession().createQuery(query).setParameter("1", title).list();
+		if (!list.isEmpty())
+			return (Film) list.get(0);
+		else
+			return null;
 	}
 
 	@Override
 	public List<Film> getFilmsByYear(int year) {
 		String query = "from Film where year = ?1";
+		@SuppressWarnings("unchecked")
 		List<Film> list = sessionFactory.getCurrentSession().createQuery(query).setParameter("1", year).list();
-		if(!list.isEmpty())
+		if (!list.isEmpty())
 			return list;
-		else 
+		else
 			return null;
+	}
+
+	//TO DO find next @count films starting with @id, pagination
+	@Override
+	public List<Film> findFilms(int id, int count) {
+		
+		String countQ = "select count(*) from Film";
+		Query countQuery = sessionFactory.getCurrentSession().createQuery(countQ);
+		Long countResults = (Long) countQuery.uniqueResult();
+		
+		int lastPageNumber = (int) Math.ceil(countResults/count);
+		
+		System.out.println(lastPageNumber);
+		
+		Query<Film> query = sessionFactory.getCurrentSession().createQuery("From Film");
+		query.setFirstResult(id);
+		query.setMaxResults(count);
+		List<Film> list = query.list();
+		return list;
 	}
 
 }

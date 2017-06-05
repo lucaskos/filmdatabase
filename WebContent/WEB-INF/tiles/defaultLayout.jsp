@@ -6,7 +6,9 @@
 <html>
 <head>
 <link href="static/css/main.css" type="text/css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<tiles:insertAttribute name="includes"></tiles:insertAttribute>
 <title>Insert title here</title>
 </head>
 <body>
