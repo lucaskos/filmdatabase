@@ -3,7 +3,6 @@ package com.luke.films.security;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -50,13 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		//Quering DB
-//		auth.jdbcAuthentication().dataSource(dataSource)
-//		.usersByUsernameQuery("select id, username,password, enabled from users where username=?")
-//		.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
-		
-		//auth.inMemoryAuthentication().withUser("lucaskos").password("lucaskos").roles("ADMIN");
-		//auth.inMemoryAuthentication().withUser("lucaskos7").password("lucaskos7").roles("USER");
-		
 		auth.userDetailsService(userDetailsService);
 		auth.authenticationProvider(authenticationProvider());
 	}

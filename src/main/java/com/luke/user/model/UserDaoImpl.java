@@ -23,8 +23,6 @@ public class UserDaoImpl implements UserDao {
 	private SessionFactory sessionFactory;
 
 	@Autowired
-	private HibernateTemplate hibernateTemplate;
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 	private NamedParameterJdbcTemplate jdbc;
 
@@ -43,14 +41,12 @@ public class UserDaoImpl implements UserDao {
 
 	@Transactional
 	public void createUser(User user) {
-		
-			Set<Role> ur = new HashSet<>();
-			ur.add(new Role("ROLE_USER"));
-			user.setUsersRoles(ur);
-			
 
+		Set<Role> ur = new HashSet<>();
+		ur.add(new Role("ROLE_USER"));
+		user.setUsersRoles(ur);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		session().save(user);
-		// return jdbc.update(sql , params) == 1;
 	}
 
 	public boolean checkUserExist(User user) {
@@ -64,7 +60,7 @@ public class UserDaoImpl implements UserDao {
 	@Transactional
 	public List<User> getAllUsers() {
 		List<User> list = session().createQuery("from User").list();
-		if(list.isEmpty())
+		if (list.isEmpty())
 			return null;
 		return list;
 	}
@@ -86,6 +82,6 @@ public class UserDaoImpl implements UserDao {
 	public void removeUser(User user) {
 		User temp = getUser(user.getUsername());
 		session().delete(temp);
-		
+
 	}
 }
