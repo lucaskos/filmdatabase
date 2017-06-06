@@ -1,8 +1,10 @@
-package com.luke.films.dao;
+package com.luke.films.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,21 +13,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
-@Table(name = "films")
+@Table(name = "film")
 public class Film {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "film_id")
+	private int filmId;
 
 	@NotNull
 	@Size(max = 60)
@@ -38,9 +43,8 @@ public class Film {
 
 	private float rating;
 
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@JoinTable(name = "actor_films", joinColumns = @JoinColumn(name = "films_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "actor_id", referencedColumnName = "id"))
-	private Set<Actor> actors;
+	@OneToMany(mappedBy = "film")
+	private Set<ActorFilm> actorsFilms = new HashSet<ActorFilm>();
 
 	public Film() {
 
@@ -57,19 +61,16 @@ public class Film {
 		this.description = description;
 	}
 
-	public Film(String title, int year, String description, Set<Actor> actors) {
-		this.title = title;
-		this.year = year;
-		this.description = description;
-		this.actors = actors;
+	public void addActor(ActorFilm actorsFilms) {
+		this.actorsFilms.add(actorsFilms);
 	}
 
-	public int getId() {
-		return id;
+	public int getFilmId() {
+		return filmId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setFilmId(int filmId) {
+		this.filmId = filmId;
 	}
 
 	public String getTitle() {
@@ -104,28 +105,30 @@ public class Film {
 		this.rating = rating;
 	}
 
-	public Set<Actor> getActors() {
-		return actors;
+	public Set<ActorFilm> getActorsFilms() {
+		return this.actorsFilms;
 	}
 
-	public void setActors(Set<Actor> actors) {
-		this.actors = actors;
+	public void setActorsFilms(Set<ActorFilm> actorsFilms) {
+		this.actorsFilms = actorsFilms;
+	}
+
+	public void addActorsFilms(ActorFilm actorFilms) {
+		this.actorsFilms.add(actorFilms);
 	}
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", year=" + year + ", description=" + description + ", rating="
-				+ rating + "]";
+		return "Film [id=" + filmId + ", title=" + title + ", year=" + year + ", description=" + description
+				+ ", rating=" + rating + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((actors == null) ? 0 : actors.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + id;
-		result = prime * result + Float.floatToIntBits(rating);
+		result = prime * result + filmId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + year;
 		return result;
@@ -140,20 +143,12 @@ public class Film {
 		if (getClass() != obj.getClass())
 			return false;
 		Film other = (Film) obj;
-/*		if (actors == null) {
-			if (other.actors.isEmpty() || other.actors == null)
-				return true;
-		} else if (!actors.equals(other.actors))
-			return false;
-			*/
 		if (description == null) {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (id != other.id)
-			return false;
-		if (Float.floatToIntBits(rating) != Float.floatToIntBits(other.rating))
+		if (filmId != other.filmId)
 			return false;
 		if (title == null) {
 			if (other.title != null)

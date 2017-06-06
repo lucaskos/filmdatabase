@@ -23,7 +23,7 @@ import com.luke.films.security.SecurityConfig;
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.luke.films.*" })
+@ComponentScan(basePackages = { "com.luke.*"})
 @Import(value = { SecurityConfig.class, HibernateConfig.class })
 public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 

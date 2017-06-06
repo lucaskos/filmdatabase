@@ -1,4 +1,4 @@
-package com.luke.films.dao;
+package com.luke.films.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.luke.films.dao;
+package com.luke.user.model;
 
 import java.util.HashSet;
 import java.util.List;
@@ -43,13 +43,11 @@ public class UserDaoImpl implements UserDao {
 
 	@Transactional
 	public void createUser(User user) {
-		List list = session().createQuery("from Role").list();
-		Set<Role> ur = new HashSet<>();
-		ur.add((Role) list.get(1));// save new user with the permission of
-									// ROLE_USER
-		user.setUsersRoles(ur);
-
-		user.setUsersRoles(ur);
+		
+			Set<Role> ur = new HashSet<>();
+			ur.add(new Role("ROLE_USER"));
+			user.setUsersRoles(ur);
+			
 
 		session().save(user);
 		// return jdbc.update(sql , params) == 1;

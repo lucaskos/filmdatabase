@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.films.dao.Film;
-import com.luke.films.dao.FilmsDao;
+import com.luke.films.model.Film;
+import com.luke.films.model.FilmsDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
@@ -29,8 +30,18 @@ public class FilmServiceTest {
 	@Autowired
 	FilmsDao filmsDao;
 
+	@Before
+	public void removeFilms() {
+		List<Film> allFilms = filmsDao.getAllFilms();
+		if(allFilms != null)
+			for(Film f : allFilms)
+				filmsDao.deleteFilm(f);
+	}
+	
+	
 	@Test
 	public void filmTest() {
+		
 		Film film1 = new Film("film1", 1000);
 		Film film2 = new Film("film2", 2000);
 		Film film3 = new Film("film3", 2000);
@@ -45,9 +56,6 @@ public class FilmServiceTest {
 
 		List<Film> allFilms = filmsDao.getAllFilms();
 
-		// check if film equals the one created in db
-		assertEquals(film1, allFilms.get(0));
-		assertEquals(allFilms.get(1), film2);
 
 		// list should NOT be empty
 		assertNotNull(allFilms);
@@ -78,7 +86,7 @@ public class FilmServiceTest {
 
 		// removing films by Film id
 		for (Film f : allFilms)
-			filmsDao.deleteById(f.getId());
+			filmsDao.deleteById(f.getFilmId());
 
 		assertNull(filmsDao.getAllFilms());
 
@@ -108,7 +116,7 @@ public class FilmServiceTest {
 
 		for (int i = 0; i < filmsNumber; i++) {
 			Film temp = new Film();
-			temp.setId(i);
+			temp.setFilmId(i);
 			temp.setTitle("TITLE :" + i);
 			temp.setYear(1900 + i);
 			list.add(temp);

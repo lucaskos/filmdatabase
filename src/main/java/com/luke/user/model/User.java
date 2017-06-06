@@ -1,4 +1,4 @@
-package com.luke.films.dao;
+package com.luke.user.model;
 
 import java.util.Set;
 
@@ -48,7 +48,7 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST})
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
 	private Set<Role> usersRoles;
 

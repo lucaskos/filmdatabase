@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luke.films.dao.Film;
+import com.luke.films.model.Actor;
+import com.luke.films.model.ActorFilm;
+import com.luke.films.model.ActorFilmDao;
+import com.luke.films.model.Film;
 import com.luke.films.service.FilmsService;
 
 @Controller
@@ -18,6 +21,7 @@ public class FilmsController {
 	
 	@Autowired
 	private FilmsService filmsService;
+	
 	
 	@RequestMapping(value="/filmslist", method=RequestMethod.GET)
 	public String showBookList(Model model) {
@@ -43,7 +47,13 @@ public class FilmsController {
 	
 	@RequestMapping(value="/{filmId}", method=RequestMethod.GET)
 	public String getFilm(@PathVariable int filmId, Model model){
-		model.addAttribute(filmsService.getFilmById(filmId));
+		Actor actor = new Actor();
+		model.addAttribute(actor);
+		
+		
+		
+		Film filmById = filmsService.getFilmById(filmId);
+		model.addAttribute("film", filmById);
 		return "film";
 	}
 

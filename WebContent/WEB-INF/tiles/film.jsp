@@ -2,13 +2,9 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
-<c:out value="${film.id }"></c:out>
+<c:out value="${film.filmId }"></c:out>
 <c:out value="${film.title }"></c:out>
 <c:out value="${film.year }"></c:out>
-<c:forEach var="actors" items="${film.actors }">
-	<c:out value="${actors.name}"></c:out>
-	
-</c:forEach>
 
 <sf:form class='addactor' name='addactor' modelAttribute='actor'
 	action="${pageContext.request.contextPath }/addactor"

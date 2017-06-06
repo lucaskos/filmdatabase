@@ -15,8 +15,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.films.dao.Actor;
-import com.luke.films.dao.ActorDao;
+import com.luke.films.model.Actor;
+import com.luke.films.model.ActorDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })

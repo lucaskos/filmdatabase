@@ -14,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
 import com.luke.films.controllers.FilmsController;
-import com.luke.films.dao.Film;
+import com.luke.films.model.Film;
 import com.luke.films.service.FilmsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,7 +37,7 @@ public class FilmsControllerTest {
 		List<Film> list = null;
 		Film temp = new Film();
 		for(int i = 0; i < filmsNumber; i++){
-			temp.setId(i);
+			temp.setFilmId(i);
 			temp.setTitle("TITLE :" +i);
 			temp.setYear(1900 + i);
 		}

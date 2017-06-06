@@ -13,9 +13,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.luke.films.dao.UserDaoImpl;
-import com.luke.films.dao.Role;
-import com.luke.films.dao.UserDao;
+
+import com.luke.user.model.Role;
+import com.luke.user.model.UserDao;
+import com.luke.user.model.UserDaoImpl;
 
 @Service
 
@@ -26,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.luke.films.dao.User activeUsr = userDao.getUser(username);
+		com.luke.user.model.User activeUsr = userDao.getUser(username);
 		List<GrantedAuthority> authorities = buildUserAuthority(activeUsr.getUsersRoles());
 		
 		return buildUserForAuthentication(activeUsr, authorities);
@@ -35,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 * Converts the user from com.luke.films.dao package
 	 * to org.springframework.security.core.userdetails.User
 	 */
-	private User buildUserForAuthentication(com.luke.films.dao.User user,
+	private User buildUserForAuthentication(com.luke.user.model.User user,
 		List<GrantedAuthority> authorities) {
 		return new User(user.getUsername(), user.getPassword(),
 			user.isEnabled(), true, true, true, authorities);
