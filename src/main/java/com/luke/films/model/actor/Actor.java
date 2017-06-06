@@ -1,4 +1,4 @@
-package com.luke.films.model;
+package com.luke.films.model.actor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.luke.films.model.ActorFilm;
 
 @Entity
 @Table(name = "actor")

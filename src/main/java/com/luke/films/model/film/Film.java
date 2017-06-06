@@ -1,4 +1,4 @@
-package com.luke.films.model;
+package com.luke.films.model.film;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
+
+import com.luke.films.model.ActorFilm;
 
 @Entity
 @Table(name = "film")

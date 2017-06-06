@@ -1,4 +1,4 @@
-package com.luke.films.model;
+package com.luke.films.model.film;
 
 import java.util.List;
 

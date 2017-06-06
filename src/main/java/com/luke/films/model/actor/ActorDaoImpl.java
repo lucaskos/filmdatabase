@@ -1,4 +1,4 @@
-package com.luke.films.model;
+package com.luke.films.model.actor;
 
 import java.util.List;
 

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luke.films.model.Actor;
 import com.luke.films.model.ActorFilm;
 import com.luke.films.model.ActorFilmDao;
-import com.luke.films.model.Film;
+import com.luke.films.model.actor.Actor;
+import com.luke.films.model.film.Film;
 import com.luke.films.service.FilmsService;
 
 @Controller

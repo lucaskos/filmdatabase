@@ -14,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
 import com.luke.films.controllers.FilmsController;
-import com.luke.films.model.Film;
+import com.luke.films.model.film.Film;
 import com.luke.films.service.FilmsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)

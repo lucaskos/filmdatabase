@@ -19,6 +19,9 @@ import javax.transaction.Transaction;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.luke.films.model.actor.Actor;
+import com.luke.films.model.film.Film;
+
 @Entity
 @Table(name = "actor_film")
 @Transactional(propagation = Propagation.SUPPORTS,rollbackFor = Exception.class)

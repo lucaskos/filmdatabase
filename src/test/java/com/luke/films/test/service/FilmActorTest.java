@@ -18,11 +18,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.films.model.Actor;
-import com.luke.films.model.ActorDao;
 import com.luke.films.model.ActorFilm;
-import com.luke.films.model.Film;
-import com.luke.films.model.FilmsDao;
+import com.luke.films.model.actor.Actor;
+import com.luke.films.model.actor.ActorDao;
+import com.luke.films.model.film.Film;
+import com.luke.films.model.film.FilmsDao;
 import com.luke.user.model.UserDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+import com.luke.films.model.actor.Actor;
+import com.luke.films.model.film.Film;
+
+@Transactional("actorFilm")
+@Component
 public class ActorFilmDao {
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -24,5 +28,9 @@ public class ActorFilmDao {
 		actorFilm.setRole("null"); //TODO null for now
 		
 		session().save(actorFilm);
+	}
+	
+	public Actor getActor(){
+		return actorFilm.getActor();
 	}
 }

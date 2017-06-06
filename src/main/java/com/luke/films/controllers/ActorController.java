@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luke.films.model.Actor;
-import com.luke.films.model.ActorDao;
+import com.luke.films.model.ActorFilm;
 import com.luke.films.model.ActorFilmDao;
-import com.luke.films.model.Film;
+import com.luke.films.model.actor.Actor;
+import com.luke.films.model.actor.ActorDao;
+import com.luke.films.model.film.Film;
 import com.luke.films.service.FilmsService;
 
 @Controller
@@ -24,14 +25,21 @@ public class ActorController {
 
 	@Autowired
 	private FilmsService filmsService;
+	
+	@Autowired
+	private ActorFilmDao actorFilm;
 
+//	@RequestMapping(value = "/addactor", method = RequestMethod.POST)
+//	public String addactor(@ModelAttribute("actor") @Valid Actor actor, Film film, BindingResult results) {
+//		System.out.println(film);
+//				actorDao.addActor(actor);
+//		return "filmslist";
+//
+//	}
 	@RequestMapping(value = "/addactor", method = RequestMethod.POST)
-	public String addactor(@ModelAttribute("actor") @Valid Actor actor, Film film, BindingResult results) {
-		int filmId = film.getFilmId();
-		System.out.println(filmId);
-				actorDao.addActor(actor);
+	public String addactor(@ModelAttribute("actorFilm") ActorFilmDao actorFilm, BindingResult results) {
+		
 		return "filmslist";
 
 	}
-
 }

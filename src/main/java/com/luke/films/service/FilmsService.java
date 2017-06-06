@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.luke.films.model.Film;
-import com.luke.films.model.FilmsDao;
+import com.luke.films.model.film.Film;
+import com.luke.films.model.film.FilmsDao;
 
 
 @Component("filmsService")
