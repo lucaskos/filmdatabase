@@ -1,6 +1,7 @@
 package com.luke.films.model.film;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,6 +25,7 @@ import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.luke.films.model.ActorFilm;
+import com.luke.films.model.actor.Actor;
 
 @Entity
 @Table(name = "film")
@@ -47,7 +49,7 @@ public class Film {
 
 	@OneToMany(mappedBy = "film")
 	private Set<ActorFilm> actorsFilms = new HashSet<ActorFilm>();
-
+	
 	public Film() {
 
 	}
@@ -118,7 +120,7 @@ public class Film {
 	public void addActorsFilms(ActorFilm actorFilms) {
 		this.actorsFilms.add(actorFilms);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Film [id=" + filmId + ", title=" + title + ", year=" + year + ", description=" + description

@@ -45,16 +45,6 @@ public class FilmsController {
 		return "filmcreated";
 	}
 	
-	@RequestMapping(value="/{filmId}", method=RequestMethod.GET)
-	public String getFilm(@PathVariable int filmId, Model model){
-		Actor actor = new Actor();
-		model.addAttribute(actor);
-		
-		
-		
-		Film filmById = filmsService.getFilmById(filmId);
-		model.addAttribute("film", filmById);
-		return "film";
-	}
+
 
 }

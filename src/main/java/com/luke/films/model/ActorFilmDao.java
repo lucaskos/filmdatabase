@@ -1,7 +1,9 @@
 package com.luke.films.model;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,28 +11,32 @@ import org.springframework.transaction.annotation.Transactional;
 import com.luke.films.model.actor.Actor;
 import com.luke.films.model.film.Film;
 
-@Transactional("actorFilm")
+@Transactional
 @Component
 public class ActorFilmDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	private ActorFilm actorFilm;
 	
 	private Session session(){
-		return sessionFactory.getCurrentSession();
+		try {
+			return sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			return sessionFactory.openSession();
+		}
 	}
 	
-	public void setActor(Film film, Actor actor){
-		actorFilm = new ActorFilm();
+	
+	public void addActorToFilm(Film film, Actor actor, String role) {
+		Transaction tx = sessionFactory.openSession().beginTransaction();
+		ActorFilm actorFilm = new ActorFilm();
 		actorFilm.setFilm(film);
 		actorFilm.setActor(actor);
-		actorFilm.setRole("null"); //TODO null for now
+		actorFilm.setRole(role);
 		
 		session().save(actorFilm);
+		
+		tx.commit();
 	}
 	
-	public Actor getActor(){
-		return actorFilm.getActor();
-	}
 }

@@ -24,24 +24,28 @@ import com.luke.films.model.film.Film;
 
 @Entity
 @Table(name = "actor_film")
-@Transactional(propagation = Propagation.SUPPORTS,rollbackFor = Exception.class)
+@Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
 public class ActorFilm implements Serializable {
 	@Column(name = "actor_film_id")
 	@Id
 	@GeneratedValue
 	private int actorFilmId;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "film_id")
 	private Film film;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "actor_id")
 	private Actor actor;
-	
+
 	@Column(name = "role")
 	private String role;
-	
+
+	public ActorFilm() {
+
+	}
+
 	public int getActorFilmId() {
 		return actorFilmId;
 	}
@@ -49,7 +53,6 @@ public class ActorFilm implements Serializable {
 	public void setActorFilmId(int actorFilmId) {
 		this.actorFilmId = actorFilmId;
 	}
-
 
 	public String getRole() {
 		return role;
@@ -74,6 +77,5 @@ public class ActorFilm implements Serializable {
 	public void setActor(Actor actor) {
 		this.actor = actor;
 	}
-
 
 }
