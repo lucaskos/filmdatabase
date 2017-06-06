@@ -9,4 +9,5 @@ public interface ActorDao {
 	void addActor(Actor actor);	
 	
 	void deleteActor(Actor actor);
+	
 }

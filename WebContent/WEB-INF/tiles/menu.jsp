@@ -4,7 +4,9 @@
 
 <a href="<c:url value='/' />">Home</a>
 <a href="<c:url value='/filmslist' />">Films List</a>
+<a href="<c:url value='/actorlist' />">Actor List</a>
 <a href="<c:url value='/addfilm' />">Add film</a>
+<a href="<c:url value='/addactor' />">Add actor</a>
 
 	<sec:authorize access="!isAuthenticated() or isAnonymous()">
 		<a class="login" href="<c:url value='/login' />">Log in</a>

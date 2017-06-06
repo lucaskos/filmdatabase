@@ -32,16 +32,27 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/film.jsp"></put-attribute>
 	</definition>
 
-	<!-- Add book -->
+	<!-- Add film -->
 	<definition name="addfilm" extends="library-base">
 		<put-attribute name="title" value="Add film"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/addfilm.jsp"></put-attribute>
 	</definition>
 
-	<!-- Book created -->
+	<!-- Film created sucessfully -->
 	<definition name="filmcreated" extends="library-base">
 		<put-attribute name="title" value="Success"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/filmcreated.jsp"></put-attribute>
+	</definition>
+
+	<!-- Actor list -->
+	<definition name="actorlist" extends="library-base">
+		<put-attribute name="title" value="Actor List"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/actorlist.jsp"></put-attribute>
+	</definition>
+	<!-- Add Actor -->
+	<definition name="addactor" extends="library-base">
+		<put-attribute name="title" value="Add Actor"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/addactor.jsp"></put-attribute>
 	</definition>
 
 	<!-- Login page -->

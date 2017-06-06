@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
@@ -39,7 +40,6 @@ public class UserDaoImpl implements UserDao {
 		return sessionFactory.getCurrentSession();
 	}
 
-	@Transactional
 	public void createUser(User user) {
 
 		Set<Role> ur = new HashSet<>();
@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+	
 	public List<User> getAllUsers() {
 		List<User> list = session().createQuery("from User").list();
 		if (list.isEmpty())
@@ -65,7 +65,6 @@ public class UserDaoImpl implements UserDao {
 		return list;
 	}
 
-	@Transactional
 	public User getUser(String username) {
 		User activeUser = new User();
 		String query = "from User where username = ?1";
