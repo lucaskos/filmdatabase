@@ -1,8 +1,6 @@
 package com.luke.films.controllers;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luke.films.model.ActorFilm;
 import com.luke.films.model.ActorFilmDao;
 import com.luke.films.model.actor.Actor;
 import com.luke.films.model.film.Film;
@@ -25,9 +22,6 @@ public class ActorFilmController {
 	private ActorFilmDao actorFilmDao;
 	@Autowired
 	private FilmsService filmsService;
-
-	@Autowired
-	private ActorService actorService;
 
 	private int filmId;
 
@@ -46,8 +40,6 @@ public class ActorFilmController {
 		Film filmById = filmsService.getFilmById(filmId);
 
 		Map<Actor, String> actorsMap = actorFilmDao.getActors(filmById);
-		
-		
 		
 		if (filmById == null)
 			return "error";

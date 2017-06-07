@@ -43,16 +43,12 @@ public class ActorFilmDao {
 	}
 
 	public Map<Actor, String> getActors(Film film) {
-		
+
 		String query = "from ActorFilm where film =?1";
 
 		List<ActorFilm> list = session().createQuery(query).setParameter("1", film).list();
-		List<Actor> actorList = new ArrayList<>();
-		List<String> roleList = new ArrayList<>();
 		Map<Actor, String> actorRole = new HashMap<>();
-		for(ActorFilm af : list) {
-			actorList.add(af.getActor());
-			roleList.add(af.getRole());
+		for (ActorFilm af : list) {
 			actorRole.put(af.getActor(), af.getRole());
 		}
 		return actorRole;
