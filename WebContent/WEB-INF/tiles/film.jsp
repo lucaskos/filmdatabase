@@ -1,5 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <div class="filmdetails">
 
 	<table>
@@ -31,28 +33,26 @@
 		</table>
 
 	</div>
-	<sf:form class='actor-to-film' var='actorfilm'
-		modelAttribute='actorFilm'
-		action="${pageContext.request.contextPath }/actoraddedtofilm"
-		method='POST'>
-
-
-
-
-		<h5>Add actor</h5>
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td><sf:input type='text' path='actor.name' /></td>
-			</tr>
-			<tr>
-				<td>Role:</td>
-				<td><sf:input type='text' path='role' /></td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="submit" type="submit"
-					value="submit" /></td>
-			</tr>
-		</table>
-	</sf:form>
+	<sec:authorize access="isAuthenticated()">
+		<sf:form class='actor-to-film' var='actorfilm'
+			modelAttribute='actorFilm'
+			action="${pageContext.request.contextPath }/actoraddedtofilm"
+			method='POST'>
+			<h5>Add actor</h5>
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td><sf:input type='text' path='actor.name' /></td>
+				</tr>
+				<tr>
+					<td>Role:</td>
+					<td><sf:input type='text' path='role' /></td>
+				</tr>
+				<tr>
+					<td colspan='2'><input name="submit" type="submit"
+						value="submit" /></td>
+				</tr>
+			</table>
+		</sf:form>
+	</sec:authorize>
 </div>

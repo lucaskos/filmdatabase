@@ -1,6 +1,5 @@
 package com.luke.films.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +41,7 @@ public class ActorFilmDao {
 		tx.commit();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<ActorFilm> getActors(Film film) {
 
 		String query = "from ActorFilm where film =?1";

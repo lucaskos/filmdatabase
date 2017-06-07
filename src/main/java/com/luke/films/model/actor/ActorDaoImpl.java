@@ -25,9 +25,10 @@ public class ActorDaoImpl implements ActorDao {
 		session().save(actor);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Actor> getAllActors() {
-		List list = session().createQuery("from Actor").list();
+		List<Actor> list = session().createQuery("from Actor").list();
 		if(!list.isEmpty())
 			return list;
 		return null;
