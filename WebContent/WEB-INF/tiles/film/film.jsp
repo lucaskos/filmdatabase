@@ -4,9 +4,14 @@
 	uri="http://www.springframework.org/security/tags"%>
 <div class="film">
 	<div id="rating">
-		<p>
-			<c:out value="${film.rating }"></c:out>
-		</p>
+		<div class="ratinginfo">
+			<p>
+				<c:out value="${film.rating }"></c:out>
+			</p>
+		</div>
+		<div class="ratingwrapper">
+		
+		</div>
 	</div>
 	<div class="main-film-wrapper">
 		<div id="filmdetail">

@@ -43,6 +43,9 @@
 		<put-list-attribute name="stylesheets" inherit="true">
 			<add-attribute value="/static/css/filmdetails.css" />
 		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute value="/static/js/rating.js" />
+		</put-list-attribute>
 	</definition>
 	<!-- Add film -->
 	<definition name="addfilm" extends="base">
