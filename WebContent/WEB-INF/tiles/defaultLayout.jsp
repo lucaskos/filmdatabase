@@ -2,14 +2,19 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<tiles:importAttribute name="javascripts" />
+<tiles:importAttribute name="stylesheets" />
 <!DOCTYPE>
 <html>
 <head>
-<link href="static/css/main.css" type="text/css" rel="stylesheet">
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<!-- stylesheets-->
+<c:forEach var="css" items="${stylesheets}">
+	<link rel="stylesheet" type="text/css" href="<c:url value="${css}"/>">
+</c:forEach>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <tiles:insertAttribute name="includes"></tiles:insertAttribute>
-<title>Insert title here</title>
+<title>Films Database</title>
 </head>
 <body>
 	<header>
@@ -24,5 +29,9 @@
 	<footer>
 		<tiles:insertAttribute name="footer" />
 	</footer>
+
+	<c:forEach var="script" items="${javascripts}">
+		<script src="<c:url value="${script}"/>"></script>
+	</c:forEach>
 </body>
 </html>

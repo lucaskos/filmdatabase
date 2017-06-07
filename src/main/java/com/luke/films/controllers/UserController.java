@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.luke.films.service.UsersService;
+import com.luke.films.service.UserService;
 import com.luke.user.model.User;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	/*
 	 * Spring security see this:

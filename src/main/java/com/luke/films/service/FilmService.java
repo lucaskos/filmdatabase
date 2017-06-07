@@ -12,7 +12,7 @@ import com.luke.films.model.film.FilmsDao;
 
 @Component("filmsService")
 @Transactional
-public class FilmsService {
+public class FilmService {
 	@Autowired
 	private FilmsDao filmsDao;
 	

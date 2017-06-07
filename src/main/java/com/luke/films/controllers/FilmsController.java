@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.luke.films.model.film.Film;
-import com.luke.films.service.FilmsService;
+import com.luke.films.service.FilmService;
 
 @Controller
 public class FilmsController {
 	
 	@Autowired
-	private FilmsService filmsService;
+	private FilmService filmsService;
 	
 	
 	@RequestMapping(value="/filmslist", method=RequestMethod.GET)

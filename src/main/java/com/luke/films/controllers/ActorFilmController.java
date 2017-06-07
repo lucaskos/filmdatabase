@@ -13,14 +13,15 @@ import com.luke.films.model.ActorFilm;
 import com.luke.films.model.ActorFilmDao;
 import com.luke.films.model.actor.Actor;
 import com.luke.films.model.film.Film;
-import com.luke.films.service.FilmsService;
+import com.luke.films.service.ActorFilmService;
+import com.luke.films.service.FilmService;
 
 @Controller
 public class ActorFilmController {
 	@Autowired
-	private ActorFilmDao actorFilmDao;
+	private ActorFilmService actorFilmService;
 	@Autowired
-	private FilmsService filmsService;
+	private FilmService filmsService;
 
 	private int filmId;
 
@@ -29,7 +30,7 @@ public class ActorFilmController {
 		Film filmById = filmsService.getFilmById(filmId);
 		actorFilm.setFilm(filmById);
 		System.out.println(actorFilm.getRole() + " : " + actorFilm.getActor() + " : " + actorFilm.getFilm());
-		actorFilmDao.addActorToFilm(filmById, actorFilm.getActor(), actorFilm.getRole());
+		actorFilmService.addActorToFilm(filmById, actorFilm.getActor(), actorFilm.getRole());
 		return "redirect:/filmslist";
 	}
 
@@ -39,7 +40,7 @@ public class ActorFilmController {
 		this.filmId = filmId;
 		Film filmById = filmsService.getFilmById(filmId);
 
-		List<ActorFilm> list = actorFilmDao.getActors(filmById);
+		List<ActorFilm> list = actorFilmService.getActors(filmById);
 			
 		if (filmById == null)
 			return "error";

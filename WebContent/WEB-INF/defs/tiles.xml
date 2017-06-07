@@ -5,15 +5,23 @@
 <tiles-definitions>
 
 	<definition name="library-base" template="/WEB-INF/tiles/defaultLayout.jsp">
+
 		<put-attribute name="includes" value=""></put-attribute>
 		<put-attribute name="title" value="Offers Homepage"></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp"></put-attribute>
 		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jsp"></put-attribute>
 		<put-attribute name="content" value=""></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/static/js/jquery-3.2.1.min.js" />
+		</put-list-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/static/css/main.css" />
+			<add-attribute value="/static/css/filmlist.css" />
+		</put-list-attribute>
 	</definition>
 
-	<!-- HOME PAGE -->
+	<!-- HOME PAGE/CONTROLLER -->
 	<definition name="home" extends="library-base">
 		<put-attribute name="title" value="Welcome"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
@@ -21,9 +29,11 @@
 
 	<!-- Films List -->
 	<definition name="filmslist" extends="library-base">
-		<put-attribute name="includes" value="/WEB-INF/tiles/filmlistscript.jsp"></put-attribute>
 		<put-attribute name="title" value="List of all films"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/filmslist.jsp"></put-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute value="/static/js/filmlist.js" />
+		</put-list-attribute>
 	</definition>
 
 	<!-- Film details -->

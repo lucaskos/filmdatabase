@@ -11,7 +11,7 @@ import com.luke.user.model.UserDao;
 
 @Service
 @Transactional
-public class UsersService {
+public class UserService {
 
 	@Autowired
 	private UserDao usersDao;

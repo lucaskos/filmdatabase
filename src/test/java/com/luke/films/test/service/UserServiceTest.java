@@ -19,7 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.films.service.UsersService;
+import com.luke.films.service.UserService;
 import com.luke.user.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,7 +29,7 @@ import com.luke.user.model.User;
 public class UserServiceTest {
 
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Test
 	public void userTest() {

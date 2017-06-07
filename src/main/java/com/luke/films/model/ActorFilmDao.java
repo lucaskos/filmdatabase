@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.luke.films.model.actor.Actor;
 import com.luke.films.model.film.Film;
 
-@Transactional
+
 @Component
 public class ActorFilmDao {
 	@Autowired
