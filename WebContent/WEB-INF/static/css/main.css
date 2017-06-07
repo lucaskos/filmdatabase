@@ -127,5 +127,11 @@ footer p {
 	color:red;
 	font-weight: 100;
 	padding: 10px;
-	
+}
+
+div.filmdetails {
+	border: 1px solid white;
+}
+div.filmdetails table{
+	margin: 40px 20px;
 }

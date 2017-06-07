@@ -42,7 +42,7 @@ public class ActorFilmDao {
 		tx.commit();
 	}
 
-	public Map<Actor, String> getActors(Film film) {
+	public List<ActorFilm> getActors(Film film) {
 
 		String query = "from ActorFilm where film =?1";
 
@@ -51,7 +51,8 @@ public class ActorFilmDao {
 		for (ActorFilm af : list) {
 			actorRole.put(af.getActor(), af.getRole());
 		}
-		return actorRole;
+		//return actorRole;
+		return list;
 	}
 
 }
