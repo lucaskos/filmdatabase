@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -44,6 +45,11 @@ public class ActorFilm implements Serializable {
 
 	public ActorFilm() {
 
+	}
+	
+	public ActorFilm(Film f, Actor a) {
+		this.film = f;
+		this.actor = a;
 	}
 
 	public int getActorFilmId() {

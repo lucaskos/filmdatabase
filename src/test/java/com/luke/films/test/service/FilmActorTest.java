@@ -68,7 +68,7 @@ public class FilmActorTest {
 		Actor actor =  new Actor("Anthony Hopkins");
 		
 		Actor actor2 = new Actor("Jodie Foster");
-		
+		Session session = session();
 		ActorFilm actorFilm = new ActorFilm();
 		actorFilm.setFilm(film);
 		actorFilm.setActor(actor);
@@ -80,12 +80,15 @@ public class FilmActorTest {
 		actorFilm1.setFilm(film);
 		actorFilm1.setActor(actor2);
 		actorFilm1.setRole("Scarlet");
-		Transaction tx = sessionFactory.openSession().beginTransaction();
+		session.save(actorFilm1);
 		
-		Session session = session();
+		Transaction tx = sessionFactory.openSession().beginTransaction();
 		
 		session.save(actorFilm);
 		session.save(actorFilm1);
+		
+		
+		//session.save(actorFilm);
 		
 		
 		tx.commit();

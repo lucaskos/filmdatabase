@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
 
 
 @Component("filmsService")
+@Transactional
 public class FilmsService {
 	@Autowired
 	private FilmsDao filmsDao;

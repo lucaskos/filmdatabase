@@ -3,6 +3,7 @@ package com.luke.films.controllers;
 import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,8 +24,10 @@ public class HomeController {
 		
 		return model;
 	}
-	@RequestMapping(value = "/error")
-	public String error(){
-		return "error";
+	@ExceptionHandler(Exception.class)
+	public ModelAndView error(Exception ex){
+		ModelAndView mav = new ModelAndView("error");
+		mav.addObject("errMsg", "This is Exception.class");
+		return mav;
 	}
 }

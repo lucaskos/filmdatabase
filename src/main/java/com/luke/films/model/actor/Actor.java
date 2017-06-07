@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class Actor {
 	@NotNull
 	@Column(name = "name")
 	private String name;
-	@OneToMany(mappedBy = "actor")
+	@OneToMany(mappedBy = "actor", fetch = FetchType.EAGER)
 	private Set<ActorFilm> actorFilm = new HashSet<ActorFilm>();
 
 	public Actor() {

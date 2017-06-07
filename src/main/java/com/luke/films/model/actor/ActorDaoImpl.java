@@ -37,6 +37,12 @@ public class ActorDaoImpl implements ActorDao {
 	public void deleteActor(Actor actor) {
 		session().delete(actor);
 	}
+
+	@Override
+	public Actor getActor(Actor actor) {
+		//TODO solve this
+		return new Actor();
+	}
 }
 
 

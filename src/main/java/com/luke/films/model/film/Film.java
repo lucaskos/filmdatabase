@@ -47,7 +47,7 @@ public class Film {
 
 	private float rating;
 
-	@OneToMany(mappedBy = "film")
+	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
 	private Set<ActorFilm> actorsFilms = new HashSet<ActorFilm>();
 	
 	public Film() {
@@ -120,48 +120,13 @@ public class Film {
 	public void addActorsFilms(ActorFilm actorFilms) {
 		this.actorsFilms.add(actorFilms);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Film [id=" + filmId + ", title=" + title + ", year=" + year + ", description=" + description
-				+ ", rating=" + rating + "]";
+		return "Film [filmId=" + filmId + ", title=" + title + ", year=" + year + ", description=" + description
+				+ ", rating=" + rating + ", actorsFilms=" + actorsFilms + "]";
 	}
+	
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + filmId;
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + year;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Film other = (Film) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (filmId != other.filmId)
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (year != other.year)
-			return false;
-		return true;
-	}
 
 }

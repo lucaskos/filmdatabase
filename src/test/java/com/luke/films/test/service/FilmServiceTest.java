@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
+import com.luke.films.model.ActorFilm;
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
 

@@ -2,6 +2,8 @@ package com.luke.films.model.film;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,14 @@ public class FilmsDaoImpl implements FilmsDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.luke.films.dao.FilmsDao#getFilms()
-	 */
+	private Session session() {
+		try {
+			return sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			return sessionFactory.openSession();
+		}
+	}
+	
 	@Override
 	public List<Film> getAllFilms() {
 		@SuppressWarnings("unchecked")
@@ -33,24 +38,24 @@ public class FilmsDaoImpl implements FilmsDao {
 
 	@Override
 	public void addFilm(Film film) {
-		sessionFactory.getCurrentSession().save(film);
+		session().save(film);
 	}
 
 	@Override
 	public void deleteFilm(Film film) {
-		sessionFactory.getCurrentSession().delete(film);
+		session().delete(film);
 	}
 
 	@Override
 	public void deleteById(int id) {
 		Film f = getFilmById(id);
-		sessionFactory.getCurrentSession().delete(f);
+		session().delete(f);
 	}
 
 	@Override
 	public Film getFilmById(int id) {
 		String query = "from Film where id = ?1";
-		List<?> list = sessionFactory.getCurrentSession().createQuery(query).setParameter("1", id).list();
+		List<?> list = session().createQuery(query).setParameter("1", id).list();
 		if (!list.isEmpty()) {
 			return (Film) list.get(0);
 		} else {
@@ -61,7 +66,7 @@ public class FilmsDaoImpl implements FilmsDao {
 	@Override
 	public Film getFilmByTitle(String title) {
 		String query = "from Film where title = ?1";
-		List<?> list = sessionFactory.getCurrentSession().createQuery(query).setParameter("1", title).list();
+		List<?> list = session().createQuery(query).setParameter("1", title).list();
 		if (!list.isEmpty())
 			return (Film) list.get(0);
 		else
@@ -72,7 +77,7 @@ public class FilmsDaoImpl implements FilmsDao {
 	public List<Film> getFilmsByYear(int year) {
 		String query = "from Film where year = ?1";
 		@SuppressWarnings("unchecked")
-		List<Film> list = sessionFactory.getCurrentSession().createQuery(query).setParameter("1", year).list();
+		List<Film> list = session().createQuery(query).setParameter("1", year).list();
 		if (!list.isEmpty())
 			return list;
 		else
@@ -84,7 +89,7 @@ public class FilmsDaoImpl implements FilmsDao {
 	public List<Film> findFilms(int id, int count) {
 		
 		String countQ = "select count(*) from Film";
-		Query countQuery = sessionFactory.getCurrentSession().createQuery(countQ);
+		Query countQuery = session().createQuery(countQ);
 		Long countResults = (Long) countQuery.uniqueResult();
 		
 		int lastPageNumber = (int) Math.ceil(countResults/count);

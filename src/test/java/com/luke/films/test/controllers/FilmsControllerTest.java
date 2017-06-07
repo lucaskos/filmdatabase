@@ -1,21 +1,24 @@
 package com.luke.films.test.controllers;
 
-import static org.mockito.Mockito.mock;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.util.List;
-
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
 import com.luke.films.controllers.FilmsController;
-import com.luke.films.model.film.Film;
-import com.luke.films.service.FilmsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ApplicationConfigCore.class, HibernateConfig.class})
@@ -23,25 +26,21 @@ import com.luke.films.service.FilmsService;
 @WebAppConfiguration("WebContent")
 public class FilmsControllerTest {
 	
+	private MockMvc mockMvc;
 	
+	@InjectMocks
+	private FilmsController filmsController;
+	
+	@Before
+	public void init(){
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(filmsController).build();
+	}
 	
 	@Test
-	public void pagedFilms(){
-		List<Film> expectedFilms = createFilmList(50);
-		FilmsService mockService = mock(FilmsService.class);
-		
+	public void pagedFilms() throws Exception{
+		mockMvc.perform(get("/filmslist")).andExpect(status().isOk()).andExpect(view().name("filmslist"));
 	
-	}
-
-	private List<Film> createFilmList(int filmsNumber) {
-		List<Film> list = null;
-		Film temp = new Film();
-		for(int i = 0; i < filmsNumber; i++){
-			temp.setFilmId(i);
-			temp.setTitle("TITLE :" +i);
-			temp.setYear(1900 + i);
-		}
-		return list;
 	}
 
 }
