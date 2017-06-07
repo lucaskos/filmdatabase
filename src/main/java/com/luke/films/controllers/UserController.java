@@ -48,7 +48,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
 	public ModelAndView adminPage() {
 		

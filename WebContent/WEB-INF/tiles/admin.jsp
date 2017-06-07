@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
 <h1>Title : ${title}</h1>
 <h1>Message : ${message}</h1>
@@ -21,7 +22,8 @@
 	</h2>
 	<p>this is custom made form</p>
 </c:if>
-<table>
+<div class="list">
+<table class="table-list">
 	<tr>
 		<th>Id</th>
 		<th>Username</th>
@@ -41,3 +43,4 @@
 		</tr>
 	</c:forEach>
 </table>
+</div>

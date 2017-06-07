@@ -23,7 +23,7 @@
 	<menu>
 		<tiles:insertAttribute name="menu" />
 	</menu>
-	<div class="content">
+	<div id="content">
 		<tiles:insertAttribute name="content" />
 	</div>
 	<footer>

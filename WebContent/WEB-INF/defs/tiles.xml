@@ -17,7 +17,7 @@
 		</put-list-attribute>
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/static/css/main.css" />
-			<add-attribute value="/static/css/filmlist.css" />
+
 		</put-list-attribute>
 	</definition>
 
@@ -40,6 +40,9 @@
 	<definition name="film" extends="library-base">
 		<put-attribute name="title" value="Film"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/film.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute value="/static/css/filmdetails.css" />
+		</put-list-attribute>
 	</definition>
 
 	<!-- Add film -->

@@ -1,0 +1,43 @@
+.film {
+	display:block;
+	width: 50%;
+}
+div.film * {
+	text-align: center;
+}
+
+#filmdetail {
+	bottom: 1px solid white;
+	margin: auto;
+	margin-top:20px;
+}
+
+#filmdetail tr:FIRST-CHILD {
+	font-size: 32px;
+}
+
+div #actorlist {
+	
+	margin:auto;
+}
+#actorlist {
+	padding-top:20px;
+}
+#actorlist h3 {
+	display:inline-block;
+	width:100px;
+	text-transform: uppercase;
+	font-variant: small-caps;
+	border-bottom:1px ridge silver;
+}
+#actorlist table {
+	
+	margin:auto;
+	padding-bottom: 10px;
+	border-bottom: 1px solid white;
+}
+
+#actorlist table:LAST-OF-TYPE {
+	margin-bottom:20px;
+	border:none;
+}

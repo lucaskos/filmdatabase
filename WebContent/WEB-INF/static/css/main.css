@@ -9,6 +9,18 @@ header {
 	border-color: white;
 }
 
+div.list {
+	border: 1px solid white;
+}
+
+div.list table tr:NOT(:FIRST-CHILD):HOVER {
+	background-color: white;
+}
+
+table.table-list {
+	border: 1px solid white;
+}
+
 .header {
 	background: #110B4A;
 	height: 60px;
@@ -36,8 +48,7 @@ header {
 	padding-left: 100px;
 }
 
-.content {
-	border: 1 px solid black;
+#content {
 	min-width: 400px;
 	min-height: 400px;
 }
@@ -116,22 +127,4 @@ footer p {
 	color: red;
 	font-weight: 100;
 	padding: 10px;
-}
-
-div.filmdetails {
-	border: 1px solid white;
-	position: relative;
-	text-align: center;
-}
-
-div.filmdetails table {
-	margin: 40px 20px;
-	display: inline-block;
-	text-align: center;
-	padding-bottom: 10px;
-	border-bottom: 1px solid white;
-}
-
-div.filmdetails table td {
-	
 }
