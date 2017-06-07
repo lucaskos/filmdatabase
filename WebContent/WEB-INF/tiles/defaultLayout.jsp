@@ -12,9 +12,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<header>
 		<tiles:insertAttribute name="header" />
-	</div>
+	</header>
 	<menu>
 		<tiles:insertAttribute name="menu" />
 	</menu>

@@ -1,5 +1,36 @@
 body{
-	background-color: #e5e5e5;
+	background-color: #383276;
+	color: #D3D2D9;
+}
+header {
+	padding:0px;
+	border-bottom: solid;
+	border-color: white;
+}
+.header {
+	background: #110B4A;
+	height: 60px;
+	margin-bottom: 10px;
+	padding-left: 30px;
+	position: relative;
+	}
+.header h3, h5, p{
+	display: inline;
+}
+
+.header h3 {
+	font-color: ;
+	text-decoration: blink;
+	font-size: 32px;
+	margin: 10px 40px;
+}
+
+.header h5 {
+	font-style: oblique;
+}
+
+.header p {
+	padding-left: 100px;
 }
 
 .content {
