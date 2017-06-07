@@ -38,7 +38,7 @@ public class FilmsController {
 			return "addfilm";
 		}
 		filmsService.addFilm(film);
-		return "filmcreated";
+		return "redirect:/filmslist";
 	}
 	
 

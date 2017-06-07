@@ -4,10 +4,10 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-	<definition name="library-base" template="/WEB-INF/tiles/defaultLayout.jsp">
+	<definition name="base" template="/WEB-INF/tiles/defaultLayout.jsp">
 
 		<put-attribute name="includes" value=""></put-attribute>
-		<put-attribute name="title" value="Offers Homepage"></put-attribute>
+		<put-attribute name="title" value="Film Database"></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp"></put-attribute>
 		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jsp"></put-attribute>
 		<put-attribute name="content" value=""></put-attribute>
@@ -17,93 +17,92 @@
 		</put-list-attribute>
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/static/css/main.css" />
-
 		</put-list-attribute>
 	</definition>
 
 	<!-- HOME PAGE/CONTROLLER -->
-	<definition name="home" extends="library-base">
+	<definition name="home" extends="base">
 		<put-attribute name="title" value="Welcome"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
 	</definition>
-
+	
+	<!-- FILM SECTION -->
 	<!-- Films List -->
-	<definition name="filmslist" extends="library-base">
+	<definition name="filmslist" extends="base">
 		<put-attribute name="title" value="List of all films"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/filmslist.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/film/filmslist.jsp"></put-attribute>
 		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute value="/static/js/filmlist.js" />
 		</put-list-attribute>
 	</definition>
 
 	<!-- Film details -->
-	<definition name="film" extends="library-base">
+	<definition name="film" extends="base">
 		<put-attribute name="title" value="Film"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/film.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/film/film.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets" inherit="true">
 			<add-attribute value="/static/css/filmdetails.css" />
 		</put-list-attribute>
 	</definition>
-
 	<!-- Add film -->
-	<definition name="addfilm" extends="library-base">
+	<definition name="addfilm" extends="base">
 		<put-attribute name="title" value="Add film"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/addfilm.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/film/addfilm.jsp"></put-attribute>
 	</definition>
-
 	<!-- Film created sucessfully -->
-	<definition name="filmcreated" extends="library-base">
+	<definition name="filmcreated" extends="base">
 		<put-attribute name="title" value="Success"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/filmcreated.jsp"></put-attribute>
+		<put-attribute name="content"
+			value="/WEB-INF/tiles/film/filmcreated.jsp"></put-attribute>
 	</definition>
 
 	<!-- Actor list -->
-	<definition name="actorlist" extends="library-base">
+	<definition name="actorlist" extends="base">
 		<put-attribute name="title" value="Actor List"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/actorlist.jsp"></put-attribute>
 	</definition>
 	<!-- Add Actor -->
-	<definition name="addactor" extends="library-base">
+	<definition name="addactor" extends="base">
 		<put-attribute name="title" value="Add Actor"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/addactor.jsp"></put-attribute>
 	</definition>
-
+	
+	<!-- USER SECTION -->
 	<!-- Login page -->
-	<definition name="login" extends="library-base">
+	<definition name="login" extends="base">
 		<put-attribute name="title" value="Log in"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/login.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/user/login.jsp"></put-attribute>
 	</definition>
 	<!-- Logout Page -->
-	<definition name="logout" extends="library-base">
+	<definition name="logout" extends="base">
 		<put-attribute name="title" value="Logout Page"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/logout.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/user/logout.jsp"></put-attribute>
 	</definition>
 	<!-- Admin page -->
-	<definition name="admin" extends="library-base">
+	<definition name="admin" extends="base">
 		<put-attribute name="title" value="Admin Page"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/admin.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/user/admin.jsp"></put-attribute>
 	</definition>
+	<!-- Create Account -->
+	<definition name="newaccount" extends="base">
+		<put-attribute name="title" value="Create Account"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/user/newaccount.jsp"></put-attribute>
+	</definition>
+	<!-- Account created -->
+	<definition name="accountcreated" extends="base">
+		<put-attribute name="title" value="Success"></put-attribute>
+		<put-attribute name="content"
+			value="/WEB-INF/tiles/user/accountcreated.jsp"></put-attribute>
+	</definition>
+	<!-- EROOR SECION -->
 	<!-- Denied page -->
-	<definition name="denied" extends="library-base">
+	<definition name="denied" extends="base">
 		<put-attribute name="title" value="Access Denied"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/denied.jsp"></put-attribute>
 	</definition>
 	<!-- Error page -->
-	<definition name="error" extends="library-base">
+	<definition name="error" extends="base">
 		<put-attribute name="title" value="Error page"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp"></put-attribute>
 	</definition>
-	<!-- Create Account -->
-	<definition name="newaccount" extends="library-base">
-		<put-attribute name="title" value="Create Account"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/newaccount.jsp"></put-attribute>
-	</definition>
-	<!-- Account created -->
-	<definition name="accountcreated" extends="library-base">
-		<put-attribute name="title" value="Success"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/accountcreated.jsp"></put-attribute>
-	</definition>
-	<!-- <definition name="home" extends="offers.base"> <put-attribute name="title" 
-		value="Offers Homepage"></put-attribute> <put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute> 
-		</definition> -->
 </tiles-definitions>

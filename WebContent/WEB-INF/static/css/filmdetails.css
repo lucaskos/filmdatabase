@@ -1,23 +1,33 @@
 .film {
 	display:block;
-	width: 50%;
+	width: 100%;
+	vertical-align: baseline;
 }
 div.film * {
 	text-align: center;
 }
 
 #filmdetail {
+	display:block;
 	bottom: 1px solid white;
 	margin: auto;
-	margin-top:20px;
+	width:70%;
 }
-
-#filmdetail tr:FIRST-CHILD {
+#filmdetail p {
+	display:block;
+}
+#filmdetail p:FIRST-CHILD {
 	font-size: 32px;
 }
 
+#rating{
+	display: block;
+	float:right;
+	border:1px solid white;
+	padding:0 5px;
+}
+
 div #actorlist {
-	
 	margin:auto;
 }
 #actorlist {

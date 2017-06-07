@@ -61,10 +61,6 @@ menu a {
 	text-decoration: none;
 }
 
-menu a:HOVER {
-	background-color: #e5e5e5;
-}
-
 menu {
 	padding-left: 20px;
 	max-width: 600px;
