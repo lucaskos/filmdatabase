@@ -28,14 +28,18 @@ public class ActorFilmController {
 	private int filmId;
 
 	@RequestMapping(value = "/actoraddedtofilm", method = RequestMethod.POST)
-	public String addActorToFilm(BindingResult results, ActorFilm actorFilm) {
-		actorFilmDao.addActorToFilm(filmsService.getFilmById(filmId), actorFilm.getActor(), actorFilm.getRole());
-		return "filmlist";
+	public String addActorToFilm(ActorFilm actorFilm) {
+		Film filmById = filmsService.getFilmById(filmId);
+		actorFilm.setFilm(filmById);
+		System.out.println(actorFilm.getRole() + " : " + actorFilm.getActor() + " : " + actorFilm.getFilm());
+		//actorFilmDao.addActorToFilm(, actorFilm.getActor(), actorFilm.getRole());
+		//actorFilmDao.addActorToFilm(filmById, actor, role);
+		actorFilmDao.addActorToFilm(filmById, actorFilm.getActor(), actorFilm.getRole());
+		return "redirect:/filmslist";
 	}
 
 	@RequestMapping(value = "/{filmId}", method = RequestMethod.GET)
 	public String getFilm(@PathVariable int filmId, Model model, Actor actor, ActorFilm actorFilm) {
-
 		
 		this.filmId = filmId;
 		Film filmById = filmsService.getFilmById(filmId);
