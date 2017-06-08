@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.luke.films.service.UserService;
+import com.luke.user.model.RoleDao;
 import com.luke.user.model.User;
 
 @Controller
@@ -26,6 +27,9 @@ public class UserController {
 
 	@Autowired
 	private UserService usersService;
+	
+	@Autowired
+	private RoleDao roleDao;
 
 	/*
 	 * Spring security see this:
@@ -57,6 +61,7 @@ public class UserController {
 		model.addObject("message", "This is protected page!");
 		model.setViewName("admin");
 		model.addObject("users", usersService.getAllUsers());
+		model.addObject("roles", roleDao.getAllRoles());
 		return model;
 
 	}

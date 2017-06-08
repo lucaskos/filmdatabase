@@ -23,24 +23,32 @@
 	<p>this is custom made form</p>
 </c:if>
 <div class="list">
-<table class="table-list">
-	<tr>
-		<th>Id</th>
-		<th>Username</th>
-		<th>Password</th>
-		<th>Email</th>
-		<th>Roles</th>
-	</tr>
-	<c:forEach var="users" items="${users}">
+	<table class="table-list">
 		<tr>
-			<td><c:out value="${users.id }" /></td>
-			<td><c:out value="${users.username }" /></td>
-			<td><c:out value="${users.password }" /></td>
-			<td><c:out value="${users.email }" /></td>
-			<c:forEach var="roles" items="${users.usersRoles }">
-				<td><c:out value="${roles.role }" /></td>
-			</c:forEach>
+			<th>Id</th>
+			<th>Username</th>
+			<th>Password</th>
+			<th>Email</th>
+			<th>Roles</th>
+			<th>Change role</th>
 		</tr>
-	</c:forEach>
-</table>
+		<c:forEach var="users" items="${users}">
+			<tr>
+				<td><c:out value="${users.id }" /></td>
+				<td><c:out value="${users.username }" /></td>
+				<td><c:out value="${users.password }" /></td>
+				<td><c:out value="${users.email }" /></td>
+				<c:forEach var="roles" items="${users.usersRoles }">
+					<td><c:out value="${roles.role }" /></td>
+				</c:forEach>
+				<td><select><c:forEach var='changeRole'
+							items='${roles}'>
+
+							<option value="${changeRole.role}"><c:out
+									value='${changeRole.role}' /></option>
+
+						</c:forEach></select></td>
+			</tr>
+		</c:forEach>
+	</table>
 </div>
