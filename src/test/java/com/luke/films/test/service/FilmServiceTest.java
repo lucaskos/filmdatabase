@@ -22,6 +22,7 @@ import com.luke.films.config.HibernateConfig;
 import com.luke.films.model.ActorFilm;
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
+import com.luke.films.service.FilmService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
@@ -30,14 +31,14 @@ import com.luke.films.model.film.FilmsDao;
 public class FilmServiceTest {
 
 	@Autowired
-	FilmsDao filmsDao;
+	FilmService filmsService;
 
 	@Before
 	public void removeFilms() {
-		List<Film> allFilms = filmsDao.getAllFilms();
+		List<Film> allFilms = filmsService.getAllFilms();
 		if(allFilms != null)
 			for(Film f : allFilms)
-				filmsDao.deleteFilm(f);
+				filmsService.deleteFilm(f);
 	}
 	
 	
@@ -49,24 +50,24 @@ public class FilmServiceTest {
 		Film film3 = new Film("film3", 2000);
 
 		// list should be empty
-		assertNull(filmsDao.getAllFilms());
+		assertNull(filmsService.getAllFilms());
 
 		// adding test Film objects to db
-		filmsDao.addFilm(film1);
-		filmsDao.addFilm(film2);
-		filmsDao.addFilm(film3);
+		filmsService.addFilm(film1);
+		filmsService.addFilm(film2);
+		filmsService.addFilm(film3);
 
-		List<Film> allFilms = filmsDao.getAllFilms();
+		List<Film> allFilms = filmsService.getAllFilms();
 
 
 		// list should NOT be empty
 		assertNotNull(allFilms);
 
 		// checking if films added to db have the same title as one in db
-		assertEquals(film1, filmsDao.getFilmByTitle(film1.getTitle()));
-		assertEquals(film2, filmsDao.getFilmByTitle(film2.getTitle()));
+		assertEquals(film1, filmsService.getFilmByTitle(film1.getTitle()));
+		assertEquals(film2, filmsService.getFilmByTitle(film2.getTitle()));
 
-		List<Film> filmsByYearFromDb = filmsDao.getFilmsByYear(film3.getYear());
+		List<Film> filmsByYearFromDb = filmsService.getFilmsByYear(film3.getYear());
 
 		assertNotNull(filmsByYearFromDb);
 		List<Film> filmsByYear = new ArrayList<>();
@@ -78,37 +79,37 @@ public class FilmServiceTest {
 
 		// removing the films by Film object
 		for (Film f : allFilms)
-			filmsDao.deleteFilm(f);
+			filmsService.deleteFilm(f);
 
 		// adding test Film objects to db again
-		filmsDao.addFilm(film1);
-		filmsDao.addFilm(film2);
+		filmsService.addFilm(film1);
+		filmsService.addFilm(film2);
 
-		allFilms = filmsDao.getAllFilms();
+		allFilms = filmsService.getAllFilms();
 
 		// removing films by Film id
 		for (Film f : allFilms)
-			filmsDao.deleteById(f.getFilmId());
+			filmsService.deleteById(f.getFilmId());
 
-		assertNull(filmsDao.getAllFilms());
+		assertNull(filmsService.getAllFilms());
 
 		int filmsNumber = 50;
 		List<Film> films = createFilms(filmsNumber);
 
 		// adding filmsNumber of films to db
 		for (Film f : films)
-			filmsDao.addFilm(f);
+			filmsService.addFilm(f);
 		
-		List<Film> findFilms = filmsDao.findFilms(5, 10);
+		List<Film> findFilms = filmsService.findFilms(5, 10);
 		
 		for(Film f : findFilms)
 			System.out.println(f);
 		
 		// removing everything from db
 		for (Film f : films)
-			filmsDao.deleteFilm(f);
+			filmsService.deleteFilm(f);
 		
-		assertNull(filmsDao.getAllFilms());
+		assertNull(filmsService.getAllFilms());
 
 		// findFilm(films, 4, 10);
 	}

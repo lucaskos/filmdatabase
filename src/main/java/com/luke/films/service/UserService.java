@@ -23,7 +23,7 @@ public class UserService {
 	public boolean checkUsername(User user) {
 		return usersDao.checkUserExist(user);
 	}
-	
+	//TODO Securing this method for ADMIN only
 	public List<User> getAllUsers() {
 		return usersDao.getAllUsers();
 	}
@@ -32,6 +32,11 @@ public class UserService {
 		return usersDao.getUser(username);
 	}
 	
+	//TODO securing this method
+	/*
+	 * only user who account belongs can delete his account
+	 * should redirect to new page when user deleting his account
+	 */
 	public void removeUser(User user) {
 		usersDao.removeUser(user);
 	}

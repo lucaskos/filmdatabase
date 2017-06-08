@@ -2,11 +2,21 @@ body {
 	background-color: #383276;
 	color: #D3D2D9;
 }
-
+/* header elements */
+.header {
+	background-color:#110B4A;
+	padding-bottom: 10px;
+	
+}
 header {
 	padding: 0px;
 	border-bottom: solid;
 	border-color: white;
+	background: #110B4A;
+	height: 60px;
+	margin-bottom: 10px;
+	padding-left: 30px;
+	position: relative;
 }
 
 div.list {
@@ -21,13 +31,7 @@ table.table-list {
 	border: 1px solid white;
 }
 
-.header {
-	background: #110B4A;
-	height: 60px;
-	margin-bottom: 10px;
-	padding-left: 30px;
-	position: relative;
-}
+
 
 .header h3, h5, p {
 	display: inline;
@@ -65,7 +69,38 @@ menu {
 	padding-left: 20px;
 	max-width: 600px;
 }
-
+/* login part */
+#login-box{
+	padding:45px;
+	width: 300px;
+	margin:0 auto 1000px;
+	margin-top:100px;
+	text-align:center;
+	display:block;
+	background: #666699;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(200, 251, 251, 0.4);
+}
+#login-box input {
+	outline:0;
+	width: 100%;
+	border:0;
+	margin: 0 0 15px;
+	padding: 15px;
+}
+#login-box input[type='submit'] {
+	background-color:#383276;
+	color: #FFFFFF;
+	text-transform:uppercase;
+	border:0;
+	cursor:pointer;
+	width:100%;
+	box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.4);
+}
+#login-box input[type='submit']:HOVER {
+	background-color:#dcdced;
+}
+/* login part ends */
 a.login {
 	position: absolute;
 	right: 10px;

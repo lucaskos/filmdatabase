@@ -4,12 +4,9 @@ import java.util.List;
 
 public interface RoleDao {
 	
-	void addRole(String name);
-	
-	void deleteRole(String name);
+	Role getRole(String role);
 	
 	List<Role> getAllRoles();
-	
 	
 
 }

@@ -22,6 +22,9 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private RoleDao roleDao;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -41,9 +44,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public void createUser(User user) {
-
+		Role role = roleDao.getRole("ROLE_USER");
 		Set<Role> ur = new HashSet<>();
-		ur.add(new Role("ROLE_USER"));
+		ur.add(role);
+		
 		user.setUsersRoles(ur);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		session().save(user);

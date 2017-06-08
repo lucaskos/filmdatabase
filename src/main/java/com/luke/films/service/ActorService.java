@@ -18,12 +18,11 @@ public class ActorService {
 	public List<Actor> getAllActors(){
 		return actorDao.getAllActors();
 	}
-	
 	@Secured("ROLE_USER")
 	public void addActor(Actor actor) {
 		actorDao.addActor(actor);
 	}
-	
+	//TODO add roles here under Security
 	public void deleteActor(Actor actor) {
 		actorDao.deleteActor(actor);
 	}

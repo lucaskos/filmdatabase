@@ -17,12 +17,14 @@
 <title>Films Database</title>
 </head>
 <body>
-	<header>
-		<tiles:insertAttribute name="header" />
-	</header>
-	<menu>
-		<tiles:insertAttribute name="menu" />
-	</menu>
+	<div class="header">
+		<header>
+			<tiles:insertAttribute name="header" />
+		</header>
+		<menu>
+			<tiles:insertAttribute name="menu" />
+		</menu>
+	</div>
 	<div id="content">
 		<tiles:insertAttribute name="content" />
 	</div>

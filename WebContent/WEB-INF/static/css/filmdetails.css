@@ -6,12 +6,14 @@
 div.film * {
 	text-align: center;
 }
-
+.main-film-wrapper {
+	width:70%;
+}
 #filmdetail {
 	display:block;
 	bottom: 1px solid white;
 	margin: auto;
-	width:70%;
+	
 }
 #filmdetail p {
 	display:block;
@@ -25,7 +27,17 @@ div.film * {
 	float:right;
 	border:1px solid white;
 	padding:0 5px;
+	color: #AA9739;
 }
+#rating a{
+color: #AA9739;
+text-decoration: none;
+margin:3px;
+}
+#rating a:HOVER {
+	color:#FFD500;
+}
+
 
 div #actorlist {
 	margin:auto;
