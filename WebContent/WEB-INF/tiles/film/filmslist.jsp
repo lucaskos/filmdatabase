@@ -8,7 +8,6 @@
 			<th>Title</th>
 			<th>Year</th>
 			<th>Description</th>
-			<th>Rating</th>
 		</tr>
 
 		<c:forEach var="film" items="${film}">
@@ -17,7 +16,6 @@
 				<td><c:out value="${film.title }" /></td>
 				<td><c:out value="${film.year }" /></td>
 				<td><c:out value="${film.description }" /></td>
-				<td><c:out value="${film.rating }" /></td>
 			</tr>
 
 		</c:forEach>

@@ -24,7 +24,7 @@ public class FilmsDaoImpl implements FilmsDao {
 			return sessionFactory.openSession();
 		}
 	}
-	
+
 	@Override
 	public List<Film> getAllFilms() {
 		@SuppressWarnings("unchecked")
@@ -84,23 +84,53 @@ public class FilmsDaoImpl implements FilmsDao {
 			return null;
 	}
 
-	//TO DO find next @count films starting with @id, pagination
+	// TO DO find next @count films starting with @id, pagination
 	@Override
 	public List<Film> findFilms(int id, int count) {
-		
+
 		String countQ = "select count(*) from Film";
 		Query countQuery = session().createQuery(countQ);
 		Long countResults = (Long) countQuery.uniqueResult();
-		
-		int lastPageNumber = (int) Math.ceil(countResults/count);
-		
+
+		int lastPageNumber = (int) Math.ceil(countResults / count);
+
 		System.out.println(lastPageNumber);
-		
+
+		@SuppressWarnings("unchecked")
 		Query<Film> query = sessionFactory.getCurrentSession().createQuery("From Film");
 		query.setFirstResult(id);
 		query.setMaxResults(count);
 		List<Film> list = query.list();
 		return list;
+	}
+
+	public int getNumberOfVotes(Film film) {
+		return film.getRating().size();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public float getRating(Film film) {
+		float f = 0.0f;
+		int rating = 0;
+
+		String query = "from Rating r where  film.filmId = ?";
+		List<Rating> result = sessionFactory.getCurrentSession().createQuery(query).setParameter(0, film.getFilmId())
+				.list();
+		for (Rating r : result) {
+			rating += r.getRating();
+		}
+		int noOfVotes = film.getRating().size();
+		if (noOfVotes == 0)
+			return 0.0f;
+		f = rating / noOfVotes;
+		return f;
+	}
+
+	@Override
+	public void setRating(Film film) {
+		int noOfRatings = film.getRating().size();
+
 	}
 
 }

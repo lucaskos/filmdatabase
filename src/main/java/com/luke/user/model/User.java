@@ -1,5 +1,6 @@
 package com.luke.user.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,12 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.luke.films.model.film.Rating;
 
 @Entity
 @Table(name = "users")
@@ -48,10 +52,11 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
 	private Set<Role> usersRoles;
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade=CascadeType.ALL)
+	private Set<Rating> rating = new HashSet<>();
 	public User() {
 
 	}
@@ -61,8 +66,6 @@ public class User {
 		this.password = password;
 		this.email = email;
 	}
-	
-	
 
 	public User(String username, String password, Set<Role> usersRoles) {
 		this.username = username;
@@ -118,7 +121,6 @@ public class User {
 		this.usersRoles = usersRoles;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", email=" + email
@@ -131,9 +133,7 @@ public class User {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + (enabled ? 1231 : 1237);
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		result = prime * result + ((usersRoles == null) ? 0 : usersRoles.hashCode());
 		return result;
 	}
 
@@ -153,11 +153,6 @@ public class User {
 			return false;
 		if (enabled != other.enabled)
 			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -165,8 +160,5 @@ public class User {
 			return false;
 		return true;
 	}
-
-
-
 
 }

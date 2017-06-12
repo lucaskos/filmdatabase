@@ -6,7 +6,7 @@
 	<div id="rating">
 		<div class="ratinginfo">
 			<p>
-				<c:out value="${film.rating }"></c:out>
+				<c:out value="${filmRating}"></c:out>
 			</p>
 		</div>
 		<div class="ratingwrapper">

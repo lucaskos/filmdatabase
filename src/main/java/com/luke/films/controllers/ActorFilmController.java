@@ -48,6 +48,7 @@ public class ActorFilmController {
 			if(list!=null) {
 					model.addAttribute("actorfilm", list);
 			}
+			model.addAttribute("filmRating", filmsService.getRating(filmById));
 			model.addAttribute("film", filmById);
 			model.addAttribute("actorFilm", new ActorFilm());
 			return "film";

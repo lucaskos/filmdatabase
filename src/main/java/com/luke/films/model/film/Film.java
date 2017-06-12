@@ -1,7 +1,6 @@
 package com.luke.films.model.film;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,21 +10,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.luke.films.model.ActorFilm;
-import com.luke.films.model.actor.Actor;
 
 @Entity
 @Table(name = "film")
@@ -45,13 +39,22 @@ public class Film {
 
 	private String description;
 
-	private float rating;
-
 	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
 	private Set<ActorFilm> actorsFilms = new HashSet<ActorFilm>();
-	
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "film", cascade = CascadeType.ALL)
+	private Set<Rating> rating = new HashSet<Rating>();
+
 	public Film() {
 
+	}
+
+	public Set<Rating> getRating() {
+		return rating;
+	}
+
+	public void setRating(Set<Rating> rating) {
+		this.rating = rating;
 	}
 
 	public Film(String title, int year) {
@@ -101,14 +104,6 @@ public class Film {
 		this.description = description;
 	}
 
-	public float getRating() {
-		return rating;
-	}
-
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-
 	public Set<ActorFilm> getActorsFilms() {
 		return this.actorsFilms;
 	}
@@ -121,11 +116,6 @@ public class Film {
 		this.actorsFilms.add(actorFilms);
 	}
 
-	@Override
-	public String toString() {
-		return "Film [filmId=" + filmId + ", title=" + title + ", year=" + year + ", description=" + description
-				+ ", rating=" + rating + ", actorsFilms=" + actorsFilms + "]";
-	}
 
 	@Override
 	public int hashCode() {
@@ -133,7 +123,6 @@ public class Film {
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + filmId;
-		result = prime * result + Float.floatToIntBits(rating);
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + year;
 		return result;
@@ -155,8 +144,6 @@ public class Film {
 			return false;
 		if (filmId != other.filmId)
 			return false;
-		if (Float.floatToIntBits(rating) != Float.floatToIntBits(other.rating))
-			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -166,7 +153,5 @@ public class Film {
 			return false;
 		return true;
 	}
-	
-
 
 }

@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.luke.films.model.actor.Actor;
 import com.luke.films.service.ActorService;
-
+/*
+ * actorList
+ * addActor
+ *
+ */
 @Controller
 public class ActorController {
 

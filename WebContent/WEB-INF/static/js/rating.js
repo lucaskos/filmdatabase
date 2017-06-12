@@ -8,7 +8,6 @@ $(document).ready(function(){
 	$('.rating').click(function(){
 		var $filmId = $('.filmId').text().trim();
 		var $rating = $(this).attr("data-index");
-		//alert($rating + ' film id \n' + $filmId);
 		console.log($rating + ' : ' + $filmId);
 		var data = {};
 		$.ajax({

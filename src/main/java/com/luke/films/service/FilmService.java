@@ -47,4 +47,10 @@ public class FilmService {
 	public List<Film> findFilms(int max, int count){
 		return filmsDao.findFilms(max, count);
 	}
+	
+	public float getRating(Film film) {
+		return filmsDao.getRating(film);
+	}
+	
+	
 }
