@@ -85,6 +85,9 @@
 	<definition name="admin" extends="base">
 		<put-attribute name="title" value="Admin Page"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/user/admin.jsp"></put-attribute>
+			<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute value="/static/js/admin.js" />
+		</put-list-attribute>
 	</definition>
 	<!-- Create Account -->
 	<definition name="newaccount" extends="base">

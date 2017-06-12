@@ -18,6 +18,9 @@ div.film * {
 #filmdetail p {
 	display:block;
 }
+#filmdetail .filmid {
+	display: none;
+}
 #filmdetail p:FIRST-CHILD {
 	font-size: 32px;
 }

@@ -15,6 +15,9 @@
 	</div>
 	<div class="main-film-wrapper">
 		<div id="filmdetail">
+		<p class="filmid" hidden="">
+		<c:out value="${film.filmId}"></c:out>
+		</p>
 			<p>
 				<c:out value="${film.title}"></c:out>
 			</p>

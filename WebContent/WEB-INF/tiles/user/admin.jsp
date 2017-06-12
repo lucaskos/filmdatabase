@@ -33,15 +33,15 @@
 			<th>Change role</th>
 		</tr>
 		<c:forEach var="users" items="${users}">
-			<tr>
+			<tr class="userdetails">
 				<td><c:out value="${users.id }" /></td>
-				<td><c:out value="${users.username }" /></td>
+				<td class="username"><c:out value="${users.username }" /></td>
 				<td><c:out value="${users.password }" /></td>
 				<td><c:out value="${users.email }" /></td>
 				<c:forEach var="roles" items="${users.usersRoles }">
 					<td><c:out value="${roles.role }" /></td>
 				</c:forEach>
-				<td><select><c:forEach var='changeRole'
+				<td><select id="change-role"><c:forEach var='changeRole'
 							items='${roles}'>
 
 							<option value="${changeRole.role}"><c:out
