@@ -42,7 +42,7 @@ public class CastDaoImpl implements CastDao {
 	@SuppressWarnings("unchecked")
 	public List<Cast> getCast(Film film) {
 
-		String query = "from ActorFilm where film =?1";
+		String query = "from Cast where film =?1";
 
 		List<Cast> list = session().createQuery(query).setParameter("1", film).list();
 		Map<Actor, String> actorRole = new HashMap<>();
@@ -56,7 +56,7 @@ public class CastDaoImpl implements CastDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public Map<Film, String> getFilmography(Actor actor) {
-		String query = "from ActorFilm where actor=?1";
+		String query = "from Cast where actor=?1";
 
 		List<Cast> list = session().createQuery(query).setParameter("1", actor).list();
 

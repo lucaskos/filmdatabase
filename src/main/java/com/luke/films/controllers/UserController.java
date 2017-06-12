@@ -1,5 +1,8 @@
 package com.luke.films.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,12 +16,15 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.luke.films.model.user.User;
+import com.luke.films.model.user.role.Role;
 import com.luke.films.model.user.role.RoleDao;
 import com.luke.films.service.UserService;
 
@@ -27,7 +33,7 @@ public class UserController {
 
 	@Autowired
 	private UserService usersService;
-	
+
 	@Autowired
 	private RoleDao roleDao;
 
@@ -55,7 +61,7 @@ public class UserController {
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
 	public ModelAndView adminPage() {
-		
+
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
 		model.addObject("message", "This is protected page!");
@@ -105,5 +111,14 @@ public class UserController {
 
 		return "accountcreated";
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "changeRole", method = RequestMethod.GET)
+	public void changeRole(@RequestParam("username") String username, @RequestParam("role") String role) {
+		System.out.println(username);
+		System.out.println(role);
+		User user = usersService.getUser(username);
+		Role newRole = roleDao.getRole(role);
+		user.getUsersRoles().add(newRole);
+	}
+	
 }

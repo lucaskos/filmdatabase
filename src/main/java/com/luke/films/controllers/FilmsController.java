@@ -50,10 +50,9 @@ public class FilmsController {
 		return "redirect:/filmslist";
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/{filmId}", method = RequestMethod.POST)
+	//@RequestMapping(value = "/{filmId}", method = RequestMethod.POST)
 	public void getSearchResultViaAjax(@RequestParam("filmId") int filmId, @RequestParam("rating") int rating) {
-
+		System.out.println("This method");
 		System.out.println(rating);
 		Film filmById = filmsService.getFilmById(filmId);
 

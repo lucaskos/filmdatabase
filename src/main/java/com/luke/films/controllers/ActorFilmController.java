@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.luke.films.model.actor.Actor;
 import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.Film;
-import com.luke.films.service.ActorFilmService;
+import com.luke.films.service.CastService;
 import com.luke.films.service.FilmService;
 
 @Controller
 public class ActorFilmController {
 	@Autowired
-	private ActorFilmService actorFilmService;
+	private CastService actorFilmService;
 	@Autowired
 	private FilmService filmsService;
 

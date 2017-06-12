@@ -1,54 +1,44 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@page session="true"%>
+<script>var ctx = "${pageContext.request.contextPath}"</script>
 <h1>Title : ${title}</h1>
 <h1>Message : ${message}</h1>
 
-<c:url value="/logout" var="logoutUrl" />
-<form action="${logoutUrl}" method="post" id="logoutForm">
-	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" />
-</form>
-<script>
-	function formSubmit() {
-		document.getElementById("logoutForm").submit();
-	}
-</script>
-
-<c:if test="${pageContext.request.userPrincipal.name != null}">
-	<h2>
-		Welcome : ${pageContext.request.userPrincipal.name} | <a
-			href="javascript:formSubmit()"> Logout</a>
-	</h2>
-	<p>this is custom made form</p>
-</c:if>
-<div class="list">
-	<table class="table-list">
-		<tr>
-			<th>Id</th>
-			<th>Username</th>
-			<th>Password</th>
-			<th>Email</th>
-			<th>Roles</th>
-			<th>Change role</th>
-		</tr>
+<sf:form action="${pageContext.request.contextPath }/changeRole"
+	>
+	<h2>Create user</h2>
+	<table>
 		<c:forEach var="users" items="${users}">
-			<tr class="userdetails">
+			<tr>
+				<td>USER ID:</td>
 				<td><c:out value="${users.id }" /></td>
+				<td>USERNAME:</td>
 				<td class="username"><c:out value="${users.username }" /></td>
-				<td><c:out value="${users.password }" /></td>
+
+				<td>EMAIL:</td>
 				<td><c:out value="${users.email }" /></td>
 				<c:forEach var="roles" items="${users.usersRoles }">
 					<td><c:out value="${roles.role }" /></td>
 				</c:forEach>
-				<td><select id="change-role"><c:forEach var='changeRole'
-							items='${roles}'>
+				<td><select class="change-role">
+						<c:forEach var='changeRole' items='${roles}'>
 
-							<option value="${changeRole.role}"><c:out
+						<option value="${changeRole.role}" data-users="${users}" data-userid="${users.id }"
+								data-username="${users.username }"><c:out
 									value='${changeRole.role}' /></option>
 
-						</c:forEach></select></td>
+						</c:forEach>
+				</select></td>
 			</tr>
 		</c:forEach>
+		<tr>
+			<td colspan='2'><input name="submit" type="submit"
+				value="submit" /></td>
+		</tr>
 	</table>
-</div>
+
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
+
+</sf:form>

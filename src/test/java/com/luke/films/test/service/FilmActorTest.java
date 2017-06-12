@@ -1,6 +1,7 @@
 package com.luke.films.test.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
@@ -24,6 +25,7 @@ import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
 import com.luke.films.model.user.UserDao;
+import com.luke.films.service.CastService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
@@ -39,6 +41,9 @@ public class FilmActorTest {
 	
 	@Autowired
 	private FilmsDao filmDao;
+	
+	@Autowired
+	private CastService castService;
 	
 	public Session session(){
 		try {
@@ -87,8 +92,10 @@ public class FilmActorTest {
 		session.save(actorFilm);
 		session.save(actorFilm1);
 		
-		
-		//session.save(actorFilm);
+		Map<Film, String> filmography = castService.getFilmography(actor);
+		for(Map.Entry<Film, String> entry : filmography.entrySet()) {
+			System.out.println(entry.getKey().getTitle() + " :AS: " + entry.getValue());
+		}
 		
 		
 		tx.commit();
