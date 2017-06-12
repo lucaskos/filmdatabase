@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.luke.films.model.ActorFilm;
+import com.luke.films.model.cast.Cast;
 
 @Entity
 @Table(name = "actor")
@@ -26,7 +26,7 @@ public class Actor {
 	@Column(name = "name")
 	private String name;
 	@OneToMany(mappedBy = "actor", fetch = FetchType.EAGER)
-	private Set<ActorFilm> actorFilm = new HashSet<ActorFilm>();
+	private Set<Cast> actorFilm = new HashSet<Cast>();
 
 	public Actor() {
 
@@ -54,15 +54,15 @@ public class Actor {
 	}
 
 
-	public Set<ActorFilm> getActorFilms() {
+	public Set<Cast> getActorFilms() {
 		return this.actorFilm;
 	}
 
-	public void setActorFilms(Set<ActorFilm> actorFilms) {
+	public void setActorFilms(Set<Cast> actorFilms) {
 		this.actorFilm = actorFilms;
 	}
 	
-	public void addActorsFilms(ActorFilm actorFilms){
+	public void addActorsFilms(Cast actorFilms){
 		this.actorFilm.add(actorFilms);
 	}
 

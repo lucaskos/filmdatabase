@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.luke.user.model.User;
-import com.luke.user.model.UserDao;
+import com.luke.films.model.user.User;
+import com.luke.films.model.user.UserDao;
 
 @Service
 @Transactional
@@ -21,7 +21,9 @@ public class UserService {
 	}
 	
 	public boolean checkUsername(User user) {
-		return usersDao.checkUserExist(user);
+		if(usersDao.getUser(user.getUsername()) != null) 
+			return true;
+		return false;
 	}
 	//TODO Securing this method for ADMIN only
 	public List<User> getAllUsers() {

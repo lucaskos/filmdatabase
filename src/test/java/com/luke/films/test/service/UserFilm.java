@@ -29,14 +29,13 @@ import com.luke.films.config.HibernateConfig;
 import com.luke.films.model.actor.ActorDao;
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
-import com.luke.films.model.film.Rating;
-import com.luke.films.model.film.RatingDao;
-import com.luke.films.model.film.RatingPk;
+import com.luke.films.model.rating.Rating;
+import com.luke.films.model.rating.RatingDao;
+import com.luke.films.model.user.User;
+import com.luke.films.model.user.role.Role;
+import com.luke.films.model.user.role.RoleDao;
 import com.luke.films.service.FilmService;
 import com.luke.films.service.UserService;
-import com.luke.user.model.Role;
-import com.luke.user.model.RoleDao;
-import com.luke.user.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
@@ -95,6 +94,5 @@ public class UserFilm {
 		Film filmById = filmsService.getFilmById(343);
 		ratingDao.rateFilm(filmsService.getFilmById(343), userService.getUser("lucaskos"), rating);
 		ratingDao.rateFilm(filmsService.getFilmById(343), userService.getUser("lucaskos1"), rating-1);
-		System.out.println(filmDao.getRating(filmById));
 	}
 }

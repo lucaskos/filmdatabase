@@ -1,4 +1,4 @@
-package com.luke.films.model.film;
+package com.luke.films.model.rating;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,8 @@ import javax.persistence.Table;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.luke.user.model.User;
+import com.luke.films.model.film.Film;
+import com.luke.films.model.user.User;
 
 @Entity
 @Table(name = "rating_films")

@@ -15,8 +15,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.films.model.ActorFilm;
 import com.luke.films.model.actor.ActorDao;
+import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.FilmsDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -47,9 +47,9 @@ public class FilmActorDao {
 
 		String query = "from ActorFilm";
 		
-		List<ActorFilm> list = session().createQuery(query).list();
+		List<Cast> list = session().createQuery(query).list();
 		System.out.println(list.size());
-		for(ActorFilm af : list){
+		for(Cast af : list){
 			System.out.println(af.getFilm());
 			System.out.println(af.getActor());
 			System.out.println(af.getRole());

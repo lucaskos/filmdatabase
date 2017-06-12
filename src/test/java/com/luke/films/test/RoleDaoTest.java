@@ -12,8 +12,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.user.model.Role;
-import com.luke.user.model.RoleDao;
+import com.luke.films.model.user.role.Role;
+import com.luke.films.model.user.role.RoleDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })

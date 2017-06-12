@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luke.films.model.ActorFilm;
-import com.luke.films.model.ActorFilmDao;
 import com.luke.films.model.actor.Actor;
+import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.Film;
 import com.luke.films.service.ActorFilmService;
 import com.luke.films.service.FilmService;
@@ -26,7 +25,7 @@ public class ActorFilmController {
 	private int filmId;
 
 	@RequestMapping(value = "/actoraddedtofilm", method = RequestMethod.POST)
-	public String addActorToFilm(ActorFilm actorFilm) {
+	public String addActorToFilm(Cast actorFilm) {
 		Film filmById = filmsService.getFilmById(filmId);
 		actorFilm.setFilm(filmById);
 		System.out.println(actorFilm.getRole() + " : " + actorFilm.getActor() + " : " + actorFilm.getFilm());
@@ -35,12 +34,12 @@ public class ActorFilmController {
 	}
 
 	@RequestMapping(value = "/{filmId}", method = RequestMethod.GET)
-	public String getFilm(@PathVariable int filmId, Model model, Actor actor, ActorFilm actorFilm) {
+	public String getFilm(@PathVariable int filmId, Model model, Actor actor, Cast actorFilm) {
 		
 		this.filmId = filmId;
 		Film filmById = filmsService.getFilmById(filmId);
 
-		List<ActorFilm> list = actorFilmService.getActors(filmById);
+		List<Cast> list = actorFilmService.getActors(filmById);
 			
 		if (filmById == null)
 			return "error";
@@ -50,7 +49,7 @@ public class ActorFilmController {
 			}
 			model.addAttribute("filmRating", filmsService.getRating(filmById));
 			model.addAttribute("film", filmById);
-			model.addAttribute("actorFilm", new ActorFilm());
+			model.addAttribute("actorFilm", new Cast());
 			return "film";
 		}
 	}

@@ -1,4 +1,4 @@
-package com.luke.user.model;
+package com.luke.films.model.user;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +15,9 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.luke.films.model.user.role.Role;
+import com.luke.films.model.user.role.RoleDao;
 
 @Component
 @Transactional
@@ -53,15 +56,8 @@ public class UserDaoImpl implements UserDao {
 		session().save(user);
 	}
 
-	public boolean checkUserExist(User user) {
-
-		String sql = "SELECT COUNT(*) FROM users WHERE username=:username";
-
-		return jdbc.queryForObject(sql, new MapSqlParameterSource("username", user.getUsername()), Integer.class) > 0;
-	}
 
 	@SuppressWarnings("unchecked")
-	
 	public List<User> getAllUsers() {
 		List<User> list = session().createQuery("from User").list();
 		if (list.isEmpty())
@@ -83,8 +79,11 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void removeUser(User user) {
-		User temp = getUser(user.getUsername());
-		session().delete(temp);
+		session().delete(user);
+	}
 
+	@Override
+	public void update(User user) {
+		session().update(user);
 	}
 }

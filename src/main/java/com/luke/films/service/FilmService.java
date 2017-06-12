@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
+import com.luke.films.model.rating.RatingDao;
 
 
 @Component("filmsService")
@@ -15,6 +16,9 @@ import com.luke.films.model.film.FilmsDao;
 public class FilmService {
 	@Autowired
 	private FilmsDao filmsDao;
+	
+	@Autowired
+	private RatingDao ratingDao;
 	
 	public List<Film> getAllFilms(){
 		return filmsDao.getAllFilms();
@@ -43,14 +47,12 @@ public class FilmService {
 	public List<Film> getFilmsByYear(int year) {
 		return filmsDao.getFilmsByYear(year);
 	}
-	
+	//TODO remove or implement this
 	public List<Film> findFilms(int max, int count){
 		return filmsDao.findFilms(max, count);
 	}
 	
 	public float getRating(Film film) {
-		return filmsDao.getRating(film);
+		return ratingDao.getRating(film);
 	}
-	
-	
 }

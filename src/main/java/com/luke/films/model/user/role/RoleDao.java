@@ -1,4 +1,4 @@
-package com.luke.user.model;
+package com.luke.films.model.user.role;
 
 import java.util.List;
 

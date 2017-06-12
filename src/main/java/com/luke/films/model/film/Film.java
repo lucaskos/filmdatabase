@@ -19,7 +19,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
-import com.luke.films.model.ActorFilm;
+import com.luke.films.model.cast.Cast;
+import com.luke.films.model.rating.Rating;
 
 @Entity
 @Table(name = "film")
@@ -40,7 +41,7 @@ public class Film {
 	private String description;
 
 	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
-	private Set<ActorFilm> actorsFilms = new HashSet<ActorFilm>();
+	private Set<Cast> actorsFilms = new HashSet<Cast>();
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "film", cascade = CascadeType.ALL)
 	private Set<Rating> rating = new HashSet<Rating>();
@@ -68,7 +69,7 @@ public class Film {
 		this.description = description;
 	}
 
-	public void addActor(ActorFilm actorsFilms) {
+	public void addActor(Cast actorsFilms) {
 		this.actorsFilms.add(actorsFilms);
 	}
 
@@ -104,15 +105,15 @@ public class Film {
 		this.description = description;
 	}
 
-	public Set<ActorFilm> getActorsFilms() {
+	public Set<Cast> getActorsFilms() {
 		return this.actorsFilms;
 	}
 
-	public void setActorsFilms(Set<ActorFilm> actorsFilms) {
+	public void setActorsFilms(Set<Cast> actorsFilms) {
 		this.actorsFilms = actorsFilms;
 	}
 
-	public void addActorsFilms(ActorFilm actorFilms) {
+	public void addActorsFilms(Cast actorFilms) {
 		this.actorsFilms.add(actorFilms);
 	}
 

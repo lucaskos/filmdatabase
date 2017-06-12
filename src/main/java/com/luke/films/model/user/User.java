@@ -1,4 +1,4 @@
-package com.luke.user.model;
+package com.luke.films.model.user;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.luke.films.model.film.Rating;
+import com.luke.films.model.rating.Rating;
+import com.luke.films.model.user.role.Role;
 
 @Entity
 @Table(name = "users")

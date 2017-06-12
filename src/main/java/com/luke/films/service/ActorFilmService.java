@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.luke.films.model.ActorFilm;
-import com.luke.films.model.ActorFilmDao;
 import com.luke.films.model.actor.Actor;
+import com.luke.films.model.cast.Cast;
+import com.luke.films.model.cast.CastDaoImpl;
 import com.luke.films.model.film.Film;
 
 @Transactional
@@ -16,13 +16,13 @@ import com.luke.films.model.film.Film;
 public class ActorFilmService {
 
 	@Autowired
-	private ActorFilmDao actorFilmDao;
+	private CastDaoImpl actorFilmDao;
 
 	public void addActorToFilm(Film film, Actor actor, String role) {
 		actorFilmDao.addActorToFilm(film, actor, role);
 	}
 
-	public List<ActorFilm> getActors(Film film) {
-		return actorFilmDao.getActors(film);
+	public List<Cast> getActors(Film film) {
+		return actorFilmDao.getCast(film);
 	}
 }

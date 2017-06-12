@@ -1,4 +1,4 @@
-package com.luke.films.model;
+package com.luke.films.model.cast;
 
 import java.io.Serializable;
 
@@ -20,7 +20,12 @@ import com.luke.films.model.film.Film;
 @Entity
 @Table(name = "actor_film")
 @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
-public class ActorFilm implements Serializable {
+public class Cast implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6424609370178798738L;
+
 	@Column(name = "actor_film_id")
 	@Id
 	@GeneratedValue
@@ -37,11 +42,11 @@ public class ActorFilm implements Serializable {
 	@Column(name = "role")
 	private String role;
 
-	public ActorFilm() {
+	public Cast() {
 
 	}
 	
-	public ActorFilm(Film f, Actor a) {
+	public Cast(Film f, Actor a) {
 		this.film = f;
 		this.actor = a;
 	}

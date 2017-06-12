@@ -20,9 +20,5 @@ public interface FilmsDao {
 
 	List<Film> findFilms(int id, int count);
 	
-	int getNumberOfVotes(Film film);
 	
-	float getRating(Film film);
-	
-	void setRating(Film film);
 }

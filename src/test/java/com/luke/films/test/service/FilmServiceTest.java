@@ -19,7 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.films.model.ActorFilm;
+import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
 import com.luke.films.service.FilmService;

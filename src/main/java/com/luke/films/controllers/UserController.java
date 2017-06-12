@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.luke.films.model.user.User;
+import com.luke.films.model.user.role.RoleDao;
 import com.luke.films.service.UserService;
-import com.luke.user.model.RoleDao;
-import com.luke.user.model.User;
 
 @Controller
 public class UserController {

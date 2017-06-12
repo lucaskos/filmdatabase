@@ -1,4 +1,4 @@
-package com.luke.user.model;
+package com.luke.films.model.user.role;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.luke.films.model.user.User;
 
 @Entity
 @Table(name = "roles")
