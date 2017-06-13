@@ -1,17 +1,14 @@
 package com.luke.films.model.user;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.sql.DataSource;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +28,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
 	private NamedParameterJdbcTemplate jdbc;
 
 	/*
@@ -42,10 +40,16 @@ public class UserDaoImpl implements UserDao {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
-	public Session session() {
-		return sessionFactory.getCurrentSession();
+	private Session session() {
+		try {
+			return sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			return sessionFactory.openSession();
+		}
 	}
-
+/*
+ * by default each user.role will equal ROLE_USER
+ */
 	public void createUser(User user) {
 		Role role = roleDao.getRole("ROLE_USER");
 		

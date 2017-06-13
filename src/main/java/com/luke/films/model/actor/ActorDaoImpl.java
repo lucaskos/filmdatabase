@@ -45,6 +45,7 @@ public class ActorDaoImpl implements ActorDao {
 		return new Actor();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Actor getActorByName(Actor actor) {
 		List<Actor> list = session().createQuery("from Actor where name = ?1").setParameter("1", actor.getName()).list();

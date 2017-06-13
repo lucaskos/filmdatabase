@@ -14,12 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity //helps configure security from WebSecurityConfigurer class
@@ -36,12 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder(){
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return passwordEncoder;
-	}
-	
-	private CsrfTokenRepository csrfTokenRepository() {
-		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-		repository.setSessionAttributeName("_csrf");
-		return repository;
 	}
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
@@ -91,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			    .logout().logoutSuccessUrl("/login?logout")
 			.and()
 				.exceptionHandling().accessDeniedPage("/denied")
-			.and()
+			.and()	
 			    .csrf();
 	    //remember me configuration
 	    http

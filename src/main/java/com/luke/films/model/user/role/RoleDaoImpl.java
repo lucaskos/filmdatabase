@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.luke.films.model.user.User;
-
 @Component
 @Transactional
 public class RoleDaoImpl implements RoleDao {
@@ -30,6 +28,7 @@ public class RoleDaoImpl implements RoleDao {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Role> getAllRoles() {
 		List<Role> list = session().createQuery("from Role").list();
