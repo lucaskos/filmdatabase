@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.luke.films.model.cast.Cast;
 
 @Entity
@@ -22,10 +24,10 @@ public class Actor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "actor_id")
 	private int id;
-	@NotNull
+	@NotBlank
 	@Column(name = "name")
 	private String name;
-	@OneToMany(mappedBy = "actor", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "actor", fetch = FetchType.LAZY)
 	private Set<Cast> actorFilm = new HashSet<Cast>();
 
 	public Actor() {
@@ -35,7 +37,6 @@ public class Actor {
 	public Actor(String name) {
 		this.name = name;
 	}
-
 
 	public int getId() {
 		return id;
@@ -53,7 +54,6 @@ public class Actor {
 		this.name = name;
 	}
 
-
 	public Set<Cast> getActorFilms() {
 		return this.actorFilm;
 	}
@@ -61,15 +61,14 @@ public class Actor {
 	public void setActorFilms(Set<Cast> actorFilms) {
 		this.actorFilm = actorFilms;
 	}
-	
-	public void addActorsFilms(Cast actorFilms){
+
+	public void addActorsFilms(Cast actorFilms) {
 		this.actorFilm.add(actorFilms);
 	}
 
 	@Override
 	public String toString() {
-		return "Actor [id=" + id + ", name=" + name + ", actorFilm=" + actorFilm + "]";
+		return "Actor [id=" + id + ", name=" + name + "]";
 	}
-
 
 }

@@ -26,6 +26,7 @@ public class UserService {
 		return false;
 	}
 	//TODO Securing this method for ADMIN only
+	
 	public List<User> getAllUsers() {
 		return usersDao.getAllUsers();
 	}
@@ -41,6 +42,11 @@ public class UserService {
 	 */
 	public void removeUser(User user) {
 		usersDao.removeUser(user);
+	}
+
+	public void update(User user) {
+		usersDao.update(user);
+		
 	}
 	
 }

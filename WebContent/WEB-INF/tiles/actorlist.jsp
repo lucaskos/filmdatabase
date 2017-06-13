@@ -9,7 +9,7 @@
 		</tr>
 
 		<c:forEach var="actor" items="${actor}">
-			<tr data-href='<c:out value="${film.filmId }" />'>
+			<tr>
 
 				<td><c:out value="${actor.name }" /></td>
 			</tr>

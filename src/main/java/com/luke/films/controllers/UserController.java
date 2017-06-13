@@ -2,6 +2,7 @@ package com.luke.films.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +65,7 @@ public class UserController {
 
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
-		model.addObject("message", "This is protected page!");
+		model.addObject("message", "This is protected page! For ADMINS only");
 		model.setViewName("admin");
 		model.addObject("users", usersService.getAllUsers());
 		model.addObject("roles", roleDao.getAllRoles());
@@ -111,14 +112,13 @@ public class UserController {
 
 		return "accountcreated";
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "changeRole", method = RequestMethod.GET)
 	public void changeRole(@RequestParam("username") String username, @RequestParam("role") String role) {
-		System.out.println(username);
-		System.out.println(role);
 		User user = usersService.getUser(username);
-		Role newRole = roleDao.getRole(role);
-		user.getUsersRoles().add(newRole);
+		user.setRole(roleDao.getRole(role));
+		usersService.update(user);
 	}
-	
+
 }

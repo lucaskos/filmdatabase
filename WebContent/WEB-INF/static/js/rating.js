@@ -16,6 +16,9 @@ $(document).ready(function(){
             data: {filmId:$filmId, rating:$rating}, // An object with the key 'submit' and value 'true;
             success: function (result) {
               alert("Your bookmark has been saved");
+            }, 
+            error: function (result) {
+            	alert("error");
             }
         });  
 	});

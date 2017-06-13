@@ -25,6 +25,7 @@ div.list {
 
 div.list table tr:NOT(:FIRST-CHILD):HOVER {
 	background-color: white;
+	cursor:pointer;
 }
 
 table.table-list {

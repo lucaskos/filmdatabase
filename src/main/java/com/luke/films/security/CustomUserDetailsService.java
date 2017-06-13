@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.luke.films.model.user.User activeUsr = userDao.getUser(username);
-		List<GrantedAuthority> authorities = buildUserAuthority(activeUsr.getUsersRoles());
+		List<GrantedAuthority> authorities = buildUserAuthority(activeUsr.getRole());
 		
 		return buildUserForAuthentication(activeUsr, authorities);
 	}
@@ -41,15 +41,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 			user.isEnabled(), true, true, true, authorities);
 	}
 
-	private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
+	private List<GrantedAuthority> buildUserAuthority(Role userRole) {
 
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
-		// Build user's authorities
-		for (Role userRole : userRoles) {
-			setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
-		}
-
+		setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
 		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
 
 		return Result;

@@ -13,9 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
@@ -31,16 +33,17 @@ public class Film {
 	@Column(name = "film_id")
 	private int filmId;
 
-	@NotNull
 	@Size(max = 60)
 	@NotBlank
 	private String title;
-	@NumberFormat(style = Style.NUMBER)
-	private int year;
+	@NotNull
+	private Integer year;
 
+	@NotBlank
+	@Size(min = 10)
 	private String description;
 
-	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Cast> actorsFilms = new HashSet<Cast>();
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "film", cascade = CascadeType.ALL)
@@ -89,11 +92,11 @@ public class Film {
 		this.title = title;
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 
@@ -117,7 +120,6 @@ public class Film {
 		this.actorsFilms.add(actorFilms);
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -125,7 +127,7 @@ public class Film {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + filmId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + year;
+		result = prime * result + ((year == null) ? 0 : year.hashCode());
 		return result;
 	}
 
@@ -150,9 +152,13 @@ public class Film {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
-		if (year != other.year)
+		if (year == null) {
+			if (other.year != null)
+				return false;
+		} else if (!year.equals(other.year))
 			return false;
 		return true;
 	}
+
 
 }

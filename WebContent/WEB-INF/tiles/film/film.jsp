@@ -9,15 +9,13 @@
 				<c:out value="${filmRating}"></c:out>
 			</p>
 		</div>
-		<div class="ratingwrapper">
-		
-		</div>
+		<div class="ratingwrapper"></div>
 	</div>
 	<div class="main-film-wrapper">
 		<div id="filmdetail">
-		<p class="filmid" hidden="">
-		<c:out value="${film.filmId}"></c:out>
-		</p>
+			<p class="filmid" hidden="">
+				<c:out value="${film.filmId}"></c:out>
+			</p>
 			<p>
 				<c:out value="${film.title}"></c:out>
 			</p>
@@ -49,7 +47,15 @@
 
 
 		</div>
-		<sec:authorize access="isAuthenticated()">
+
+		<sec:authorize access="hasAnyRole('ADMIN', 'PREMIUM')">
+
+			<sf:form action='${pageContext.request.contextPath}/removeFilm'
+				method='GET' commandName="film">
+				
+				<button name="filmId" value="${film.filmId}">REMOVE</button>
+			</sf:form>
+
 			<sf:form class='actor-to-film' var='actorfilm'
 				modelAttribute='actorFilm'
 				action="${pageContext.request.contextPath }/actoraddedtofilm"

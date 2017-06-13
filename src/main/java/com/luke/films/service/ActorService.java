@@ -18,7 +18,6 @@ public class ActorService {
 	public List<Actor> getAllActors(){
 		return actorDao.getAllActors();
 	}
-	@Secured("ROLE_USER")
 	public void addActor(Actor actor) {
 		actorDao.addActor(actor);
 	}

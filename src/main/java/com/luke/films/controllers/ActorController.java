@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,17 +28,14 @@ public class ActorController {
 		return "actorlist";
 	}
 	
-	@RequestMapping(value = "/addactor", method=RequestMethod.GET)
-	public String addActor(Model model){
-		model.addAttribute("actor", new Actor());
-		return "addactor";
-	}
-	
 	@RequestMapping(value = "/actoradded", method=RequestMethod.POST)
-	public String actorAdded(@Valid Actor actor){
+	public String actorAdded(@Valid Actor actor, BindingResult results){
 		//TODO error handling
+		if(results.hasErrors()) {
+			return "addactor";
+		}
 		actorService.addActor(actor);
-		return "actorlist";
+		return "redirect:/actorlist";
 	}
 	
 }

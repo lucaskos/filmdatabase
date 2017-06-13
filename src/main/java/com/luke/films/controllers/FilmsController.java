@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.luke.films.model.film.Film;
 import com.luke.films.model.rating.RatingDao;
@@ -34,13 +33,6 @@ public class FilmsController {
 		return "filmslist";
 	}
 
-	@RequestMapping(value = "/addfilm")
-	public String addFilm(Model model) {
-
-		model.addAttribute("film", new Film());
-		return "addfilm";
-	}
-
 	@RequestMapping(value = "/docreate", method = RequestMethod.POST)
 	public String filmAdded(@Valid Film film, BindingResult results) {
 		if (results.hasErrors()) {
@@ -50,21 +42,22 @@ public class FilmsController {
 		return "redirect:/filmslist";
 	}
 
-	//@RequestMapping(value = "/{filmId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{filmId}", method = RequestMethod.POST)
 	public void getSearchResultViaAjax(@RequestParam("filmId") int filmId, @RequestParam("rating") int rating) {
-		System.out.println("This method");
-		System.out.println(rating);
+		System.out.println("Passed variable " + filmId + " : " + rating);
 		Film filmById = filmsService.getFilmById(filmId);
-
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
 		String name = auth.getName();
 
 		ratingDao.rateFilm(filmById, userService.getUser(name), rating);
-		System.out.println(filmsService.getRating(filmById));
-		System.out.println(filmById.getRating().size());
-		System.out.println("rating for movie is :" + rating);
+	}
 
+	@RequestMapping(value = "/removeFilm", method = RequestMethod.GET)
+	public String removeFilm(@RequestParam("filmId") String filmId) {
+		System.out.println("DELETE FILM");
+		System.out.println(filmId);
+		filmsService.deleteById(Integer.valueOf(filmId));
+		return "redirect:/filmslist";
 	}
 
 }

@@ -14,7 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -27,7 +29,7 @@ import com.luke.films.model.user.role.Role;
 @Entity
 @Table(name = "users")
 public class User {
-	@NotBlank
+	@NotNull
 	@NotEmpty
 	@Size(min = 5, max = 45)
 	@Column(name = "username")
@@ -38,8 +40,6 @@ public class User {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank
-	@NotEmpty
 	@Size(min = 5, max = 80)
 	@Column(name = "password")
 	private String password;
@@ -47,15 +47,16 @@ public class User {
 	@Column(name = "enabled")
 	private boolean enabled;
 
-	@NotBlank
-	@NotEmpty
 	@Email
 	@Column(name = "email")
 	private String email;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
-	private Set<Role> usersRoles;
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="users_roles",
+        joinColumns = {@JoinColumn(name="users_id", referencedColumnName="id")},
+        inverseJoinColumns = {@JoinColumn(name="roles_id", referencedColumnName="id")}
+    )
+	private Role role;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade=CascadeType.ALL)
 	private Set<Rating> rating = new HashSet<>();
 	public User() {
@@ -68,10 +69,12 @@ public class User {
 		this.email = email;
 	}
 
-	public User(String username, String password, Set<Role> usersRoles) {
-		this.username = username;
-		this.password = password;
-		this.usersRoles = usersRoles;
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public int getId() {
@@ -114,18 +117,10 @@ public class User {
 		this.email = email;
 	}
 
-	public Set<Role> getUsersRoles() {
-		return usersRoles;
-	}
-
-	public void setUsersRoles(Set<Role> usersRoles) {
-		this.usersRoles = usersRoles;
-	}
-
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", email=" + email
-				+ ", usersRoles=" + usersRoles + "]";
+				+ "]";
 	}
 
 	@Override

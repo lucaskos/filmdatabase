@@ -48,10 +48,8 @@ public class UserDaoImpl implements UserDao {
 
 	public void createUser(User user) {
 		Role role = roleDao.getRole("ROLE_USER");
-		Set<Role> ur = new HashSet<>();
-		ur.add(role);
 		
-		user.setUsersRoles(ur);
+		user.setRole(role);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		session().save(user);
 	}
