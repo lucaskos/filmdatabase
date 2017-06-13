@@ -33,7 +33,8 @@ public class FilmService {
 	}
 	
 	public void deleteById(int id) {
-		filmsDao.deleteById(id);
+		Film filmById = filmsDao.getFilmById(id);
+		filmsDao.deleteFilm(filmById);
 	}
 	
 	public Film getFilmByTitle(String title) {

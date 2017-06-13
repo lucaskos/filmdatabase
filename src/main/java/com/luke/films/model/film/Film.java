@@ -43,7 +43,7 @@ public class Film {
 	@Size(min = 10)
 	private String description;
 
-	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "film", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Cast> actorsFilms = new HashSet<Cast>();
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "film", cascade = CascadeType.ALL)

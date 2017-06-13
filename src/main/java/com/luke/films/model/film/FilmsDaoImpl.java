@@ -1,6 +1,7 @@
 package com.luke.films.model.film;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -9,6 +10,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.luke.films.model.cast.Cast;
 
 @Component("filmsDao")
 @Transactional
@@ -44,12 +47,6 @@ public class FilmsDaoImpl implements FilmsDao {
 	@Override
 	public void deleteFilm(Film film) {
 		session().delete(film);
-	}
-
-	@Override
-	public void deleteById(int id) {
-		Film f = getFilmById(id);
-		session().delete(f);
 	}
 
 	@Override

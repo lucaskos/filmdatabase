@@ -44,6 +44,15 @@ public class ActorDaoImpl implements ActorDao {
 		//TODO solve this
 		return new Actor();
 	}
+
+	@Override
+	public Actor getActorByName(Actor actor) {
+		List<Actor> list = session().createQuery("from Actor where name = ?1").setParameter("1", actor.getName()).list();
+		if(list.isEmpty())
+			return null;
+		else 
+			return list.get(0);
+	}
 }
 
 

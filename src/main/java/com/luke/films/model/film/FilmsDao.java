@@ -16,8 +16,6 @@ public interface FilmsDao {
 
 	void deleteFilm(Film film);
 
-	void deleteById(int id);
-
 	List<Film> findFilms(int id, int count);
 	
 	

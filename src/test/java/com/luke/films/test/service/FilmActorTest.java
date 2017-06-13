@@ -68,8 +68,8 @@ public class FilmActorTest {
 	
 	@Test
 	public void test(){
-		Film film = new Film("Silence of the lamb", 1990);
-		
+		Film film = new Film("silence of the lambs", 1989, "silence of the lambs");
+		Film filmTest = new Film("Test film", 1990, "Test description");
 		Actor actor =  new Actor("Anthony Hopkins");
 		
 		Actor actor2 = new Actor("Jodie Foster");
@@ -79,7 +79,7 @@ public class FilmActorTest {
 		actorFilm.setActor(actor);
 		actorFilm.setRole("Hannibal");
 		
-		
+	
 		
 		Cast actorFilm1 = new Cast();
 		actorFilm1.setFilm(film);
@@ -96,7 +96,12 @@ public class FilmActorTest {
 		for(Map.Entry<Film, String> entry : filmography.entrySet()) {
 			System.out.println(entry.getKey().getTitle() + " :AS: " + entry.getValue());
 		}
+		session().save(filmTest);
 		
+		Actor actorTest = new Actor("Test actor");
+		session().save(actorTest);
+		
+		System.out.println(actorDao.getActorByName(actorTest));
 		
 		tx.commit();
 		//sessionFactory.getCurrentSession().merge(actorFilm1);

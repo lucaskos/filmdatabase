@@ -12,4 +12,6 @@ public interface ActorDao {
 	
 	void deleteActor(Actor actor);
 	
+	Actor getActorByName(Actor actor);
+	
 }
