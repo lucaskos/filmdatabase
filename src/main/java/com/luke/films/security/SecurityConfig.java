@@ -14,6 +14,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
@@ -63,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 	    .authorizeRequests()
-			.antMatchers("/addfilm").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+			.antMatchers("/addfilm").access("hasAnyRole('ROLE_ADMIN', 'ROLE_PREMIUM')")
 			.and()
 		.formLogin().loginPage("/login").failureUrl("/login?error")
 			    .usernameParameter("username").passwordParameter("password")
@@ -78,7 +82,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    .authorizeRequests()
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.and()
-		.formLogin().loginPage("/login").failureUrl("/login?error")
+		.formLogin()
+		.successHandler(savedRequestAwareAuthenticationSuccessHandler())
+		.loginPage("/login")
+		.failureUrl("/login?error")
 			    .usernameParameter("username").passwordParameter("password")
 			.and()
 			    .logout().logoutSuccessUrl("/login?logout")
@@ -86,8 +93,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().accessDeniedPage("/denied")
 			.and()
 			    .csrf();
+	    //remember me configuration
+	    http
+			    .rememberMe()
+			    .tokenRepository(getTokenRepository())
+			    .tokenValiditySeconds(86400);
 	    
 	    http.authorizeRequests().antMatchers("/static/**").permitAll();
+	}
+	@Bean
+	public SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler() {
+		SavedRequestAwareAuthenticationSuccessHandler auth  = new SavedRequestAwareAuthenticationSuccessHandler();
+		auth.setTargetUrlParameter("targetUrl");
+		return auth;
+	}
+
+	@Bean
+	public PersistentTokenRepository getTokenRepository(){
+		JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+		db.setDataSource(dataSource);
+		return db;
 	}
 	
 }

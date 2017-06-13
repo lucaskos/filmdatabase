@@ -17,6 +17,7 @@
 			name="submit" type="submit" value="submit" /> <input type="hidden"
 			name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 			<p>Not registered? <a
-			href="<c:url value='/newaccount'/>">Create Account</a></p>
+			href="<c:url value='/newaccount'/>">Create Account</a></p><br/>
+			<p>Remember me: <input type="checkbox" name="remember-me" /></p>
 	</form>
 </div>

@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,6 @@ public class UserController {
 		return model;
 
 	}
-
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
 	public ModelAndView adminPage() {
@@ -81,8 +81,6 @@ public class UserController {
 			SecurityContextHolder.getContextHolderStrategy().clearContext();
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-
-		System.out.println("AFter: " + auth);
 		return new ModelAndView("logout");
 	}
 
