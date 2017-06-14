@@ -10,8 +10,7 @@
 
 		<c:forEach var="actor" items="${actor}">
 			<tr>
-
-				<td><c:out value="${actor.name }" /></td>
+				<td data-href='<c:out value="${actor.id }" />'><c:out value="${actor.name }" /></td>
 			</tr>
 
 		</c:forEach>

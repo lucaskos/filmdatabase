@@ -1,68 +1,76 @@
 .film {
-	display:block;
+	display: block;
 	width: 100%;
 	vertical-align: baseline;
 }
+
 div.film * {
 	text-align: center;
 }
+
 .main-film-wrapper {
-	width:70%;
+	width: 70%;
 }
+
 #filmdetail {
-	display:block;
+	display: block;
 	bottom: 1px solid white;
 	margin: auto;
-	
 }
+
 #filmdetail p {
-	display:block;
+	display: block;
 }
+
 #filmdetail .filmid {
 	display: none;
 }
+
 #filmdetail p:FIRST-CHILD {
 	font-size: 32px;
 }
 
-#rating{
+#rating {
 	display: block;
-	float:right;
-	border:1px solid white;
-	padding:0 5px;
+	float: right;
+	border: 1px solid white;
+	padding: 0 5px;
 	color: #AA9739;
 }
-#rating a{
-color: #AA9739;
-text-decoration: none;
-margin:3px;
-}
-#rating a:HOVER {
-	color:#FFD500;
+
+#rating a {
+	color: #AA9739;
+	text-decoration: none;
+	margin: 3px;
 }
 
+#rating a:HOVER {
+	color: #FFD500;
+}
 
 div #actorlist {
-	margin:auto;
+	margin: auto;
 }
+
 #actorlist {
-	padding-top:20px;
+	padding-top: 20px;
 }
+
 #actorlist h3 {
-	display:inline-block;
-	width:100px;
+	display: inline-block;
+	width: 100px;
 	text-transform: uppercase;
 	font-variant: small-caps;
-	border-bottom:1px ridge silver;
+	border-bottom: 1px ridge silver;
 }
+
 #actorlist table {
-	
-	margin:auto;
+	margin: auto;
 	padding-bottom: 10px;
 	border-bottom: 1px solid white;
 }
 
 #actorlist table:LAST-OF-TYPE {
-	margin-bottom:20px;
-	border:none;
+	margin-bottom: 20px;
+	border: none;
 }

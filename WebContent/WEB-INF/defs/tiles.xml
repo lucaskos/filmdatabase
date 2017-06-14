@@ -32,7 +32,7 @@
 		<put-attribute name="title" value="List of all films"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/film/filmslist.jsp"></put-attribute>
 		<put-list-attribute name="javascripts" inherit="true">
-			<add-attribute value="/static/js/filmlist.js" />
+			<add-attribute value="/static/js/filmdetails.js" />
 		</put-list-attribute>
 	</definition>
 
@@ -52,23 +52,26 @@
 		<put-attribute name="title" value="Add film"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/film/addfilm.jsp"></put-attribute>
 	</definition>
-	<!-- Film created sucessfully -->
-	<definition name="filmcreated" extends="base">
-		<put-attribute name="title" value="Success"></put-attribute>
-		<put-attribute name="content"
-			value="/WEB-INF/tiles/film/filmcreated.jsp"></put-attribute>
-	</definition>
 
 	<!-- Actor list -->
 	<definition name="actorlist" extends="base">
 		<put-attribute name="title" value="Actor List"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/actorlist.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/actor/actorlist.jsp"></put-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute value="/static/js/actordetails.js" />
+		</put-list-attribute>
 	</definition>
 	<!-- Add Actor -->
 	<definition name="addactor" extends="base">
 		<put-attribute name="title" value="Add Actor"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/addactor.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/actor/addactor.jsp"></put-attribute>
 	</definition>
+	<!-- Actor details -->
+	<definition name="actor" extends="base">
+		<put-attribute name="title" value="Actor"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/actor/actor.jsp"></put-attribute>
+	</definition>
+	
 	
 	<!-- USER SECTION -->
 	<!-- Login page -->

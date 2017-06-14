@@ -4,22 +4,23 @@
 <div class="list">
 	<h1>Films list</h1>
 	<table class="table-list">
-		<tr>
-			<th>Title</th>
-			<th>Year</th>
-			<th>Description</th>
-		</tr>
-
-		<c:forEach var="film" items="${film}">
+		<thead>
 			<tr>
-
-				<td data-href='<c:out value="${film.filmId }" />'><c:out
-						value="${film.title }" /></td>
-				<td><c:out value="${film.year }" /></td>
-				<td><c:out value="${film.description }" /></td>
+				<th>Title</th>
+				<th>Year</th>
+				<th>Description</th>
 			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="film" items="${film}">
+				<tr>
+					<td data-href='<c:out value="${film.filmId }" />'><c:out
+							value="${film.title }" /></td>
+					<td><c:out value="${film.year }" /></td>
+					<td><c:out value="${film.description }" /></td>
+				</tr>
 
-		</c:forEach>
-
+			</c:forEach>
+		</tbody>
 	</table>
 </div>

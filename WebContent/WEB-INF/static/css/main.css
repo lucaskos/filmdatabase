@@ -4,10 +4,10 @@ body {
 }
 /* header elements */
 .header {
-	background-color:#110B4A;
+	background-color: #110B4A;
 	padding-bottom: 10px;
-	
 }
+
 header {
 	padding: 0px;
 	border-bottom: solid;
@@ -18,21 +18,6 @@ header {
 	padding-left: 30px;
 	position: relative;
 }
-
-div.list {
-	border: 1px solid white;
-}
-
-div.list table tr:NOT(:FIRST-CHILD):HOVER {
-	background-color: white;
-	cursor:pointer;
-}
-
-table.table-list {
-	border: 1px solid white;
-}
-
-
 
 .header h3, h5, p {
 	display: inline;
@@ -53,16 +38,70 @@ table.table-list {
 	padding-left: 100px;
 }
 
+div.list {
+	width: 560px;
+	display: block;
+	font-size: 12px;
+	padding-left: 30px;
+	text-align: center;
+}
+
+.table-list thead {
+	background-color: #205960;
+}
+
+.table-list tbody {
+	background-color: #5fb4b7;
+}
+
+div.list tbody tr:HOVER {
+	background-color: #25636b;
+	font-weight: bold;
+	color: black;
+	cursor: pointer;
+}
+
+table.table-list {
+	border-top: 5px #25636b ridge;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+.table-list td, th {
+	padding: 0.8em;
+	border-bottom: 1px solid white;
+}
+
+.table-list td:FIRST-CHILD, th:FIRST-CHILD {
+	padding-right: 3.6em;
+	width: 160px;
+}
+
+.table-list td:LAST-CHILD {
+	width: 460px;
+}
+
+.table-list tbody tr:LAST-CHILD {
+	border-bottom: 5px #25636b;
+	border-bottom-style: ridge;
+}
+
 #content {
 	min-width: 400px;
 	min-height: 400px;
 }
 
-menu a {
-	display: inline-block;
+menu ul {
+}
+
+menu ul li {
+	display: inline;
 	padding: 10px;
 	background-color: #dcdced;
 	text-transform: uppercase;
+}
+
+menu ul li a {
 	text-decoration: none;
 }
 
@@ -71,35 +110,38 @@ menu {
 	max-width: 600px;
 }
 /* login part */
-#login-box{
-	padding:45px;
+#login-box {
+	padding: 45px;
 	width: 300px;
-	margin:0 auto 1000px;
-	margin-top:100px;
-	text-align:center;
-	display:block;
+	margin: 0 auto 1000px;
+	margin-top: 100px;
+	text-align: center;
+	display: block;
 	background: #666699;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px rgba(200, 251, 251, 0.4);
 }
+
 #login-box input {
-	outline:0;
+	outline: 0;
 	width: 100%;
-	border:0;
+	border: 0;
 	margin: 0 0 15px;
 	padding: 15px;
 }
+
 #login-box input[type='submit'] {
-	background-color:#383276;
+	background-color: #383276;
 	color: #FFFFFF;
-	text-transform:uppercase;
-	border:0;
-	cursor:pointer;
-	width:100%;
+	text-transform: uppercase;
+	border: 0;
+	cursor: pointer;
+	width: 100%;
 	box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.4);
 }
+
 #login-box input[type='submit']:HOVER {
-	background-color:#dcdced;
+	background-color: #dcdced;
 }
 /* login part ends */
 a.login {

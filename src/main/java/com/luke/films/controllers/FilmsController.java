@@ -4,20 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.HttpRequestHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.luke.films.model.film.Film;
 import com.luke.films.model.rating.RatingDao;
@@ -46,16 +41,21 @@ public class FilmsController {
 			return "addfilm";
 		}
 		Film sessionFilm = (Film) request.getSession().getAttribute("film");
-		film.setFilmId(sessionFilm.getFilmId());
-			
-		filmsService.addFilm(film);
+
+		if (sessionFilm != null) {
+			film.setFilmId(sessionFilm.getFilmId());
+
+			filmsService.addFilm(film);
+			System.out.println(sessionFilm.getFilmId());
+		} else {
+			filmsService.addFilm(film);
+		}
 		request.getSession().removeAttribute("film");
 		return "redirect:/filmslist";
 	}
 
 	@RequestMapping(value = "/{filmId}", method = RequestMethod.POST)
 	public void getSearchResultViaAjax(@RequestParam("filmId") int filmId, @RequestParam("rating") int rating) {
-		System.out.println("Passed variable " + filmId + " : " + rating);
 		Film filmById = filmsService.getFilmById(filmId);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
@@ -81,7 +81,7 @@ public class FilmsController {
 	public String addFilm(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Film film = (Film) session.getAttribute("film");
-		
+
 		if (film != null)
 			model.addAttribute("film", film);
 		else {

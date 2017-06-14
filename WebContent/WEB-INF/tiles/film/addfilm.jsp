@@ -32,11 +32,11 @@
 		<tr>
 			<c:if test="${ empty film.title}">
 				<td colspan='2'><input name="submit" type="submit"
-					value="submit" /></td>
+					value="Add" /></td>
 			</c:if>
 			<c:if test="${ not empty film.title}">
 				<td colspan='2'><input name="submit" type="submit"
-					value="update" /></td>
+					value="Update" /></td>
 			</c:if>
 		</tr>
 	</table>

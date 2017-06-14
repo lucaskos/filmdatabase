@@ -28,14 +28,12 @@ public class ActorFilmController {
 	public String addActorToFilm(Cast actorFilm) {
 		Film filmById = filmsService.getFilmById(filmId);
 		actorFilm.setFilm(filmById);
-		System.out.println(actorFilm.getRole() + " : " + actorFilm.getActor() + " : " + actorFilm.getFilm());
 		actorFilmService.addActorToFilm(filmById, actorFilm.getActor(), actorFilm.getRole());
 		return "redirect:/filmslist";
 	}
 
-	@RequestMapping(value = "/{filmId}", method = RequestMethod.GET)
-	public String getFilm(@PathVariable int filmId, Model model, Actor actor, Cast actorFilm) {
-		
+	@RequestMapping(value = "/film/{filmId}", method = RequestMethod.GET)
+	public String getFilmPage(@PathVariable int filmId, Model model, Actor actor, Cast actorFilm) {
 		this.filmId = filmId;
 		Film filmById = filmsService.getFilmById(filmId);
 
@@ -52,5 +50,11 @@ public class ActorFilmController {
 			model.addAttribute("actorFilm", new Cast());
 			return "film";
 		}
+	}
+	
+	@RequestMapping(value = "/actor/{actorId}", method = RequestMethod.GET)
+	public String getActorPage(@PathVariable("actorId") int actorId) {
+		System.out.println(actorId);
+		return "actor";
 	}
 }
