@@ -156,5 +156,10 @@ public class Film {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Film [filmId=" + filmId + ", title=" + title + ", year=" + year + ", description=" + description
+				+ "]";
+	}
 
 }

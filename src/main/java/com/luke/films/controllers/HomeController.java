@@ -43,9 +43,5 @@ public class HomeController {
 		return "addactor";
 	}
 
-	@RequestMapping(value = "/addfilm")
-	public String addFilm(Model model) {
-		model.addAttribute("film", new Film());
-		return "addfilm";
-	}
+
 }

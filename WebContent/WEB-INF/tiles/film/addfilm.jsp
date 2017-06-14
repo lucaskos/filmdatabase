@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <sf:form class='addfilm' modelAttribute='film'
 	action="${pageContext.request.contextPath }/docreate" method='POST'>
 	<h2>Add film</h2>
@@ -31,8 +30,14 @@
 		</tr>
 
 		<tr>
-			<td colspan='2'><input name="submit" type="submit"
-				value="submit" /></td>
+			<c:if test="${ empty film.title}">
+				<td colspan='2'><input name="submit" type="submit"
+					value="submit" /></td>
+			</c:if>
+			<c:if test="${ not empty film.title}">
+				<td colspan='2'><input name="submit" type="submit"
+					value="update" /></td>
+			</c:if>
 		</tr>
 	</table>
 </sf:form>

@@ -38,7 +38,7 @@ public class FilmsDaoImpl implements FilmsDao {
 
 	@Override
 	public void addFilm(Film film) {
-		session().save(film);
+		session().saveOrUpdate(film);
 	}
 
 	@Override

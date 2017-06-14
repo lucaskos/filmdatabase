@@ -1,16 +1,23 @@
 package com.luke.films.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.HttpRequestHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.luke.films.model.film.Film;
 import com.luke.films.model.rating.RatingDao;
@@ -34,11 +41,15 @@ public class FilmsController {
 	}
 
 	@RequestMapping(value = "/docreate", method = RequestMethod.POST)
-	public String filmAdded(@Valid Film film, BindingResult results) {
+	public String filmAdded(@Valid Film film, BindingResult results, HttpServletRequest request) {
 		if (results.hasErrors()) {
 			return "addfilm";
 		}
+		Film sessionFilm = (Film) request.getSession().getAttribute("film");
+		film.setFilmId(sessionFilm.getFilmId());
+			
 		filmsService.addFilm(film);
+		request.getSession().removeAttribute("film");
 		return "redirect:/filmslist";
 	}
 
@@ -54,10 +65,30 @@ public class FilmsController {
 
 	@RequestMapping(value = "/removeFilm", method = RequestMethod.GET)
 	public String removeFilm(@RequestParam("filmId") String filmId) {
-		System.out.println("DELETE FILM");
-		System.out.println(filmId);
 		filmsService.deleteById(Integer.valueOf(filmId));
 		return "redirect:/filmslist";
+	}
+
+	@RequestMapping(value = "/editfilm", method = RequestMethod.GET)
+	public String editFilm(@RequestParam("filmId") String filmId, Model model, HttpSession session) {
+
+		session.setAttribute("film", filmsService.getFilmById(Integer.valueOf(filmId)));
+
+		return "redirect:/addfilm";
+	}
+
+	@RequestMapping(value = "/addfilm")
+	public String addFilm(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Film film = (Film) session.getAttribute("film");
+		
+		if (film != null)
+			model.addAttribute("film", film);
+		else {
+			session.removeAttribute("film");
+			model.addAttribute("film", new Film());
+		}
+		return "addfilm";
 	}
 
 }
