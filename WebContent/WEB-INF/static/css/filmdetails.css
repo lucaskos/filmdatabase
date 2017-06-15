@@ -11,7 +11,6 @@ div.film * {
 .main-film-wrapper {
 	width: 70%;
 }
-
 #filmdetail {
 	display: block;
 	bottom: 1px solid white;
@@ -30,22 +29,12 @@ div.film * {
 	font-size: 32px;
 }
 
-#rating {
+.rating {
 	display: block;
 	float: right;
 	border: 1px solid white;
 	padding: 0 5px;
 	color: #AA9739;
-}
-
-#rating a {
-	color: #AA9739;
-	text-decoration: none;
-	margin: 3px;
-}
-
-#rating a:HOVER {
-	color: #FFD500;
 }
 
 div #actorlist {

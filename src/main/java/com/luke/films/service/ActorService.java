@@ -25,5 +25,12 @@ public class ActorService {
 		actorDao.deleteActor(actor);
 	}
 	
+	public Actor getActorByName(Actor actor) {
+		return actorDao.getActorByName(actor);
+	}
+	
+	public Actor getActorById(int id) {
+		return actorDao.getActorById(id);
+	}
 	
 }

@@ -54,6 +54,11 @@ public class ActorDaoImpl implements ActorDao {
 		else 
 			return list.get(0);
 	}
+	
+	public Actor getActorById(int id) {
+		Actor actor = session().get(Actor.class, id);
+		return actor;
+	}
 }
 
 

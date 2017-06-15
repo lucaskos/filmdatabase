@@ -14,4 +14,6 @@ public interface ActorDao {
 	
 	Actor getActorByName(Actor actor);
 	
+	Actor getActorById(int id);
+	
 }

@@ -4,9 +4,9 @@ $(document).ready(function(){
 	for (i = 1; i < 11; i++) {
 		var btn = $("<a/>");
 		btn.text(i);
-		$('.ratingwrapper').append("<button type='submit' class='rating' data-index="+i+">"+i+"</button>");
+		$('.ratingwrapper').append("<button type='submit' class='btn-sm' data-index="+i+">"+i+"</button>");
 	}
-	$('.rating').click(function(){
+	$('.btn-sm').click(function(){
 		var $filmId = $('.filmId').text().trim();
 		var $rating = $(this).attr("data-index");
 		console.log($rating + ' : ' + $filmId);
@@ -20,7 +20,7 @@ $(document).ready(function(){
             }, 
             error: function (result) {
             	/*
-            	 * Reload current page
+            	 * 
             	 */
             	location.reload();
             }

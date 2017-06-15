@@ -1,6 +1,7 @@
 package com.luke.films.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.luke.films.model.actor.Actor;
 import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.Film;
+import com.luke.films.service.ActorService;
 import com.luke.films.service.CastService;
 import com.luke.films.service.FilmService;
 
@@ -21,6 +23,9 @@ public class ActorFilmController {
 	private CastService actorFilmService;
 	@Autowired
 	private FilmService filmsService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	private int filmId;
 
@@ -53,8 +58,13 @@ public class ActorFilmController {
 	}
 	
 	@RequestMapping(value = "/actor/{actorId}", method = RequestMethod.GET)
-	public String getActorPage(@PathVariable("actorId") int actorId) {
-		System.out.println(actorId);
+	public String getActorPage(@PathVariable("actorId") int actorId, Model model, Cast actorFilm) {
+		Actor actor = actorService.getActorById(actorId);
+		Map<Film, String> map = actorFilmService.getFilmography(actor);
+		for(Map.Entry<Film, String> entry : map.entrySet())
+			System.out.println(entry.getKey() + " / " + entry.getValue());
+		model.addAttribute("films", map);
+		model.addAttribute("actor", actor);
 		return "actor";
 	}
 }

@@ -25,7 +25,7 @@
 			<tiles:insertAttribute name="menu" />
 		</menu>
 	</div>
-	<div id="content">
+	<div class="container">
 		<tiles:insertAttribute name="content" />
 	</div>
 	<footer>
