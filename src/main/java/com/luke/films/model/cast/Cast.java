@@ -83,4 +83,9 @@ public class Cast implements Serializable {
 		this.actor = actor;
 	}
 
+	@Override
+	public String toString() {
+		return "Cast [actorFilmId=" + actorFilmId + ", film=" + film + ", actor=" + actor + ", role=" + role + "]";
+	}
+
 }

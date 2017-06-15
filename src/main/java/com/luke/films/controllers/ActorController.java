@@ -62,7 +62,6 @@ public class ActorController {
 		//TODO extract this to separate method
 		for (Actor actor : allActors)
 			if (actor.getName().toLowerCase().contains(name.toLowerCase())){
-				System.out.println(actor);
 				actor.setActorFilms(null);
 				results.add(actor);
 			}

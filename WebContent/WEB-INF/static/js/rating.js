@@ -56,7 +56,6 @@ $(document).ready(
 			$button.click(function(){
 				
 				var $role = $roleBox.val().trim();
-				alert('Right button');
 				$.ajax({
 					type: 'GET',
 					url: ctx+'/actoraddedtofilm',

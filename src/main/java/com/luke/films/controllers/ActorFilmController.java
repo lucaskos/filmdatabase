@@ -23,7 +23,7 @@ import com.luke.films.service.FilmService;
 @Controller
 public class ActorFilmController {
 	@Autowired
-	private CastService actorFilmService;
+	private CastService castService;
 	@Autowired
 	private FilmService filmsService;
 	
@@ -33,12 +33,10 @@ public class ActorFilmController {
 	@RequestMapping(value = "/actoraddedtofilm", method = RequestMethod.GET)
 	public String addActorToFilm(@RequestParam("actorId") String actorId, @RequestParam("filmId") String filmId, @RequestParam() String role) {
 		
-		System.out.println(actorId + " : " + filmId + " : " + role);
-		
 		Actor actor = actorService.getActorById(Integer.valueOf(actorId));
 		Film film = filmsService.getFilmById(Integer.valueOf(filmId));
 		
-		
+		castService.addActorToFilm(film, actor, role);
 		//actorFilmService.addActorToFilm(filmById, actorFilm.getActor(), actorFilm.getRole());
 		return "redirect:/filmslist";
 	}
@@ -47,7 +45,7 @@ public class ActorFilmController {
 	public String getFilmPage(@PathVariable int filmId, Model model, Actor actor, Cast actorFilm) {
 		Film filmById = filmsService.getFilmById(filmId);
 
-		List<Cast> list = actorFilmService.getActors(filmById);
+		List<Cast> list = castService.getActors(filmById);
 			
 		if (filmById == null)
 			return "error";
@@ -65,9 +63,7 @@ public class ActorFilmController {
 	@RequestMapping(value = "/actor/{actorId}", method = RequestMethod.GET)
 	public String getActorPage(@PathVariable("actorId") int actorId, Model model, Cast actorFilm) {
 		Actor actor = actorService.getActorById(actorId);
-		Map<Film, String> map = actorFilmService.getFilmography(actor);
-		for(Map.Entry<Film, String> entry : map.entrySet())
-			System.out.println(entry.getKey() + " / " + entry.getValue());
+		Map<Film, String> map = castService.getFilmography(actor);
 		model.addAttribute("films", map);
 		model.addAttribute("actor", actor);
 		return "actor";

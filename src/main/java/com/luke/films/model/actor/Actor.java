@@ -6,16 +6,18 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luke.films.model.cast.Cast;
 
 @Entity
@@ -28,8 +30,8 @@ public class Actor {
 	@NotBlank
 	@Column(name = "name")
 	private String name;
-	@JsonIgnore
-	@OneToMany(mappedBy = "actor", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "actor",cascade = CascadeType.ALL)
 	private Set<Cast> actorFilm = new HashSet<Cast>();
 
 	public Actor() {
@@ -77,6 +79,7 @@ public class Actor {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((actorFilm == null) ? 0 : actorFilm.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -91,6 +94,11 @@ public class Actor {
 		if (getClass() != obj.getClass())
 			return false;
 		Actor other = (Actor) obj;
+		if (actorFilm == null) {
+			if (other.actorFilm != null)
+				return false;
+		} else if (!actorFilm.equals(other.actorFilm))
+			return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -100,5 +108,6 @@ public class Actor {
 			return false;
 		return true;
 	}
+
 
 }

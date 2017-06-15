@@ -1,5 +1,6 @@
 package com.luke.films.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,10 @@ public class CastService {
 	}
 
 	public Map<Film, String> getFilmography(Actor actor) {
-		return castDao.getFilmography(actor);
+		List<Cast> filmography = castDao.getFilmography(actor);
+		Map<Film, String> filmographyMap = new HashMap<>();
+		for(Cast cast : filmography)
+			filmographyMap.put(cast.getFilm(), cast.getRole());
+		return filmographyMap;
 	}
 }
