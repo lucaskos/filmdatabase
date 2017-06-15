@@ -2,10 +2,34 @@ body {
 	background-color: #383276;
 	color: #D3D2D9;
 }
+/* menu elements */
+.container {
+	display:inline-block;
+}
+.nav {
+	padding-bottom:10px;
+}
+.nav ul {
+	display:flex;
+}
+.nav li {
+  display: inline;
+}
+.nav a {
+  color: #5a5a5a;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color:#a5a5a5;
+  padding: 10px;
+}
+.nav a:HOVER{
+	background-color: silver;
+	text-decoration: none;
+}
 /* header elements */
 .header {
 	background-color: #110B4A;
-	padding-bottom: 10px;
 }
 
 header {
@@ -91,24 +115,6 @@ table.table-list {
 	min-height: 400px;
 }
 
-menu ul {
-}
-
-menu ul li {
-	display: inline;
-	padding: 10px;
-	background-color: #dcdced;
-	text-transform: uppercase;
-}
-
-menu ul li a {
-	text-decoration: none;
-}
-
-menu {
-	padding-left: 20px;
-	max-width: 600px;
-}
 /* login part */
 #login-box {
 	padding: 45px;
@@ -144,10 +150,6 @@ menu {
 	background-color: #dcdced;
 }
 /* login part ends */
-a.login {
-	position: absolute;
-	right: 10px;
-}
 
 p {
 	border: 0px solid red;

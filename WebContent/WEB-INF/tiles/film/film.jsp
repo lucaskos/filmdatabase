@@ -9,7 +9,9 @@
 				<c:out value="${filmRating}"></c:out>
 			</p>
 		</div>
-		<div class="ratingwrapper"></div>
+		<sec:authorize access="isAuthenticated()">
+			<div class="ratingwrapper"></div>
+		</sec:authorize>
 	</div>
 	<div class="main-film-wrapper">
 		<div id="filmdetail">
@@ -54,12 +56,12 @@
 				method='GET' commandName="film">
 				<button name="filmId" value="${film.filmId}">REMOVE</button>
 			</sf:form>
-			
+
 			<sf:form action='${pageContext.request.contextPath}/editfilm'
 				method='GET' commandName="film">
 				<button name="filmId" value="${film.filmId}">EDIT</button>
 			</sf:form>
-			
+
 			<sf:form class='actor-to-film' var='actorfilm'
 				modelAttribute='actorFilm'
 				action="${pageContext.request.contextPath }/actoraddedtofilm"

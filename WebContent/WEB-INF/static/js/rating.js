@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+	$('.ratingwrapper').prepend("<ul class='scores'>");
 	for (i = 1; i < 11; i++) {
 		var btn = $("<a/>");
 		btn.text(i);
@@ -18,7 +19,10 @@ $(document).ready(function(){
               alert("Your bookmark has been saved");
             }, 
             error: function (result) {
-            	alert("error");
+            	/*
+            	 * Reload current page
+            	 */
+            	location.reload();
             }
         });  
 	});
