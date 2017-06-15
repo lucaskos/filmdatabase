@@ -42,17 +42,40 @@ public class CastDaoImpl implements CastDao {
 	 */
 	public void addActorToFilm(Film film, Actor actor, String role) {
 		System.out.println("*****Passed parameters : " + film + " : " + actor + " : " + role);
-		
-		if(actor.getActorFilms().isEmpty()) {
+		Set<Cast> cast = actor.getActorFilms();
+		// no film for this actor so we create one
+		if (cast.isEmpty()) {
 			System.out.println("ACTOR DOESNT HAVE ANY FILMS");
-			Cast cast = new Cast(film, actor);
-			cast.setRole(role);
-			session().save(cast);
+			Cast newCast = new Cast(film, actor);
+			newCast.setRole(role);
+			session().save(newCast);
 		} else {
-			
-		}		
-		
-		
+			Cast c = isInFilm(cast, film);
+			if (c != null) {
+				// if he is in this film update role
+				//so we must iterate and find cast responsible for the
+				//given film
+				
+				c.setRole(role);
+				session().update(c);
+			} else {
+				System.out.println("DOESNT PLAY IN THIS FILM");
+				Cast newCast = new Cast(film, actor);
+				newCast.setRole(role);
+				System.out.println(newCast);
+				session().save(newCast);
+				// adding new cast and connection to this actor
+			}
+		}
+
+	}
+	//better to return instance of cast responsible for the movie
+	private Cast isInFilm(Set<Cast> actorFilms, Film film) {
+		for (Cast c : actorFilms)
+			if (c.getFilm().getTitle().equalsIgnoreCase(film.getTitle()))
+				return c;
+
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -68,28 +91,6 @@ public class CastDaoImpl implements CastDao {
 		String query = "from Cast where actor = ?1";
 		List<Cast> list = session().createQuery(query).setParameter("1", actor).list();
 		return list;
-	}
-
-	public Cast getFilm(Actor actor, Film film) {
-		String query = "from Cast where actor = ?1 and film = ?2";
-		List<Cast> list = session().createQuery(query).setParameter("1", actor).setParameter("2", film).list();
-		System.out.println(list.size());
-		return null;
-	}
-
-	private Cast isActorInFilm(Film film, List<Cast> castForActor) {
-		for (Cast c : castForActor)
-			if (c.getFilm().getTitle().toLowerCase().equals(film.getTitle().toLowerCase()))
-				return c;
-		return null;
-	}
-
-	private Cast getFilm(List<Cast> cast, Film film) {
-		for (Cast c : cast)
-			if (c.getFilm().getTitle().equalsIgnoreCase(film.getTitle())) {
-				return c;
-			}
-		return null;
 	}
 
 }
