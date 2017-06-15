@@ -14,6 +14,7 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
 		<put-list-attribute name="javascripts">
 			<add-attribute value="/static/js/jquery-3.2.1.min.js" />
+			<add-attribute value="/static/js/jquery.autocomplete.min.js" />
 			<add-attribute value="/static/js/bootstrap.min.js" />
 		</put-list-attribute>
 		<put-list-attribute name="stylesheets">

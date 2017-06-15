@@ -66,28 +66,14 @@
 						method='GET' commandName="film">
 						<button name="filmId" value="${film.filmId}">EDIT</button>
 					</sf:form>
-<!-- ADDING ACTOR TO FILM -->
-					<sf:form class='actor-to-film' var='actorfilm'
-						modelAttribute='actorFilm'
-						action="${pageContext.request.contextPath }/actoraddedtofilm"
-						method='POST'>
-						<h5>Add actor</h5>
-						<table>
-							<tr>
-								<td>Name:</td>
-								<td><sf:input type='text' path='actor.name' /></td>
-							</tr>
-							<tr>
-								<td>Role:</td>
-								<td><sf:input type='text' path='role' /></td>
-							</tr>
-							<tr>
-								<td colspan='2'><input name="submit" type="submit"
-									value="submit" /></td>
-							</tr>
-						</table>
-					</sf:form>
 				</sec:authorize>
+				
+					<input type="text" id="w-input-search" value=""
+						placeholder="Search">
+					<input type="text" id="role-in-film" value="" placeholder="Role">
+					<span>
+						<button id="button-id" type="button">Search</button>
+					</span>
 			</div>
 		</div>
 	</div>

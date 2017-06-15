@@ -3,6 +3,7 @@ package com.luke.films.test.service;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -51,10 +52,14 @@ public class ActorDaoTest {
 		actorService.addActor(actor1);
 		actorService.addActor(actor2);
 		assertNotNull(actorService.getAllActors());
-	}
-
-	public void getAddedActors() {
 		
+		String name = "e";
+		List<Actor> allActors = actorService.getAllActors();
+		List<Actor> containList = new ArrayList<Actor>();
+		for (Actor actor : allActors)
+			if (actor.getName().contains(name))
+				containList.add(actor);
+		System.out.println("\n\nContain list : " + containList);
 	}
 
 	@After

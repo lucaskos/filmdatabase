@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.luke.films.model.actor.Actor;
 import com.luke.films.model.actor.ActorDao;
+import com.luke.films.model.cast.CastDao;
 
 @Component
 public class ActorService {
