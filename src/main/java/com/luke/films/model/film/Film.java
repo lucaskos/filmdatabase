@@ -40,7 +40,7 @@ public class Film {
 	private String description;
 
 	@OneToMany(mappedBy = "film", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	private Set<Cast> actorsFilms = new HashSet<Cast>();
+	private Set<Cast> allCast = new HashSet<Cast>();
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "film", cascade = CascadeType.ALL)
 	private Set<Rating> rating = new HashSet<Rating>();
@@ -69,7 +69,7 @@ public class Film {
 	}
 
 	public void addActor(Cast actorsFilms) {
-		this.actorsFilms.add(actorsFilms);
+		this.allCast.add(actorsFilms);
 	}
 
 	public int getFilmId() {
@@ -105,15 +105,15 @@ public class Film {
 	}
 
 	public Set<Cast> getActorsFilms() {
-		return this.actorsFilms;
+		return this.allCast;
 	}
 
 	public void setActorsFilms(Set<Cast> actorsFilms) {
-		this.actorsFilms = actorsFilms;
+		this.allCast = actorsFilms;
 	}
 
 	public void addActorsFilms(Cast actorFilms) {
-		this.actorsFilms.add(actorFilms);
+		this.allCast.add(actorFilms);
 	}
 
 	@Override

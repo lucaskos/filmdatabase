@@ -58,13 +58,11 @@ public class FilmsDaoImpl implements FilmsDao {
 	}
 
 	@Override
-	public Film getFilmByTitle(String title) {
+	@SuppressWarnings("unchecked")
+	public List<Film> getFilmsByTitle(String title) {
 		String query = "from Film where title = ?1";
-		List<?> list = session().createQuery(query).setParameter("1", title).list();
-		if (!list.isEmpty())
-			return (Film) list.get(0);
-		else
-			return null;
+		List<Film> list = session().createQuery(query).setParameter("1", title).list();
+		return list;
 	}
 
 	@Override
@@ -97,6 +95,5 @@ public class FilmsDaoImpl implements FilmsDao {
 		List<Film> list = query.list();
 		return list;
 	}
-
 
 }

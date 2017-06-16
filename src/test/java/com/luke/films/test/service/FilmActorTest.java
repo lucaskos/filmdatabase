@@ -2,7 +2,6 @@ package com.luke.films.test.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -24,7 +23,6 @@ import com.luke.films.model.actor.ActorDao;
 import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
-import com.luke.films.model.user.UserDao;
 import com.luke.films.service.CastService;
 
 @RunWith(SpringJUnit4ClassRunner.class)

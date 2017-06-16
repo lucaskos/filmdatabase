@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.deser.impl.ExternalTypeHandler.Builder;
 import com.luke.films.model.cast.CastDao;
 
 @Component
@@ -39,7 +38,6 @@ public class ActorDaoImpl implements ActorDao {
 		session().save(actor);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Actor> getAllActors() {
 		//List<Actor> list = session().createQuery("from Actor").list();
@@ -51,10 +49,10 @@ public class ActorDaoImpl implements ActorDao {
 		
 		criteria.select(actorRoot);
 		
-		List<Actor> list = session().createQuery(criteria).getResultList();
+		List<Actor> listOfAllActors = session().createQuery(criteria).getResultList();
 		
-		if(!list.isEmpty())
-			return list;
+		if(!listOfAllActors.isEmpty())
+			return listOfAllActors;
 		return null;
 	}
 
@@ -72,16 +70,16 @@ public class ActorDaoImpl implements ActorDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Actor getActorByName(Actor actor) {
-		List<Actor> list = session().createQuery("from Actor where name = ?1").setParameter("1", actor.getName()).list();
-		if(list.isEmpty())
+		List<Actor> listOfActorsByName = session().createQuery("from Actor where name = ?1").setParameter("1", actor.getName()).list();
+		if(listOfActorsByName.isEmpty())
 			return null;
 		else 
-			return list.get(0);
+			return listOfActorsByName.get(0);
 	}
 	
 	public Actor getActorById(int id) {
-		Actor actor = session().get(Actor.class, id);
-		return actor;
+		Actor actorById = session().get(Actor.class, id);
+		return actorById;
 	}
 }
 

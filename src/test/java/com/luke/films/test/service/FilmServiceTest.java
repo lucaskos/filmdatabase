@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.jboss.logging.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +33,7 @@ public class FilmServiceTest {
 
 	@Autowired
 	FilmService filmsService;
-
+	static Logger log = Logger.getLogger(FilmServiceTest.class.getName());
 	@Before
 	public void removeFilms() {
 		List<Film> allFilms = filmsService.getAllFilms();
@@ -45,9 +46,11 @@ public class FilmServiceTest {
 	@Test
 	public void filmTest() {
 		
-		Film film1 = new Film("film1", 1000);
-		Film film2 = new Film("film2", 2000);
-		Film film3 = new Film("film3", 2000);
+		String description = "Test description";
+		
+		Film film1 = new Film("film1", 1000, description);
+		Film film2 = new Film("film2", 2000, description);
+		Film film3 = new Film("film3", 2000, description);
 
 		// list should be empty
 		assertNull(filmsService.getAllFilms());
@@ -66,6 +69,7 @@ public class FilmServiceTest {
 		// checking if films added to db have the same title as one in db
 		assertEquals(film1, filmsService.getFilmByTitle(film1.getTitle()));
 		assertEquals(film2, filmsService.getFilmByTitle(film2.getTitle()));
+		assertEquals(film3, filmsService.getFilmByTitle(film3.getTitle()));
 
 		List<Film> filmsByYearFromDb = filmsService.getFilmsByYear(film3.getYear());
 
@@ -77,41 +81,18 @@ public class FilmServiceTest {
 		// checking if 2 films of the same year equal those in db
 		assertEquals(filmsByYearFromDb, filmsByYear);
 
-		// removing the films by Film object
-		for (Film f : allFilms)
-			filmsService.deleteFilm(f);
-
-		// adding test Film objects to db again
-		filmsService.addFilm(film1);
-		filmsService.addFilm(film2);
-
 		allFilms = filmsService.getAllFilms();
-
-		// removing films by Film id
-		for (Film f : allFilms)
-			filmsService.deleteById(f.getFilmId());
-
-		assertNull(filmsService.getAllFilms());
-
-		int filmsNumber = 50;
-		List<Film> films = createFilms(filmsNumber);
-
-		// adding filmsNumber of films to db
-		for (Film f : films)
-			filmsService.addFilm(f);
+		assertNotNull(allFilms);
 		
-		List<Film> findFilms = filmsService.findFilms(5, 10);
+		Film filmByTitle = filmsService.getFilmByTitle(film1.getTitle());
 		
-		for(Film f : findFilms)
-			System.out.println(f);
+		assertEquals(film1, filmByTitle);
 		
-		// removing everything from db
-		for (Film f : films)
+		for(Film f : allFilms)
 			filmsService.deleteFilm(f);
-		
+	
 		assertNull(filmsService.getAllFilms());
-
-		// findFilm(films, 4, 10);
+		
 	}
 
 	private List<Film> createFilms(int filmsNumber) {
@@ -122,6 +103,7 @@ public class FilmServiceTest {
 			temp.setFilmId(i);
 			temp.setTitle("TITLE :" + i);
 			temp.setYear(1900 + i);
+			temp.setDescription("Test description for film");
 			list.add(temp);
 		}
 		return list;

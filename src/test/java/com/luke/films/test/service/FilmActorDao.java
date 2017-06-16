@@ -18,6 +18,7 @@ import com.luke.films.config.HibernateConfig;
 import com.luke.films.model.actor.ActorDao;
 import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.FilmsDao;
+import com.luke.films.service.ActorService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
@@ -25,35 +26,14 @@ import com.luke.films.model.film.FilmsDao;
 @ActiveProfiles(profiles = "test")
 public class FilmActorDao {
 
-	
 	@Autowired
 	SessionFactory sessionFactory;
 	@Autowired
-	private ActorDao actorDao;
-	
-	@Autowired
-	private FilmsDao filmDao;
-	
-	public Session session(){
-		try {
-			return sessionFactory.getCurrentSession();
-		} catch (HibernateException e) {
-			return sessionFactory.openSession();
-		}
-	}
-	@Test
-	public void getAllActors() {
-		session().beginTransaction();
+	private ActorService actorService;
 
-		String query = "from ActorFilm";
-		
-		List<Cast> list = session().createQuery(query).list();
-		System.out.println(list.size());
-		for(Cast af : list){
-			System.out.println(af.getFilm());
-			System.out.println(af.getActor());
-			System.out.println(af.getRole());
-		
-		}
+
+	@Test
+	public void actorServiceTest() {
+
 	}
 }

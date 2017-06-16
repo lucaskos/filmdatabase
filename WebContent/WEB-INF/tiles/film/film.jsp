@@ -51,12 +51,8 @@
 							</tr>
 						</table>
 					</c:forEach>
-
-
 				</div>
-
 				<sec:authorize access="hasAnyRole('ADMIN', 'PREMIUM')">
-
 					<sf:form action='${pageContext.request.contextPath}/removeFilm'
 						method='GET' commandName="film">
 						<button name="filmId" value="${film.filmId}">REMOVE</button>
@@ -66,14 +62,15 @@
 						method='GET' commandName="film">
 						<button name="filmId" value="${film.filmId}">EDIT</button>
 					</sf:form>
-				</sec:authorize>
-				
+
+
 					<input type="text" id="w-input-search" value=""
-						placeholder="Search">
-					<input type="text" id="role-in-film" value="" placeholder="Role">
+						placeholder="Search actor">
+					<input type="text" id="role-in-film" value="" placeholder="What wast the role?">
 					<span>
 						<button id="button-id" type="button">Search</button>
 					</span>
+				</sec:authorize>
 			</div>
 		</div>
 	</div>

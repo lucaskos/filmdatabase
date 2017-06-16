@@ -25,11 +25,11 @@ public class CastService {
 	}
 
 	public List<Cast> getActors(Film film) {
-		return castDao.getCast(film);
+		return castDao.getCastOfFilm(film);
 	}
 
 	public Map<Film, String> getFilmography(Actor actor) {
-		List<Cast> filmography = castDao.getFilmography(actor);
+		List<Cast> filmography = castDao.getFilmographyOfActor(actor);
 		Map<Film, String> filmographyMap = new HashMap<>();
 		for(Cast cast : filmography)
 			filmographyMap.put(cast.getFilm(), cast.getRole());

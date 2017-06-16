@@ -26,7 +26,7 @@ import com.luke.films.service.ActorService;
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
 @WebAppConfiguration("WebContent")
 @ActiveProfiles(profiles = "test")
-public class ActorDaoTest {
+public class ActorServiceTest {
 	@Autowired
 	private ActorService actorService;
 //TODO learn how  to mockuser

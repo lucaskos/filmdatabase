@@ -26,7 +26,6 @@ public class HomeController {
 		if (user != null) {
 			model.addObject("user", user.getName());
 		}
-
 		return model;
 	}
 
@@ -42,6 +41,4 @@ public class HomeController {
 		model.addAttribute("actor", new Actor());
 		return "addactor";
 	}
-
-
 }

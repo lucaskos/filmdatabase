@@ -3,8 +3,6 @@ package com.luke.films.controllers;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +35,6 @@ public class ActorFilmController {
 		Film film = filmsService.getFilmById(Integer.valueOf(filmId));
 		
 		castService.addActorToFilm(film, actor, role);
-		//actorFilmService.addActorToFilm(filmById, actorFilm.getActor(), actorFilm.getRole());
 		return "redirect:/filmslist";
 	}
 

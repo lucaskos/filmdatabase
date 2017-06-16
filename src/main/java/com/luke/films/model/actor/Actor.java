@@ -32,7 +32,7 @@ public class Actor {
 	private String name;
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "actor",cascade = CascadeType.ALL)
-	private Set<Cast> actorFilm = new HashSet<Cast>();
+	private Set<Cast> filmography = new HashSet<Cast>();
 
 	public Actor() {
 
@@ -59,15 +59,15 @@ public class Actor {
 	}
 
 	public Set<Cast> getActorFilms() {
-		return this.actorFilm;
+		return this.filmography;
 	}
 
 	public void setActorFilms(Set<Cast> actorFilms) {
-		this.actorFilm = actorFilms;
+		this.filmography = actorFilms;
 	}
 
 	public void addActorsFilms(Cast actorFilms) {
-		this.actorFilm.add(actorFilms);
+		this.filmography.add(actorFilms);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class Actor {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((actorFilm == null) ? 0 : actorFilm.hashCode());
+		result = prime * result + ((filmography == null) ? 0 : filmography.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -94,10 +94,10 @@ public class Actor {
 		if (getClass() != obj.getClass())
 			return false;
 		Actor other = (Actor) obj;
-		if (actorFilm == null) {
-			if (other.actorFilm != null)
+		if (filmography == null) {
+			if (other.filmography != null)
 				return false;
-		} else if (!actorFilm.equals(other.actorFilm))
+		} else if (!filmography.equals(other.filmography))
 			return false;
 		if (id != other.id)
 			return false;

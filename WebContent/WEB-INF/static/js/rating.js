@@ -37,6 +37,7 @@ $(document).ready(
 			var $actorId;
 			$button.attr('disabled', 'disabled');
 			$searchBox.autocomplete({
+				minChars: 3,
 				serviceUrl : ctx+'/getActors',
 				paramName: "name",
 				transformResult: function(response) {
@@ -48,13 +49,14 @@ $(document).ready(
 					};
 				},
 				onSelect: function (suggestion) {
-					$button.removeAttr('disabled');
-					$actorId = suggestion.data;
+					$roleBox.keyup(function(){
+						$button.removeAttr('disabled');
+						$actorId = suggestion.data;
+					});
 			    }
 			});
 			
 			$button.click(function(){
-				
 				var $role = $roleBox.val().trim();
 				$.ajax({
 					type: 'GET',
@@ -65,7 +67,7 @@ $(document).ready(
 						role:$role
 					},
 					success : function(result) {
-						console.log('Success');
+						location.reload();
 					},
 					error : function(responseData) {
 						console.log('in ajax, error : ' + responseData.responseText);

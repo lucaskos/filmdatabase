@@ -9,8 +9,8 @@ public interface CastDao {
 
 	void addActorToFilm(Film film, Actor actor, String role);
 	
-	List<Cast> getCast(Film film);
+	List<Cast> getCastOfFilm(Film film);
 	
-	List<Cast> getFilmography(Actor actor);
+	List<Cast> getFilmographyOfActor(Actor actor);
 	
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,7 +63,6 @@ public class UserController {
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
 	public ModelAndView adminPage() {
-
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
 		model.addObject("message", "This is protected page! For ADMINS only");
