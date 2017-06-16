@@ -77,8 +77,8 @@ public class ActorDaoImpl implements ActorDao {
 			return listOfActorsByName.get(0);
 	}
 	
-	public Actor getActorById(int id) {
-		Actor actorById = session().get(Actor.class, id);
+	public Actor getActorById(int primaryKey) {
+		Actor actorById = session().get(Actor.class, primaryKey);
 		return actorById;
 	}
 }

@@ -26,8 +26,6 @@ public class FilmsController {
 	private FilmService filmsService;
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private RatingDao ratingDao;
 
 	@RequestMapping(value = "/filmslist", method = RequestMethod.GET)
 	public String showBookList(Model model) {
@@ -59,8 +57,8 @@ public class FilmsController {
 		Film filmById = filmsService.getFilmById(filmId);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
-
-		ratingDao.rateFilm(filmById, userService.getUser(name), rating);
+		System.out.println("Authentication : " + auth.getPrincipal());
+		filmsService.rateFilm(filmById, userService.getUser(name), rating);
 	}
 
 	@RequestMapping(value = "/removeFilm", method = RequestMethod.GET)

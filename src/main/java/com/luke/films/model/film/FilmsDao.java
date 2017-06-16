@@ -2,6 +2,8 @@ package com.luke.films.model.film;
 
 import java.util.List;
 
+import com.luke.films.model.rating.Rating;
+
 public interface FilmsDao {
 
 	List<Film> getAllFilms();
@@ -14,9 +16,8 @@ public interface FilmsDao {
 
 	void deleteFilm(Film film);
 
-	List<Film> findFilms(int id, int count);
-
 	List<Film> getFilmsByTitle(String title);
 
-	
+	void addRating(Rating rating);
+
 }

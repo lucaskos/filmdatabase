@@ -7,9 +7,17 @@
 		<div class="pull-right">
 			<div class="rating">
 				<div class="ratinginfo">
-					<p>
-						<c:out value="${filmRating}"></c:out>
-					</p>
+					<div class="filmrating">
+						<p>
+							<c:out value="${filmRating}"></c:out>
+						</p>
+					</div>
+					<div class="votesadded">
+						<p>
+							<c:out value="${noOfVotes}"></c:out>
+							votes added
+						</p>
+					</div>
 				</div>
 				<sec:authorize access="isAuthenticated()">
 					<div class="ratingwrapper"></div>
@@ -66,7 +74,8 @@
 
 					<input type="text" id="w-input-search" value=""
 						placeholder="Search actor">
-					<input type="text" id="role-in-film" value="" placeholder="What wast the role?">
+					<input type="text" id="role-in-film" value=""
+						placeholder="What wast the role?">
 					<span>
 						<button id="button-id" type="button">Search</button>
 					</span>

@@ -52,6 +52,7 @@ public class ActorFilmController {
 			}
 			model.addAttribute("filmRating", filmsService.getRating(filmById));
 			model.addAttribute("film", filmById);
+			model.addAttribute("noOfVotes", filmById.getRating().size());
 			model.addAttribute("actorFilm", new Cast());
 			return "film";
 		}

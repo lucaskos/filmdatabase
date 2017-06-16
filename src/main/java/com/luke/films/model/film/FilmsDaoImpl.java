@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.luke.films.model.rating.Rating;
+import com.luke.films.model.user.User;
+
 @Component("filmsDao")
 @Transactional
 public class FilmsDaoImpl implements FilmsDao {
@@ -76,24 +79,8 @@ public class FilmsDaoImpl implements FilmsDao {
 			return null;
 	}
 
-	// TO DO find next @count films starting with @id, pagination
 	@Override
-	public List<Film> findFilms(int id, int count) {
-
-		String countQ = "select count(*) from Film";
-		Query<?> countQuery = session().createQuery(countQ);
-		Long countResults = (Long) countQuery.uniqueResult();
-
-		int lastPageNumber = (int) Math.ceil(countResults / count);
-
-		System.out.println(lastPageNumber);
-
-		@SuppressWarnings("unchecked")
-		Query<Film> query = sessionFactory.getCurrentSession().createQuery("From Film");
-		query.setFirstResult(id);
-		query.setMaxResults(count);
-		List<Film> list = query.list();
-		return list;
+	public void addRating(Rating rating) {
+		session().saveOrUpdate(rating);
 	}
-
 }
