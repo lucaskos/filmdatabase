@@ -2,12 +2,13 @@
 <script>
 	var ctx = "${pageContext.request.contextPath}"
 </script>
-<div class="header">
-		<h3>FDB</h3>
-		<h5>film data base</h5>
-		<c:if test="${ not empty pageContext.request.userPrincipal.name }">
-		
+<div class="page-header">
+	<h1>
+		FDB <span>film data base</span>
+	</h1>
+	<c:if test="${ not empty pageContext.request.userPrincipal.name }">
+
 		<p>You are logged in as "${pageContext.request.userPrincipal.name }"</p>
-		
-		</c:if>
+
+	</c:if>
 </div>

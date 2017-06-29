@@ -5,7 +5,6 @@
 <tiles-definitions>
 
 	<definition name="base" template="/WEB-INF/tiles/defaultLayout.jsp">
-
 		<put-attribute name="includes" value=""></put-attribute>
 		<put-attribute name="title" value="Film Database"></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp"></put-attribute>
@@ -16,10 +15,11 @@
 			<add-attribute value="/static/js/jquery-3.2.1.min.js" />
 			<add-attribute value="/static/js/jquery.autocomplete.min.js" />
 			<add-attribute value="/static/js/bootstrap.min.js" />
+			
 		</put-list-attribute>
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/static/css/bootstrap.min.css" />
-			<add-attribute value="/static/css/main.css" />
+			<add-attribute value="/static/css/datatables.min.css" />
 		</put-list-attribute>
 	</definition>
 
@@ -28,7 +28,7 @@
 		<put-attribute name="title" value="Welcome"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
 	</definition>
-	
+
 	<!-- FILM SECTION -->
 	<!-- Films List -->
 	<definition name="filmslist" extends="base">
@@ -36,6 +36,8 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/film/filmslist.jsp"></put-attribute>
 		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute value="/static/js/filmdetails.js" />
+			<add-attribute value="/static/js/jquery.dataTables.min.js" />
+			<add-attribute value="/static/js/list.js" />
 		</put-list-attribute>
 	</definition>
 
@@ -62,6 +64,8 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/actor/actorlist.jsp"></put-attribute>
 		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute value="/static/js/actordetails.js" />
+			<add-attribute value="/static/js/jquery.dataTables.min.js" />
+			<add-attribute value="/static/js/list.js" />
 		</put-list-attribute>
 	</definition>
 	<!-- Add Actor -->
@@ -74,8 +78,8 @@
 		<put-attribute name="title" value="Actor"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/actor/actor.jsp"></put-attribute>
 	</definition>
-	
-	
+
+
 	<!-- USER SECTION -->
 	<!-- Login page -->
 	<definition name="login" extends="base">
@@ -91,7 +95,7 @@
 	<definition name="admin" extends="base">
 		<put-attribute name="title" value="Admin Page"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/user/admin.jsp"></put-attribute>
-			<put-list-attribute name="javascripts" inherit="true">
+		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute value="/static/js/admin.js" />
 		</put-list-attribute>
 	</definition>

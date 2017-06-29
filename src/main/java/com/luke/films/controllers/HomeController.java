@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.luke.films.model.actor.Actor;
-import com.luke.films.model.film.Film;
 
 @Controller
 public class HomeController {
@@ -32,7 +31,7 @@ public class HomeController {
 	@ExceptionHandler(Exception.class)
 	public ModelAndView error(Exception ex) {
 		ModelAndView mav = new ModelAndView("error");
-		mav.addObject("errMsg", "This is Exception.class");
+		mav.addObject("errMsg", ex.getMessage());
 		return mav;
 	}
 

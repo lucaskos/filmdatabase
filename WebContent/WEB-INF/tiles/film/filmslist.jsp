@@ -1,9 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <div class="list">
 	<h1>Films list</h1>
-	<table class="table-list">
+	<table id="table-list">
 		<thead>
 			<tr>
 				<th>Title</th>

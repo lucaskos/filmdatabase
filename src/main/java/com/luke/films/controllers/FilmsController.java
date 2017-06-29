@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.luke.films.model.film.Film;
-import com.luke.films.model.rating.RatingDao;
 import com.luke.films.service.FilmService;
 import com.luke.films.service.UserService;
 

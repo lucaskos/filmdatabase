@@ -8,16 +8,24 @@
 	<c:if test="${not empty msg}">
 		<div class="msg">${msg}</div>
 	</c:if>
-
 	<form class="loginform" name='loginForm'
 		action="<c:url value='/login' />" method='POST'>
 
-		<input type='text' placeholder='username' name='username' value=''>
-		<input type='password' placeholder='password' name='password' /> <input
-			name="submit" type="submit" value="submit" /> <input type="hidden"
-			name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-			<p>Not registered? <a
-			href="<c:url value='/newaccount'/>">Create Account</a></p><br/>
-			<p>Remember me: <input type="checkbox" name="remember-me" /></p>
+
+		<div class="form-group">
+			<label for="login">Login:</label> <input type="text" name="username"
+				class="form-control" id="login">
+		</div>
+		<div class="form-group">
+			<label for="pwd">Password:</label> <input type="password"
+				name="password" class="form-control" id="pwd">
+		</div>
+		<div class="checkbox">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" /> <label><input type="checkbox">
+				Remember me</label> <span class="pull-right">Not registered yet? <a
+				href="<c:url value='/newaccount'/>">Register</a></span>
+		</div>
+		<button type="submit" value="submit" class="btn btn-default">Submit</button>
 	</form>
 </div>

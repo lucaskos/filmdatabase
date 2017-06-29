@@ -13,17 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.luke.films.model.cast.CastDao;
-
 @Component
 @Transactional
 public class ActorDaoImpl implements ActorDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	@Autowired
-	private CastDao castDao;
 	
 	private Session session() {
 		try {

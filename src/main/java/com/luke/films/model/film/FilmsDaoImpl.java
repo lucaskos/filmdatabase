@@ -5,13 +5,11 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.luke.films.model.rating.Rating;
-import com.luke.films.model.user.User;
 
 @Component("filmsDao")
 @Transactional

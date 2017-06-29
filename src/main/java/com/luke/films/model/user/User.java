@@ -15,11 +15,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.luke.films.model.rating.Rating;
 import com.luke.films.model.user.role.Role;
@@ -27,8 +26,7 @@ import com.luke.films.model.user.role.Role;
 @Entity
 @Table(name = "users")
 public class User {
-	@NotNull
-	@NotEmpty
+	@NotBlank
 	@Size(min = 5, max = 45)
 	@Column(name = "username")
 	private String username;
@@ -38,6 +36,7 @@ public class User {
 	@Column(name = "id")
 	private int id;
 
+	@NotBlank
 	@Size(min = 5, max = 80)
 	@Column(name = "password")
 	private String password;
@@ -45,6 +44,7 @@ public class User {
 	@Column(name = "enabled")
 	private boolean enabled;
 
+	@NotBlank
 	@Email
 	@Column(name = "email")
 	private String email;

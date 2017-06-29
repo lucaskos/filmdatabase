@@ -17,23 +17,25 @@
 <title>Films Database</title>
 </head>
 <body>
-	<div class="header">
+	<div class="container-fluid">
 		<header>
 			<tiles:insertAttribute name="header" />
 		</header>
 		<menu>
 			<tiles:insertAttribute name="menu" />
 		</menu>
-	</div>
-	<div class="container">
-		<tiles:insertAttribute name="content" />
-	</div>
-	<footer>
-		<tiles:insertAttribute name="footer" />
-	</footer>
+		<div class="container">
+			<div class="col-lg-12 col-md-10 col-sm-6 col-xs-12">
+				<tiles:insertAttribute name="content" />
+			</div>
+		</div>
+		<footer>
+			<tiles:insertAttribute name="footer" />
+		</footer>
 
-	<c:forEach var="script" items="${javascripts}">
-		<script src="<c:url value="${script}"/>"></script>
-	</c:forEach>
+		<c:forEach var="script" items="${javascripts}">
+			<script src="<c:url value="${script}"/>"></script>
+		</c:forEach>
+	</div>
 </body>
 </html>
