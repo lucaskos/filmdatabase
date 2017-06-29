@@ -13,8 +13,7 @@ import com.luke.films.model.actor.Actor;
 
 @Controller
 public class HomeController {
-
-	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String showHomePage() {
 		return "home";
 	}

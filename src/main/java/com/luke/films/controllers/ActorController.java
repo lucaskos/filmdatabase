@@ -25,7 +25,7 @@ public class ActorController {
 	private ActorService actorService;
 
 	@Autowired
-	CastDao castDao;
+	private CastDao castDao;
 
 	@RequestMapping(value = "/actorlist", method = RequestMethod.GET)
 	public String showActorList(Model model) {
@@ -42,8 +42,10 @@ public class ActorController {
 		return "redirect:/actorlist";
 	}
 
-	/*
-	 * working with jquery search plugin to search for an actor
+	/**
+	 * Returns a List of Actors that contains specific String.
+	 * @param name - String representation of name
+	 * @return List of {@link Actor} objects
 	 */
 	@RequestMapping(value = "/getActors", method = RequestMethod.GET)
 	public @ResponseBody List<Actor> getActors(@RequestParam String name) {
@@ -52,9 +54,10 @@ public class ActorController {
 		results = extractActor(allActors, name);
 		return results;
 	}
-	/*
-	 * given list of all actors it iterates through list and returns new list
-	 * that contains given string
+
+	/**
+	 * Given list of all actors it iterates through list and returns new list
+	 * that contains given string.
 	 */
 	private List<Actor> extractActor(List<Actor> listOfActors, String nameOfActor) {
 		List<Actor> results = new ArrayList<Actor>();

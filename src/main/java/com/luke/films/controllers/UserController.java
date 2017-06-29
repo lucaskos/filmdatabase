@@ -56,8 +56,8 @@ public class UserController {
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
 	public ModelAndView adminPage() {
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Custom Login Form");
-		model.addObject("message", "This is protected page! For ADMINS only");
+		model.addObject("title", "This is Admin page!");
+		model.addObject("message", "This is protected page! For Users with Admin privilege only.");
 		model.setViewName("admin");
 		model.addObject("users", usersService.getAllUsers());
 		model.addObject("roles", roleDao.getAllRoles());
@@ -73,12 +73,9 @@ public class UserController {
 			SecurityContextHolder.getContextHolderStrategy().clearContext();
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return new ModelAndView("logout");
+		return new ModelAndView("home");
 	}
 
-	/*
-	 * We need to pass model to 'bind' the form with the user
-	 */
 	@RequestMapping(value = "/newaccount", method = RequestMethod.GET)
 	public String showRegistrationForm(Model model) {
 		model.addAttribute("user", new User());
@@ -92,7 +89,7 @@ public class UserController {
 			return "newaccount";
 		}
 
-		if (usersService.checkUsername(user) == true) { // if user exists
+		if (usersService.checkUsername(user) == true) {
 			result.rejectValue("username", "DuplicateKey.user");
 			return "newaccount";
 		} else {
