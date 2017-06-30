@@ -17,16 +17,20 @@
 <title>Films Database</title>
 </head>
 <body>
-	<div class="container-fluid">
-		<header>
-			<tiles:insertAttribute name="header" />
-		</header>
-		<menu>
-			<tiles:insertAttribute name="menu" />
-		</menu>
-		<div class="container">
-			<div class="col-lg-12 col-md-10 col-sm-6 col-xs-12">
-				<tiles:insertAttribute name="content" />
+	<div class="container">
+		<div class="row">
+			<header>
+				<tiles:insertAttribute name="header" />
+			</header>
+			<menu>
+				<tiles:insertAttribute name="menu" />
+			</menu>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-10 col-sm-12 col-xs-12">
+				<div class="continer-fluid">
+					<tiles:insertAttribute name="content" />
+				</div>
 			</div>
 		</div>
 		<footer>

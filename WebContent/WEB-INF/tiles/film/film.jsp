@@ -2,30 +2,9 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<div class="film">
+<div class="container">
 	<div class="row">
-		<div class="pull-right">
-			<div class="rating">
-				<div class="ratinginfo">
-					<div class="filmrating">
-						<p>
-							<c:out value="${filmRating}"></c:out>
-						</p>
-					</div>
-					<div class="votesadded">
-						<p>
-							<c:out value="${noOfVotes}"></c:out>
-							votes added
-						</p>
-					</div>
-				</div>
-				<sec:authorize access="isAuthenticated()">
-					<div class="ratingwrapper"></div>
-				</sec:authorize>
-			</div>
-		</div>
-		<div class="pull-left">
-
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
 			<div class="filmdetails">
 				<div id="filmdetail">
 					<p class="filmid" hidden="">
@@ -79,6 +58,26 @@
 					<span>
 						<button id="button-id" type="button">Search</button>
 					</span>
+				</sec:authorize>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-2">
+			<div class="rating">
+				<div class="ratinginfo">
+					<div class="filmrating">
+						<p>
+							<c:out value="${filmRating}"></c:out>
+						</p>
+					</div>
+					<div class="votesadded">
+						<p>
+							<c:out value="${noOfVotes}"></c:out>
+							votes added
+						</p>
+					</div>
+				</div>
+				<sec:authorize access="isAuthenticated()">
+					<div class="ratingwrapper"></div>
 				</sec:authorize>
 			</div>
 		</div>

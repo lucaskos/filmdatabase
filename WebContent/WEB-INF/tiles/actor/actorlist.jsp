@@ -2,8 +2,7 @@
 
 <div id="list">
 	<h1>Actor list</h1>
-
-	<table id="table-list">
+	<table id="table-list" class="table-hover">
 		<thead>
 			<tr>
 				<th>Name</th>

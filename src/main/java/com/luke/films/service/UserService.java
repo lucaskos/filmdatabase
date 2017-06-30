@@ -17,6 +17,7 @@ public class UserService {
 	private UserDao usersDao;
 	
 	public void createUser(User user){
+		System.out.println(user);
 		usersDao.createUser(user);
 	}
 	

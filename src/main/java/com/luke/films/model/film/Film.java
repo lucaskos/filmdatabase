@@ -24,14 +24,13 @@ import com.luke.films.model.rating.Rating;
 public class Film {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "film_id")
 	private int filmId;
 
 	@Size(max = 60)
 	@NotBlank
 	private String title;
-	@NotBlank
 	private Integer year;
 
 	@NotBlank

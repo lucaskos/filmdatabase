@@ -1,0 +1,17 @@
+@media (max-width: @screen-xs) {  
+  body{font-size:75%;}
+}
+@media (max-width: @screen-sm) {
+    body{font-size:85%;} 
+}
+
+h1 {
+	font-size: 4.9vw;
+}
+h2 {
+	font-size: 4.1vh;
+}
+
+p {
+	font-size: 2.3vmin;
+}

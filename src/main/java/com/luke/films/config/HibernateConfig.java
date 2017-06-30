@@ -44,7 +44,7 @@ public class HibernateConfig {
 	 */
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
-		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
+		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.id.new_generator_mappings", "false");
 		return properties;

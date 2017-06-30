@@ -2,7 +2,7 @@
 
 <div class="list">
 	<h1>Films list</h1>
-	<table id="table-list">
+	<table id="table-list" class="table-hover">
 		<thead>
 			<tr>
 				<th>Title</th>
@@ -14,7 +14,8 @@
 			<c:forEach var="film" items="${film}">
 				<tr>
 					<td data-href='<c:out value="${film.filmId }" />'><c:out
-							value="${film.title }" /></td>
+							value="${film.title }" />
+							</td>
 					<td><c:out value="${film.year }" /></td>
 					<td><c:out value="${film.description }" /></td>
 				</tr>

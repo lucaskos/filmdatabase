@@ -8,7 +8,7 @@
 <h1>Message : ${message}</h1>
 
 <sf:form action="${pageContext.request.contextPath }/changeRole">
-	<table id="table-list">
+	<table id="table-list" class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>User ID:</th>
