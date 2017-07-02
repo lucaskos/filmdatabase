@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
 import com.luke.films.model.rating.Rating;
-import com.luke.films.model.rating.RatingDao;
 import com.luke.films.model.user.User;
 
 @Component("filmsService")
@@ -18,7 +17,7 @@ import com.luke.films.model.user.User;
 public class FilmService {
 	@Autowired
 	private FilmsDao filmsDao;
-
+	
 	public List<Film> getAllFilms() {
 		return filmsDao.getAllFilms();
 	}
@@ -75,13 +74,13 @@ public class FilmService {
 		Set<Rating> userRating = film.getRating();
 		
 		if(userRating.isEmpty()) {
+			
 			filmsDao.addRating(new Rating(rating, user, film));
 		} else {
 			Rating didUserRateFilm = didUserRateFilm(userRating, user);
 			didUserRateFilm.setRating(rating);
 			didUserRateFilm.setFilm(film);
 			didUserRateFilm.setRating(rating);
-			System.out.println(didUserRateFilm);
 			filmsDao.addRating(didUserRateFilm);
 		}
 	}

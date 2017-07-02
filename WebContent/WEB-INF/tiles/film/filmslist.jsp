@@ -13,7 +13,7 @@
 		<tbody>
 			<c:forEach var="film" items="${film}">
 				<tr>
-					<td data-href='<c:out value="${film.filmId }" />'><c:out
+					<td title="Click on title to see details" class="table-details" data-href='<c:out value="${film.filmId }" />'><c:out
 							value="${film.title }" />
 							</td>
 					<td><c:out value="${film.year }" /></td>

@@ -1,23 +1,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<sf:form class='addactor' modelAttribute='actor'
-	action="${pageContext.request.contextPath }/actoradded"
-	method='POST'>
-<h2>Add actor</h2>
-	<table>
-	
-		<tr>
-			<td>Name:</td>
-			<td><sf:input type='text' path='name' />
-				<div class='error'>
-					<sf:errors path='name' />
-				</div></td>
-		</tr>
-		<tr>
-			<td colspan='2'><input name="submit" type="submit"
-				value="submit" /></td>
-		</tr>
-	</table>
-</sf:form>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<sf:form class="form-horizontal" modelAttribute='actor'
+				action="${pageContext.request.contextPath }/actoradded"
+				method='POST'>
+				<h2>Add actor</h2>
+				<div class="form-group row">
+					<div class="col-xs-4">
+					<label class="control-label" for="name">Name:</label>
+					<sf:input class="form-control" id="name" type='text' path='name'/>
+					<sf:errors class="alert alert-danger" path='name' />
+					</div>
+				</div>
+					<input class="btn btn-lg btn-success" name="submit" type="submit"
+						value="Add actor" />
+			</sf:form>
+		</div>
+	</div>
+</div>

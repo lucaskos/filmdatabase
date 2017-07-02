@@ -76,7 +76,7 @@ public class FilmsDaoImpl implements FilmsDao {
 		else
 			return null;
 	}
-
+//TODO remove it and work on ratingdao
 	@Override
 	public void addRating(Rating rating) {
 		session().saveOrUpdate(rating);

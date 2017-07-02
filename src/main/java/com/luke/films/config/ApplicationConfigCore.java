@@ -42,9 +42,9 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 	public DataSource getTestDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/films_test");
-		dataSource.setUsername("root");
-		dataSource.setPassword("lucas7");
+		dataSource.setUrl("jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11183110");
+		dataSource.setUsername("sql11183110");
+		dataSource.setPassword("NaCzf7t6T6");
 		return dataSource;
 	}
 	/*
