@@ -15,26 +15,27 @@ public class ActorService {
 
 	@Autowired
 	private ActorDao actorDao;
-	
-	public List<Actor> getAllActors(){
+
+	public List<Actor> getAllActors() {
 		return actorDao.getAllActors();
 	}
-	
+
 	public void addActor(Actor actor) {
 		actorDao.addActor(actor);
 	}
-	//TODO add roles here under Security
+
+	// TODO add roles here under Security
 	@PreAuthorize(value = "hasRole('USER_PREMIUM')")
 	public void deleteActor(Actor actor) {
 		actorDao.deleteActor(actor);
 	}
-	
+
 	public Actor getActorByName(Actor actor) {
 		return actorDao.getActorByName(actor);
 	}
-	
+
 	public Actor getActorById(int id) {
 		return actorDao.getActorById(id);
 	}
-	
+
 }

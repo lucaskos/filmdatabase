@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.luke.films.model.user.User;
@@ -24,8 +23,6 @@ public class Role {
 
 	@Column(name = "role")
 	private String role;
-
-	// mapped to userRoles in the user.class
 
 	@OneToMany(cascade=CascadeType.ALL)
     @JoinTable(name="users_roles",

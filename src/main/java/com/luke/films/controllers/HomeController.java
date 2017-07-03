@@ -1,10 +1,11 @@
 package com.luke.films.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,18 +21,17 @@ public class HomeController {
 
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
 	public ModelAndView denied(Principal user) {
+		final String statusCode = "404 - Access denied!";
+		final String accessDeniedMessage = "This page is unavailable for you.";
 		ModelAndView model = new ModelAndView();
 		if (user != null) {
+			List<String> errorsList = new ArrayList<String>();
+			errorsList.add(statusCode);
+			errorsList.add(accessDeniedMessage);
 			model.addObject("user", user.getName());
+			model.addObject("error", errorsList);
 		}
 		return model;
-	}
-
-	@ExceptionHandler(Exception.class)
-	public ModelAndView error(Exception ex) {
-		ModelAndView mav = new ModelAndView("error");
-		mav.addObject("errMsg", ex.getMessage());
-		return mav;
 	}
 
 	@RequestMapping(value = "/addactor", method = RequestMethod.GET)

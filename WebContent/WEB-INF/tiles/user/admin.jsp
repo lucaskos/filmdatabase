@@ -4,8 +4,7 @@
 <script>
 	var ctx = "${pageContext.request.contextPath}"
 </script>
-<h1>Title : ${title}</h1>
-<h1>Message : ${message}</h1>
+<div class="alert alert-warning">${title}<br/>${message}</div>
 
 <sf:form action="${pageContext.request.contextPath }/changeRole">
 	<table id="table-list" class="table table-striped table-bordered">

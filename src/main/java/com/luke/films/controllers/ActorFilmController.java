@@ -24,16 +24,17 @@ public class ActorFilmController {
 	private CastService castService;
 	@Autowired
 	private FilmService filmsService;
-	
+
 	@Autowired
 	private ActorService actorService;
 
 	@RequestMapping(value = "/actoraddedtofilm", method = RequestMethod.GET)
-	public String addActorToFilm(@RequestParam("actorId") String actorId, @RequestParam("filmId") String filmId, @RequestParam() String role) {
-		
+	public String addActorToFilm(@RequestParam("actorId") String actorId, @RequestParam("filmId") String filmId,
+			@RequestParam() String role) {
+
 		Actor actor = actorService.getActorById(Integer.valueOf(actorId));
 		Film film = filmsService.getFilmById(Integer.valueOf(filmId));
-		
+
 		castService.addActorToFilm(film, actor, role);
 		return "redirect:/filmslist";
 	}
@@ -43,12 +44,13 @@ public class ActorFilmController {
 		Film filmById = filmsService.getFilmById(filmId);
 
 		List<Cast> list = castService.getActors(filmById);
-			
-		if (filmById == null)
-			return "error";
-		else {
-			if(list!=null) {
-					model.addAttribute("actorfilm", list);
+
+		if (filmById == null) {
+			final String filmError = "No film of id " + filmId + " found!";
+			throw new NullPointerException(filmError);
+		} else {
+			if (list != null) {
+				model.addAttribute("actorfilm", list);
 			}
 			model.addAttribute("filmRating", filmsService.getRating(filmById));
 			model.addAttribute("film", filmById);
@@ -57,13 +59,19 @@ public class ActorFilmController {
 			return "film";
 		}
 	}
-	
+
 	@RequestMapping(value = "/actor/{actorId}", method = RequestMethod.GET)
 	public String getActorPage(@PathVariable("actorId") int actorId, Model model, Cast actorFilm) {
 		Actor actor = actorService.getActorById(actorId);
-		Map<Film, String> map = castService.getFilmography(actor);
-		model.addAttribute("films", map);
-		model.addAttribute("actor", actor);
-		return "actor";
+
+		if (actor == null) {
+			final String actorError = "No actor of id " + actorId + " found!";
+			throw new NullPointerException(actorError);
+		} else {
+			Map<Film, String> map = castService.getFilmography(actor);
+			model.addAttribute("films", map);
+			model.addAttribute("actor", actor);
+			return "actor";
+		}
 	}
 }
