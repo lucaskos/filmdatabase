@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +61,12 @@ public class FilmsController {
 		System.out.println("Authentication : " + auth.getPrincipal());
 		filmsService.rateFilm(filmById, userService.getUser(name), rating);
 	}
-
+	/**
+	 * Removal of the film object had to be done through GET method.
+	 * Jsp not allows to use DELETE method.
+	 * @param filmId String representation of filmID.
+	 * @return redirect to list of all films after deletion.
+	 */
 	@RequestMapping(value = "/removeFilm", method = RequestMethod.GET)
 	public String removeFilm(@RequestParam("filmId") String filmId) {
 		filmsService.deleteById(Integer.valueOf(filmId));

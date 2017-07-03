@@ -31,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		return buildUserForAuthentication(activeUsr, authorities);
 	}
-	/*
+	/**
 	 * Converts the user from com.luke.films.dao package
 	 * to org.springframework.security.core.userdetails.User
 	 */

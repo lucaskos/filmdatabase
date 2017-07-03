@@ -9,6 +9,15 @@ $(document).ready(
 						"<button type='submit' class='btn-sm' data-index=" + i
 								+ ">" + i + "</button>");
 			}
+//			$('.delete').click(function() {
+//				console.log($filmId);
+//				$.ajax({
+//					url: ctx+'/removeFilm/' +$filmId,
+//					type: 'GET'
+//				});
+//				
+//				
+//			});
 			$('.btn-sm').click(function() {
 				var $rating = $(this).attr("data-index");
 				console.log($rating + ' : ' + $filmId);

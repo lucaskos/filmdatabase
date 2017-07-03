@@ -23,6 +23,12 @@ public class ActorController {
 	@Autowired
 	private ActorService actorService;
 
+	@RequestMapping(value = "/addactor", method = RequestMethod.GET)
+	public String addActor(Model model) {
+		model.addAttribute("actor", new Actor());
+		return "addactor";
+	}
+
 	@RequestMapping(value = "/actorlist", method = RequestMethod.GET)
 	public String showActorList(Model model) {
 		model.addAttribute("actor", actorService.getAllActors());
@@ -40,7 +46,9 @@ public class ActorController {
 
 	/**
 	 * Returns a List of Actors that contains specific String.
-	 * @param name - String representation of name
+	 * 
+	 * @param name
+	 *            - String representation of name
 	 * @return List of {@link Actor} objects
 	 */
 	@RequestMapping(value = "/getActors", method = RequestMethod.GET)

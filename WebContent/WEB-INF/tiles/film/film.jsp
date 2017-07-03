@@ -40,14 +40,13 @@
 					</c:forEach>
 				</div>
 				<sec:authorize access="hasAnyRole('ADMIN', 'PREMIUM')">
-					<sf:form action='${pageContext.request.contextPath}/removeFilm'
-						method='GET' commandName="film">
-						<button name="filmId" value="${film.filmId}">REMOVE</button>
+					<sf:form action="${pageContext.request.contextPath}/removeFilm" method="GET">
+						<button class="delete btn btn-danger" name="filmId" value="${film.filmId}">REMOVE</button>
 					</sf:form>
-
 					<sf:form action='${pageContext.request.contextPath}/editfilm'
 						method='GET' commandName="film">
-						<button name="filmId" value="${film.filmId}">EDIT</button>
+						<button class="btn btn-warning" name="filmId"
+							value="${film.filmId}">EDIT</button>
 					</sf:form>
 
 
