@@ -41,6 +41,7 @@
 								value="Add new film" />
 						</c:if>
 						<c:if test="${ not empty film.title}">
+						<!-- Button info can be externalized using controller -->
 							<input class="btn btn-success" type="submit" value="Update film" />
 						</c:if>
 					</div>
