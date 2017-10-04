@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.luke.films.model.comment.Comment;
+import com.luke.films.model.comment.CommentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +22,8 @@ import com.luke.films.model.film.Film;
 import com.luke.films.service.FilmService;
 import com.luke.films.service.UserService;
 
+import java.util.List;
+
 @Controller
 public class FilmsController {
 
@@ -27,6 +31,8 @@ public class FilmsController {
 	private FilmService filmsService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CommentDao commentDao;
 
 	@RequestMapping(value = "/filmslist", method = RequestMethod.GET)
 	public String showBookList(Model model) {
@@ -93,6 +99,10 @@ public class FilmsController {
 			model.addAttribute("film", new Film());
 		}
 		return "addfilm";
+	}
+
+	public List<Comment> getFilmComments(int filmId) {
+		return commentDao.getFilmsComments(filmId);
 	}
 
 }

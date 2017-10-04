@@ -7,8 +7,10 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import com.luke.films.config.ApplicationConfigCore;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-	
-	/*
+
+	private final String DEVELOPER_DB_ENVIRONMENT= "${developer.data.source}";
+
+	/**
 	 * Auto detect default Servlet for the container at startup time (tomcat...)
 	 */
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -18,7 +20,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	@Override
 	protected WebApplicationContext createRootApplicationContext() {
 		WebApplicationContext context = (WebApplicationContext)super.createRootApplicationContext();
-	    ((ConfigurableEnvironment)context.getEnvironment()).setActiveProfiles("test");
+	    ((ConfigurableEnvironment)context.getEnvironment()).setActiveProfiles("DEVELOPER_DB_ENVIRONMENT");
 	    return context;
 	}
 	

@@ -35,6 +35,12 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 		dataSource.setUrl("jdbc:mysql://localhost:3306/films");
 		dataSource.setUsername("root");
 		dataSource.setPassword("lucas7");
+		/*
+		dataSource.setDriverClassName("${dataSource.driver_class_name}");
+		dataSource.setUrl("${dataSource.url}");
+		dataSource.setUsername("${dataSource.username}");
+		dataSource.setPassword("${dataSource.password}");
+		*/
 		return dataSource;
 	}
 	@Profile("test")
@@ -53,6 +59,7 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 	@Bean
 	public TilesConfigurer getTilesConfigurer() {
 		TilesConfigurer configurer = new TilesConfigurer();
+		//configurer.setDefinitions(new String[] { "${tiles.configurer.definitions}" });
 		configurer.setDefinitions(new String[] { "/WEB-INF/defs/tiles.xml" });
 		configurer.setCheckRefresh(true);
 		return configurer;
@@ -66,18 +73,18 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 		registry.viewResolver(viewResolver);
 	}
 
-	/*
+	/**
 	 * Serving static resources through configuration of ResourceHandler
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
+		registry.addResourceHandler("${registry.static.resources.path}").addResourceLocations("${registry.static.resources.location}");
 	}
 
 	@Bean("messageSource")
 	public MessageSource getMessageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("classpath:messages");
+		messageSource.setBasename("${messages.source.basename}");
 		return messageSource;
 	}
 

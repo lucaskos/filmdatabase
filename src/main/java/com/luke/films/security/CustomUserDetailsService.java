@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.luke.films.model.user.UserDao;
+import com.luke.films.model.user.dao.UserDao;
 import com.luke.films.model.user.role.Role;
 
 @Service

@@ -13,7 +13,6 @@
 				<p>
 					In <a href="/films/film/<c:out value='${film.key.filmId}'/>"><c:out value="${film.key.title}"></c:out></a> as <c:out value="${film.value}"></c:out>
 				</p>
-					
 			</c:forEach>
 		</div>
 	</div>

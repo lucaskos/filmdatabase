@@ -17,10 +17,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class HibernateConfig {
 
+	private final String FILM_MODEL = "com.luke.films.model";
+	private final String USER_MODEL = "com.luke.user.model";
+
+	private final String HIBERNATE_DIALECT = "hibernate.dialect";
+	private final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
+	private final String HIBERNATE_ID_NEW_GENERATOR_MAPPINGS = "hibernate.id.new_generator_mappings";
+
 	@Autowired(required=true)
 	private DataSource dataSource;
 
-	/*
+	/**
 	 * HibernateTemplate - helper class to interact with db. converts hibernate
 	 * exceptiopins to data access exceptions. can be used in DAO classes to get
 	 * data from db
@@ -34,19 +41,19 @@ public class HibernateConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
-		sessionFactory.setPackagesToScan(new String[] { "com.luke.films.model", "com.luke.user.model"});
+		sessionFactory.setPackagesToScan(new String[] {FILM_MODEL, USER_MODEL});
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
 
-	/*
+	/**
 	 * returns hibernate properties
 	 */
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
-		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.id.new_generator_mappings", "false");
+		properties.put(HIBERNATE_DIALECT, "${hibernate.dialect}");
+		properties.put(HIBERNATE_SHOW_SQL, "${hibernate.show_sql}");
+		properties.put(HIBERNATE_ID_NEW_GENERATOR_MAPPINGS, "${hibernate.id.new_generator_mappings}");
 		return properties;
 	}
 

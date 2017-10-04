@@ -29,7 +29,6 @@
 							<option value="default" selected="selected">Select
 								option</option>
 							<c:forEach var='changeRole' items='${roles}'>
-
 								<option value="${changeRole.role}" data-users="${users}"
 									data-userid="${users.id }" data-username="${users.username }"><c:out
 										value='${changeRole.role}' /></option>
