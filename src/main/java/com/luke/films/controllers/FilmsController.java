@@ -27,6 +27,8 @@ import java.util.List;
 @Controller
 public class FilmsController {
 
+	private final String updateButtonText = "Update Film";
+
 	@Autowired
 	private FilmService filmsService;
 	@Autowired
@@ -105,4 +107,7 @@ public class FilmsController {
 		return commentDao.getFilmsComments(filmId);
 	}
 
+	public String getUpdateButtonText() {
+		return updateButtonText;
+	}
 }

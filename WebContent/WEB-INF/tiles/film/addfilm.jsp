@@ -41,7 +41,7 @@
 								value="Add new film" />
 						</c:if>
 						<c:if test="${ not empty film.title}">
-							<input class="btn btn-success" type="submit" value="Update film" />
+							<c:input class="btn btn-success" type="submit" value="#{Constants.updateButtonText}" />
 						</c:if>
 					</div>
 				</div>
