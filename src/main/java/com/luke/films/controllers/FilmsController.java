@@ -6,14 +6,13 @@ import javax.validation.Valid;
 
 import com.luke.films.model.comment.Comment;
 import com.luke.films.model.comment.CommentDao;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +28,8 @@ public class FilmsController {
 
 	private final String updateButtonText = "Update Film";
 
+	private static final Logger logger = Logger.getLogger(FilmsController.class);
+
 	@Autowired
 	private FilmService filmsService;
 	@Autowired
@@ -37,19 +38,22 @@ public class FilmsController {
 	private CommentDao commentDao;
 
 	@RequestMapping(value = "/filmslist", method = RequestMethod.GET)
-	public String showBookList(Model model) {
+	public String showAllFilms(Model model) {
 		model.addAttribute("film", filmsService.getAllFilms());
+		logger.info("The number of films available is: " + filmsService.getAllFilms().size());
 		return "filmslist";
 	}
 
 	@RequestMapping(value = "/docreate", method = RequestMethod.POST)
 	public String filmAdded(@Valid Film film, BindingResult results, HttpServletRequest request) {
 		if (results.hasErrors()) {
+			logger.error("The error exists during film creation.");
 			return "addfilm";
 		}
 		Film sessionFilm = (Film) request.getSession().getAttribute("film");
 
 		if (sessionFilm != null) {
+			logger.info("Film " + sessionFilm + " will be added to database.");
 			film.setFilmId(sessionFilm.getFilmId());
 
 			filmsService.addFilm(film);
@@ -77,6 +81,7 @@ public class FilmsController {
 	 */
 	@RequestMapping(value = "/removeFilm", method = RequestMethod.GET)
 	public String removeFilm(@RequestParam("filmId") String filmId) {
+		logger.info("Deleting film of id :" + filmId);
 		filmsService.deleteById(Integer.valueOf(filmId));
 		return "redirect:/filmslist";
 	}

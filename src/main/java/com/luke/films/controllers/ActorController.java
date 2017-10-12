@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.luke.films.model.actor.Actor;
 import com.luke.films.service.ActorService;
+import sun.rmi.runtime.Log;
 
 @Controller
 public class ActorController {
+
+	private static final Logger logger = Logger.getLogger(ActorController.class);
 
 	@Autowired
 	private ActorService actorService;
@@ -32,6 +36,7 @@ public class ActorController {
 	@RequestMapping(value = "/actorlist", method = RequestMethod.GET)
 	public String showActorList(Model model) {
 		model.addAttribute("actor", actorService.getAllActors());
+		logger.info("Actor list of size " + actorService.getAllActors().size());
 		return "actorlist";
 	}
 
