@@ -3,9 +3,8 @@ package com.luke.films.config;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -52,10 +51,15 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 	@Bean
 	public DataSource getTestDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//		dataSource.setDriverClassName(env.getProperty(ConfigurationConstants.TEST_DATASOURCE_PATH));
+//		dataSource.setUrl(env.getProperty(ConfigurationConstants.TEST_DATASOURCE_URL));
+//		dataSource.setUsername(env.getProperty(ConfigurationConstants.TEST_DATASOURCE_USERNAME));
+//		dataSource.setPassword(env.getProperty(ConfigurationConstants.TEST_DATASOURCE_PASSWORD));
+
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11183110");
-		dataSource.setUsername("sql11183110");
-		dataSource.setPassword("NaCzf7t6T6");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/films_test");
+		dataSource.setUsername("root");
+		dataSource.setPassword("lucas7");
 		return dataSource;
 	}
 	/**
