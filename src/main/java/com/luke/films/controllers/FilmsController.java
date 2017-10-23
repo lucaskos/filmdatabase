@@ -107,12 +107,4 @@ public class FilmsController {
 		}
 		return "addfilm";
 	}
-
-	public List<Comment> getFilmComments(int filmId) {
-		return commentDao.getFilmsComments(filmId);
-	}
-
-	public String getUpdateButtonText() {
-		return updateButtonText;
-	}
 }

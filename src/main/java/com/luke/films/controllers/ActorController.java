@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.luke.films.model.actor.Actor;
 import com.luke.films.service.ActorService;
-import sun.rmi.runtime.Log;
 
 @Controller
 public class ActorController {

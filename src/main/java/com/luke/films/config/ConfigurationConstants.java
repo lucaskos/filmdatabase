@@ -3,7 +3,7 @@ package com.luke.films.config;
 /**
  * Created by Luke on 11.10.2017.
  */
-class ConfigurationConstants {
+public class ConfigurationConstants {
 
     public static final String DATASOURCE_PATH = "dataSource.driver_class_name";
 
@@ -12,6 +12,14 @@ class ConfigurationConstants {
     public static final String DATASOURCE_USERNAME = "dataSource.username";
 
     public static final String DATASOURCE_PASSWORD = "dataSource.password";
+
+    public static final String TEST_DATASOURCE_PATH = "test.dataSource.driver_class_name";
+
+    public static final String TEST_DATASOURCE_URL = "test.dataSource.url";
+
+    public static final String TEST_DATASOURCE_USERNAME = "test.dataSource.username";
+
+    public static final String TEST_DATASOURCE_PASSWORD = "test.dataSource.password";
 
     public static final String TILES_CONFIGURATION_DEFINITION = "tiles.configurer.definitions";
 

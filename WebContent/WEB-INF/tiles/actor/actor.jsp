@@ -2,6 +2,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <div class="row">
 	<div class="col-md-10 col-md-offset-2">
 		<div class="item-info">
@@ -16,4 +17,7 @@
 			</c:forEach>
 		</div>
 	</div>
+</div>
+<div>
+    <tiles:insertAttribute name="commentsList" />
 </div>

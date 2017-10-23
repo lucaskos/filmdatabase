@@ -1,36 +1,25 @@
 package com.luke.films.model.comment;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.luke.films.model.actor.Actor;
+import com.luke.films.model.film.Film;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Created by Luke on 25.09.2017.
+ * Created by Luke on 21.10.2017.
  */
-@Component
-@Transactional
-public class CommentDao {
+public interface CommentDao {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    List<Comment> getFilmComments(int id);
 
-    public List<Comment> getFilmsComments(int filmId) {
-        String query = "from Comment where filmId = ?1";
-        List<Comment> list = sessionFactory.getCurrentSession().createQuery(query).setParameter("1", filmId).list();
-        return list;
-    }
+    List<Comment> getActorComments(int id);
 
-    public List<Comment> getActorComments(int actorId) {
-        String query = "from Comment where actorId = ?1";
-        return sessionFactory.getCurrentSession().createQuery(query).setParameter("1", actorId).list();
-    }
+    Comment getCommentById(int id);
 
-    public List<Comment> getCommentById() {
-        String query = "from Comment";
-        return sessionFactory.getCurrentSession().createQuery(query).list();
-    }
+    void insertComment(Comment comment, Film film, Actor actor);
+
+    List<Comment> getAllHierarchyComment(int id);
+
+    List<Comment> getUserComments(String username);
 
 }

@@ -41,7 +41,7 @@ public class FilmControllerTest {
 
     @Test
     public void test() {
-        List<Comment> list = commentDao.getFilmsComments(94);
+        List<Comment> list = commentDao.getFilmComments(94);
 
         System.out.println(list.size());
 

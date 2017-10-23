@@ -57,7 +57,7 @@
 		<put-attribute name="title" value="Add film"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/film/addfilm.jsp"></put-attribute>
 	</definition>
-
+	
 	<!-- Actor list -->
 	<definition name="actorlist" extends="base">
 		<put-attribute name="title" value="Actor List"></put-attribute>
@@ -76,7 +76,11 @@
 	<!-- Actor details -->
 	<definition name="actor" extends="base">
 		<put-attribute name="title" value="Actor"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/actor/actor.jsp"></put-attribute>
+		<put-attribute name="content">
+			<definition  template="/WEB-INF/tiles/actor/actor.jsp">
+				<put-attribute name="commentsList" value="/WEB-INF/tiles/comment/commentList.jsp" cascade="true" />
+			</definition>
+		</put-attribute>
 	</definition>
 
 

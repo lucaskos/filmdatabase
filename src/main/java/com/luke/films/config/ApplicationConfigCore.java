@@ -10,6 +10,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -99,8 +100,8 @@ public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 	@Bean
 	private static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		PropertySourcesPlaceholderConfigurer propSourceConfigurer = new PropertySourcesPlaceholderConfigurer();
-		//propSourceConfigurer.setLocation(new ClassPathResource("spring.properties"));
-		//propSourceConfigurer.setIgnoreUnresolvablePlaceholders(true);
+//		propSourceConfigurer.setLocation(new ClassPathResource("spring.properties"));
+//		propSourceConfigurer.setIgnoreUnresolvablePlaceholders(true);
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 

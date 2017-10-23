@@ -1,9 +1,10 @@
 package com.luke.films.model.comment;
 
+import com.luke.films.model.user.User;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  * Created by Luke on 25.09.2017.
@@ -17,24 +18,77 @@ public class Comment {
     @Column(name = "COMMENT_ID")
     private int commentId;
 
-    @Column(name = "OWNER_ID")
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "OWNER_ID")
+    private User user;
 
     @NotBlank
     @Column(name = "TEXT")
     private String text;
 
     @Column(name = "PARENT_COMMENT_ID")
-    private Integer parentCommentId;
+    private Integer parentId;
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    @Column(name = "DEPTH")
+    private Integer depth;
+
+    public Integer getDepth() {
+        return depth;
+    }
+
+    public void setDepth(Integer depth) {
+        this.depth = depth;
+    }
+
+    //
+//    @ManyToOne
+//    private Comment comment;
+//
+//    @OneToMany(mappedBy = "comment")
+//    private List<Comment> children = new LinkedList<>();
+
+//    public Comment getComment() {
+//        return comment;
+//    }
+//
+//    public void setComment(Comment comment) {
+//        this.comment = comment;
+//    }
+//
+//    public List<Comment> getChildren() {
+//        return children;
+//    }
+//
+//    public void setChildren(List<Comment> children) {
+//        this.children = children;
+//    }
 
     @Column(name = "FILM_ID")
     private Integer filmId;
 
     @Column(name = "ACTOR_ID")
     private Integer actorId;
-    //private TimeStamp ?
+
+    @Column(name = "CREATED_DATE")
+    private Timestamp createdDate;
 
     public Comment() {}
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
 
     public int getCommentId() {
         return commentId;
@@ -44,12 +98,20 @@ public class Comment {
         this.commentId = commentId;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
+
+    public void setActorId(Integer actorId) {
+        this.actorId = actorId;
     }
 
     public String getText() {
@@ -60,13 +122,6 @@ public class Comment {
         this.text = text;
     }
 
-    public int getParentCommentId() {
-        return parentCommentId;
-    }
-
-    public void setParentCommentId(int parentCommentId) {
-        this.parentCommentId = parentCommentId;
-    }
 
     public int getFilmId() {
         return filmId;
@@ -88,9 +143,7 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "commentId=" + commentId +
-                ", userId=" + userId +
                 ", text='" + text + '\'' +
-                ", parentCommentId=" + parentCommentId +
                 ", filmId=" + filmId +
                 ", actorId=" + actorId +
                 '}';
