@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.luke.films.model.comment.Comment;
+import com.luke.films.common.ControllerConstants;
 import com.luke.films.model.comment.CommentDao;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,6 @@ import com.luke.films.model.film.Film;
 import com.luke.films.service.FilmService;
 import com.luke.films.service.UserService;
 
-import java.util.List;
-
 @Controller
 public class FilmsController {
 
@@ -37,11 +35,11 @@ public class FilmsController {
 	@Autowired
 	private CommentDao commentDao;
 
-	@RequestMapping(value = "/filmslist", method = RequestMethod.GET)
+	@RequestMapping(value = "/filmlist", method = RequestMethod.GET)
 	public String showAllFilms(Model model) {
 		model.addAttribute("film", filmsService.getAllFilms());
 		logger.info("The number of films available is: " + filmsService.getAllFilms().size());
-		return "filmslist";
+		return "filmlist";
 	}
 
 	@RequestMapping(value = "/docreate", method = RequestMethod.POST)
@@ -61,8 +59,8 @@ public class FilmsController {
 		} else {
 			filmsService.addFilm(film);
 		}
-		request.getSession().removeAttribute("film");
-		return "redirect:/filmslist";
+		request.getSession().removeAttribute(ControllerConstants.FILM);
+		return ControllerConstants.REDIRECT+ ControllerConstants.FILM_LIST;
 	}
 
 	@RequestMapping(value = "/{filmId}", method = RequestMethod.POST)
@@ -83,7 +81,7 @@ public class FilmsController {
 	public String removeFilm(@RequestParam("filmId") String filmId) {
 		logger.info("Deleting film of id :" + filmId);
 		filmsService.deleteById(Integer.valueOf(filmId));
-		return "redirect:/filmslist";
+		return ControllerConstants.REDIRECT+ ControllerConstants.FILM_LIST;
 	}
 
 	@RequestMapping(value = "/editfilm", method = RequestMethod.GET)
@@ -100,7 +98,7 @@ public class FilmsController {
 		Film film = (Film) session.getAttribute("film");
 
 		if (film != null)
-			model.addAttribute("film", film);
+			model.addAttribute(ControllerConstants.FILM, film);
 		else {
 			session.removeAttribute("film");
 			model.addAttribute("film", new Film());

@@ -19,7 +19,7 @@
 					<li class="dropdown"><a class="dropdown-toggle" href="#"
 						data-toggle="dropdown">Films <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-							<li><a href="<c:url value='/filmslist' />">Films List</a></li>
+							<li><a href="<c:url value='/filmlist' />">Films List</a></li>
 							<li><a href="<c:url value='/addfilm' />">Add film</a></li>
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"

@@ -32,6 +32,7 @@ public class CommentDaoImp implements CommentDao{
     private SessionFactory sessionFactory;
 
     public List<Comment> getFilmComments(int filmId) {
+        mainComments = new ArrayList<>();
         query = "from Comment where filmId = :id";
         List<Comment> comments = sessionFactory.getCurrentSession().createQuery(query).setParameter("id", filmId).list();
         if(comments != null) {

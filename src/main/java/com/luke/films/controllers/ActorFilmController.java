@@ -1,10 +1,9 @@
 package com.luke.films.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.luke.films.common.Constants;
+import com.luke.films.common.ControllerConstants;
 import com.luke.films.model.comment.Comment;
 import com.luke.films.model.comment.CommentDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,8 @@ public class ActorFilmController {
 	@Autowired
 	private CommentDao commentDao;
 
+	private List<Comment> comments;
+
 	@RequestMapping(value = "/actoraddedtofilm", method = RequestMethod.GET)
 	public String addActorToFilm(@RequestParam("actorId") String actorId, @RequestParam("filmId") String filmId,
 			@RequestParam() String role) {
@@ -41,17 +42,14 @@ public class ActorFilmController {
 		Film film = filmsService.getFilmById(Integer.valueOf(filmId));
 
 		castService.addActorToFilm(film, actor, role);
-		return "redirect:/filmslist";
+		return ControllerConstants.REDIRECT+ ControllerConstants.FILM_LIST;
 	}
 
 	@RequestMapping(value = "/film/{filmId}", method = RequestMethod.GET)
 	public String getFilmPage(@PathVariable int filmId, Model model, Actor actor, Cast actorFilm) {
 		Film filmById = filmsService.getFilmById(filmId);
 		List<Cast> list = castService.getActors(filmById);
-
-		List<Comment> filmComments = commentDao.getFilmComments(filmId);
-
-		System.out.println(filmComments);
+		comments = commentDao.getFilmComments(filmId);
 
 		if (filmById == null) {
 			final String filmError = "No film of id " + filmId + " found!";
@@ -61,11 +59,11 @@ public class ActorFilmController {
 				model.addAttribute("actorfilm", list);
 			}
 			model.addAttribute("filmRating", filmsService.getRating(filmById));
-			model.addAttribute("film", filmById);
+			model.addAttribute(ControllerConstants.FILM, filmById);
 			model.addAttribute("noOfVotes", filmById.getRating().size());
 			model.addAttribute("actorFilm", new Cast());
-			model.addAttribute("comments", filmComments);
-			return "film";
+			model.addAttribute(ControllerConstants.COMMENTS_LIST, comments);
+			return ControllerConstants.FILM;
 		}
 	}
 
@@ -73,7 +71,7 @@ public class ActorFilmController {
 	public String getActorPage(@PathVariable("actorId") int actorId, Model model, Cast actorFilm) {
 		Actor actor = actorService.getActorById(actorId);
 
-		List<Comment> comments = commentDao.getActorComments(actorId);
+		comments = commentDao.getActorComments(actorId);
 
 		if (actor == null) {
 			final String actorError = "No actor of id " + actorId + " found!";
@@ -81,12 +79,12 @@ public class ActorFilmController {
 		} else {
 
 			if(!comments.isEmpty()) {
-				model.addAttribute(Constants.COMMENTS_LIST, comments);
+				model.addAttribute(ControllerConstants.COMMENTS_LIST, comments);
 			}
 			Map<Film, String> map = castService.getFilmography(actor);
-			model.addAttribute("films", map);
-			model.addAttribute("actor", actor);
-			return "actor";
+			model.addAttribute(ControllerConstants.FILMS, map);
+			model.addAttribute(ControllerConstants.ACTOR, actor);
+			return ControllerConstants.ACTOR;
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.luke.films.common.ControllerConstants;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,24 +29,24 @@ public class ActorController {
 
 	@RequestMapping(value = "/addactor", method = RequestMethod.GET)
 	public String addActor(Model model) {
-		model.addAttribute("actor", new Actor());
+		model.addAttribute(ControllerConstants.ACTOR, new Actor());
 		return "addactor";
 	}
 
-	@RequestMapping(value = "/actorlist", method = RequestMethod.GET)
+	@RequestMapping(value = "/"+ ControllerConstants.ACTOR_LIST, method = RequestMethod.GET)
 	public String showActorList(Model model) {
-		model.addAttribute("actor", actorService.getAllActors());
+		model.addAttribute(ControllerConstants.ACTOR, actorService.getAllActors());
 		logger.info("Actor list of size " + actorService.getAllActors().size());
-		return "actorlist";
+		return ControllerConstants.ACTOR_LIST;
 	}
 
 	@RequestMapping(value = "/actoradded", method = RequestMethod.POST)
 	public String actorAdded(@Valid Actor actor, BindingResult results) {
 		if (results.hasErrors()) {
-			return "addactor";
+			return ControllerConstants.ADD_ACTOR;
 		}
 		actorService.addActor(actor);
-		return "redirect:/actorlist";
+		return ControllerConstants.REDIRECT + ControllerConstants.ACTOR_LIST;
 	}
 
 	/**

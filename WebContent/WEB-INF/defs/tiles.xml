@@ -5,12 +5,12 @@
 <tiles-definitions>
 
 	<definition name="base" template="/WEB-INF/tiles/defaultLayout.jsp">
-		<put-attribute name="includes" value=""></put-attribute>
-		<put-attribute name="title" value="Film Database"></put-attribute>
-		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp"></put-attribute>
-		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jsp"></put-attribute>
-		<put-attribute name="content" value=""></put-attribute>
-		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
+		<put-attribute name="includes" value="" />
+		<put-attribute name="title" value="Film Database" />
+		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
 		<put-list-attribute name="javascripts">
 			<add-attribute value="/static/js/jquery-3.2.1.min.js" />
 			<add-attribute value="/static/js/jquery.autocomplete.min.js" />
@@ -25,15 +25,15 @@
 
 	<!-- HOME PAGE/CONTROLLER -->
 	<definition name="home" extends="base">
-		<put-attribute name="title" value="Welcome"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
+		<put-attribute name="title" value="Welcome" />
+		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp" />
 	</definition>
 
 	<!-- FILM SECTION -->
 	<!-- Films List -->
-	<definition name="filmslist" extends="base">
-		<put-attribute name="title" value="List of all films"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/film/filmslist.jsp"></put-attribute>
+	<definition name="filmlist" extends="base">
+		<put-attribute name="title" value="List of all films" />
+		<put-attribute name="content" value="/WEB-INF/tiles/film/filmlist.jsp" />
 		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute value="/static/js/filmdetails.js" />
 			<add-attribute value="/static/js/jquery.dataTables.min.js" />
@@ -43,8 +43,9 @@
 
 	<!-- Film details -->
 	<definition name="film" extends="base">
-		<put-attribute name="title" value="Film"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/film/film.jsp"></put-attribute>
+		<put-attribute name="title" value="Film" />
+		<put-attribute name="content" value="/WEB-INF/tiles/film/film.jsp" />
+		<put-attribute name="commentsList" value="/WEB-INF/tiles/comment/commentList.jsp" cascade="true" />
 		<put-list-attribute name="stylesheets" inherit="true">
 			<add-attribute value="/static/css/filmdetails.css" />
 		</put-list-attribute>
@@ -54,14 +55,14 @@
 	</definition>
 	<!-- Add film -->
 	<definition name="addfilm" extends="base">
-		<put-attribute name="title" value="Add film"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/film/addfilm.jsp"></put-attribute>
+		<put-attribute name="title" value="Add film" />
+		<put-attribute name="content" value="/WEB-INF/tiles/film/addfilm.jsp" />
 	</definition>
 	
 	<!-- Actor list -->
 	<definition name="actorlist" extends="base">
-		<put-attribute name="title" value="Actor List"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/actor/actorlist.jsp"></put-attribute>
+		<put-attribute name="title" value="Actor List" />
+		<put-attribute name="content" value="/WEB-INF/tiles/actor/actorlist.jsp" />
 		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute value="/static/js/actordetails.js" />
 			<add-attribute value="/static/js/jquery.dataTables.min.js" />
@@ -70,35 +71,32 @@
 	</definition>
 	<!-- Add Actor -->
 	<definition name="addactor" extends="base">
-		<put-attribute name="title" value="Add Actor"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/actor/addactor.jsp"></put-attribute>
+		<put-attribute name="title" value="Add Actor" />
+		<put-attribute name="content" value="/WEB-INF/tiles/actor/addactor.jsp" />
 	</definition>
 	<!-- Actor details -->
 	<definition name="actor" extends="base">
-		<put-attribute name="title" value="Actor"></put-attribute>
-		<put-attribute name="content">
-			<definition  template="/WEB-INF/tiles/actor/actor.jsp">
-				<put-attribute name="commentsList" value="/WEB-INF/tiles/comment/commentList.jsp" cascade="true" />
-			</definition>
-		</put-attribute>
+		<put-attribute name="title" value="Actor" />
+		<put-attribute name="content" value="/WEB-INF/tiles/actor/actor.jsp" />
+		<put-attribute name="commentsList" value="/WEB-INF/tiles/comment/commentList.jsp" cascade="true" />
 	</definition>
 
 
 	<!-- USER SECTION -->
 	<!-- Login page -->
 	<definition name="login" extends="base">
-		<put-attribute name="title" value="Log in"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/user/login.jsp"></put-attribute>
+		<put-attribute name="title" value="Log in" />
+		<put-attribute name="content" value="/WEB-INF/tiles/user/login.jsp" />
 	</definition>
 	<!-- Logout Page -->
 	<definition name="logout" extends="base">
-		<put-attribute name="title" value="Logout Page"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/user/logout.jsp"></put-attribute>
+		<put-attribute name="title" value="Logout Page" />
+		<put-attribute name="content" value="/WEB-INF/tiles/user/logout.jsp" />
 	</definition>
 	<!-- Admin page -->
 	<definition name="admin" extends="base">
-		<put-attribute name="title" value="Admin Page"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/user/admin.jsp"></put-attribute>
+		<put-attribute name="title" value="Admin Page" />
+		<put-attribute name="content" value="/WEB-INF/tiles/user/admin.jsp" />
 		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute value="/static/js/admin.js" />
 			<add-attribute value="/static/js/jquery.dataTables.min.js" />
@@ -107,24 +105,24 @@
 	</definition>
 	<!-- Create Account -->
 	<definition name="newaccount" extends="base">
-		<put-attribute name="title" value="Create Account"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/user/newaccount.jsp"></put-attribute>
+		<put-attribute name="title" value="Create Account" />
+		<put-attribute name="content" value="/WEB-INF/tiles/user/newaccount.jsp" />
 	</definition>
 	<!-- Account created -->
 	<definition name="accountcreated" extends="base">
-		<put-attribute name="title" value="Success"></put-attribute>
+		<put-attribute name="title" value="Success" />
 		<put-attribute name="content"
-			value="/WEB-INF/tiles/user/accountcreated.jsp"></put-attribute>
+			value="/WEB-INF/tiles/user/accountcreated.jsp" />
 	</definition>
 	<!-- EROOR SECION -->
 	<!-- Denied page -->
 	<definition name="denied" extends="base">
-		<put-attribute name="title" value="Access Denied"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/denied.jsp"></put-attribute>
+		<put-attribute name="title" value="Access Denied" />
+		<put-attribute name="content" value="/WEB-INF/tiles/denied.jsp" />
 	</definition>
 	<!-- Error page -->
 	<definition name="error" extends="base">
-		<put-attribute name="title" value="Error page"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp"></put-attribute>
+		<put-attribute name="title" value="Error page" />
+		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp" />
 	</definition>
 </tiles-definitions>

@@ -6,6 +6,8 @@ target/
 /.idea/compiler.xml
 /.idea/dbnavigator.xml
 /.idea/kotlinc.xml
+.idea/**/gradle.xml
+.idea/**/libraries
 /.idea/libraries/Maven__antlr_antlr_2_7_7.xml
 /.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml
 /.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.luke.films.common.ControllerConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -42,7 +43,7 @@ public class UserController {
 
 		ModelAndView model = new ModelAndView();
 		if (error != null) {
-			model.addObject("error", "Invalid username and password!");
+			model.addObject(ControllerConstants.ERROR, "Invalid username and password!");
 		}
 
 		if (logout != null) {
@@ -58,10 +59,10 @@ public class UserController {
 	public ModelAndView adminPage() {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "This is Admin page!");
-		model.addObject("message", "This is protected page! For Users with Admin privilege only.");
+		model.addObject(ControllerConstants.MESSAGE, "This is protected page! For Users with Admin privilege only.");
 		model.setViewName("admin");
 		model.addObject("users", usersService.getAllUsers());
-		model.addObject("roles", roleDao.getAllRoles());
+		model.addObject(ControllerConstants.ROLES, roleDao.getAllRoles());
 		return model;
 
 	}
@@ -103,7 +104,7 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "changeRole", method = RequestMethod.GET)
-	public void changeRole(@RequestParam("username") String username, @RequestParam("role") String role) {
+	public void changeRole(@RequestParam("username") String username, @RequestParam(ControllerConstants.ROLE) String role) {
 		User user = usersService.getUser(username);
 		user.setRole(roleDao.getRole(role));
 		usersService.update(user);

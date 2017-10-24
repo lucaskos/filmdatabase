@@ -2,6 +2,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
@@ -22,10 +23,10 @@
 				</div>
 
 				<div id="actorlist">
-					<c:if test="${not empty actorfilm }">
+					<c:if test="${not empty actors }">
 						<h3>Cast</h3>
 					</c:if>
-					<c:forEach var="actorfilm" varStatus="status" items="${actorfilm}">
+					<c:forEach var="actorfilm" varStatus="status" items="${actors}">
 
 						<table id="actorinfilm">
 							<tr>
@@ -82,3 +83,7 @@
 		</div>
 	</div>
 </div>
+<div>
+    <tiles:insertAttribute name="commentsList" />
+</div>
+<p>test</p>
