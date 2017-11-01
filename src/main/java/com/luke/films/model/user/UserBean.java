@@ -1,4 +1,4 @@
-package com.luke.films.model;
+package com.luke.films.model.user;
 
 import com.luke.films.model.comment.Comment;
 

@@ -2,7 +2,7 @@ package com.luke.films.cache;
 
 import com.luke.films.common.CacheConstants;
 import com.luke.films.common.QualifierConstants;
-import com.luke.films.cache.dictionaries.PersonRole;
+import com.luke.films.cache.dictionaries.GenresDictionary;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -15,20 +15,21 @@ import java.util.List;
 /**
  * Created by Luke on 01.11.2017.
  */
-@Component(QualifierConstants.PERSON_DIC_DAO)
-public class PersonRoleDaoImpl implements DictionaryDao {
+@Component(QualifierConstants.GENRES_DIC_DAO)
+public class GenresDaoImpl implements DictionaryDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     @Cacheable(CacheConstants.CACHE_DICTIONARY)
-    public List<PersonRole> getAll() {
+    public List<GenresDictionary> getAll() {
 
-        CriteriaQuery<PersonRole> query = entityManager.getCriteriaBuilder().createQuery(PersonRole.class);
-        Root<PersonRole> root = query.from(PersonRole.class);
+        CriteriaQuery<GenresDictionary> query = entityManager.getCriteriaBuilder().createQuery(GenresDictionary.class);
+        Root<GenresDictionary> root = query.from(GenresDictionary.class);
         query.select(root);
 
         return entityManager.createQuery(query).getResultList();
     }
+
 }

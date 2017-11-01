@@ -1,6 +1,5 @@
 package com.luke.films.model;
 
-import com.luke.films.dictionaries.PersonRole;
 import com.luke.films.model.actor.Person;
 import com.luke.films.model.film.Film;
 

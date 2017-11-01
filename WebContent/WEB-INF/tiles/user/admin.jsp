@@ -18,6 +18,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		<c:if test="${users not null}">
 			<c:forEach var="users" items="${users}">
 				<tr>
 					<td><c:out value="${users.id }" /></td>
@@ -37,6 +38,7 @@
 					</select></td>
 				</tr>
 			</c:forEach>
+		</c:if>
 		</tbody>
 	</table>
 </sf:form>

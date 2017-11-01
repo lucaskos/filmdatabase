@@ -1,6 +1,6 @@
 package com.luke.films.model;
 
-import com.luke.films.dictionaries.PersonRole;
+import com.luke.films.cache.dictionaries.PersonRole;
 import com.luke.films.model.actor.Person;
 
 import javax.persistence.*;

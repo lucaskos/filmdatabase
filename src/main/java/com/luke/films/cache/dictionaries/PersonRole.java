@@ -1,4 +1,4 @@
-package com.luke.films.dictionaries;
+package com.luke.films.cache.dictionaries;
 
 import javax.persistence.*;
 

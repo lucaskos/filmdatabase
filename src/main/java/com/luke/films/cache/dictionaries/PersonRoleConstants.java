@@ -1,4 +1,4 @@
-package com.luke.films.dictionaries;
+package com.luke.films.cache.dictionaries;
 
 /**
  * Created by Luke on 25.10.2017.

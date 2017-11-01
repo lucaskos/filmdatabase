@@ -1,7 +1,9 @@
 package com.luke.films.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.luke.films.model.user.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,11 +30,33 @@ public class UserService {
 	}
 	//TODO Securing this method for ADMIN only
 	
-	public List<User> getAllUsers() {
-		return usersDao.getAllUsers();
+	public List<UserBean> getAllUsers() {
+		List<User> allUsers = usersDao.getAllUsers();
+        List<UserBean> userBeans = new ArrayList<>();
+
+		if(!allUsers.isEmpty()) {
+            userBeans = copyUserData(allUsers);
+        }
+
+		return userBeans;
 	}
-	
-	public User getUser(String username) {
+
+    private List<UserBean> copyUserData(List<User> allUsers) {
+
+        List userBeanList = new ArrayList();
+        for(User user : allUsers) {
+            UserBean bean = new UserBean();
+            bean.setEmail(user.getEmail());
+            bean.setId(user.getId());
+            bean.setUsername(user.getUsername());
+
+            userBeanList.add(userBeanList);
+        }
+
+        return userBeanList;
+    }
+
+    public User getUser(String username) {
 		return usersDao.getUser(username);
 	}
 	

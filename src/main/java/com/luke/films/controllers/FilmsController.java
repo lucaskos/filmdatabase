@@ -5,9 +5,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import com.luke.films.cache.DictionaryDao;
 import com.luke.films.common.ControllerConstants;
+import com.luke.films.common.QualifierConstants;
 import com.luke.films.model.comment.CommentDao;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,7 @@ public class FilmsController {
 	@Autowired
 	private CommentDao commentDao;
 	@Autowired
+	@Qualifier(QualifierConstants.GENRES_DIC_DAO)
 	private DictionaryDao dictionaryDao;
 
 	@RequestMapping(value = "/filmlist", method = RequestMethod.GET)

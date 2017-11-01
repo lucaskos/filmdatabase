@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.luke.films.common.ControllerConstants;
+import com.luke.films.model.user.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.luke.films.model.user.User;
 import com.luke.films.model.user.role.RoleDao;
 import com.luke.films.service.UserService;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -61,7 +64,11 @@ public class UserController {
 		model.addObject("title", "This is Admin page!");
 		model.addObject(ControllerConstants.MESSAGE, "This is protected page! For Users with Admin privilege only.");
 		model.setViewName("admin");
-		model.addObject("users", usersService.getAllUsers());
+		List<UserBean> usersData = usersService.getAllUsers();
+
+		if(!usersData.isEmpty())
+			model.addObject("users", usersData);
+
 		model.addObject(ControllerConstants.ROLES, roleDao.getAllRoles());
 		return model;
 
