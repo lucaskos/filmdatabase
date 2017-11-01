@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -30,6 +31,7 @@ import com.luke.films.security.SecurityConfig;
 @PropertySource(
 		value={"classpath:spring.properties"},
 		ignoreResourceNotFound = true)
+@EnableCaching
 public class ApplicationConfigCore extends WebMvcConfigurerAdapter {
 
 	private static final Logger LOGGER = Logger.getLogger(ApplicationConfigCore.class);

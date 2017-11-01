@@ -2,7 +2,7 @@ target/
 .classpath
 .settings/
 .project
-/.idea/.name
+/.idea/.firstName
 /.idea/compiler.xml
 /.idea/dbnavigator.xml
 /.idea/kotlinc.xml

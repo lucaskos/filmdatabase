@@ -34,7 +34,7 @@ public class HibernateConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
-		sessionFactory.setPackagesToScan(new String[] { "com.luke.films.model", "com.luke.user.model"});
+		sessionFactory.setPackagesToScan(new String[] { "com.luke.films", "com.luke.user.model"});
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
@@ -47,6 +47,10 @@ public class HibernateConfig {
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.id.new_generator_mappings", "false");
+		properties.put("hibernate.cache.use_second_level", "true");
+		properties.put("hibernate.cache.use_query_cache", "true");
+		properties.put("hibernate.cache.region.factory_class", "org.hibernate.cache.jcache.JCacheRegionFactory");
+		properties.put("hibernate.javax.cache.provider", "org.ehcache.jsr107.EhcacheCachingProvider");
 		return properties;
 	}
 

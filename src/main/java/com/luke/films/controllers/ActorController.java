@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.luke.films.common.ControllerConstants;
+import com.luke.films.model.actor.Person;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.luke.films.model.actor.Actor;
 import com.luke.films.service.ActorService;
 
 @Controller
@@ -29,23 +29,23 @@ public class ActorController {
 
 	@RequestMapping(value = "/addactor", method = RequestMethod.GET)
 	public String addActor(Model model) {
-		model.addAttribute(ControllerConstants.ACTOR, new Actor());
+		model.addAttribute(ControllerConstants.ACTOR, new Person());
 		return "addactor";
 	}
 
 	@RequestMapping(value = "/"+ ControllerConstants.ACTOR_LIST, method = RequestMethod.GET)
 	public String showActorList(Model model) {
 		model.addAttribute(ControllerConstants.ACTOR, actorService.getAllActors());
-		logger.info("Actor list of size " + actorService.getAllActors().size());
+		logger.info("Person list of size " + actorService.getAllActors().size());
 		return ControllerConstants.ACTOR_LIST;
 	}
 
 	@RequestMapping(value = "/actoradded", method = RequestMethod.POST)
-	public String actorAdded(@Valid Actor actor, BindingResult results) {
+	public String actorAdded(@Valid Person person, BindingResult results) {
 		if (results.hasErrors()) {
 			return ControllerConstants.ADD_ACTOR;
 		}
-		actorService.addActor(actor);
+		actorService.addActor(person);
 		return ControllerConstants.REDIRECT + ControllerConstants.ACTOR_LIST;
 	}
 
@@ -54,13 +54,13 @@ public class ActorController {
 	 * 
 	 * @param name
 	 *            - String representation of name
-	 * @return List of {@link Actor} objects
+	 * @return List of {@link Person} objects
 	 */
 	@RequestMapping(value = "/getActors", method = RequestMethod.GET)
-	public @ResponseBody List<Actor> getActors(@RequestParam String name) {
-		List<Actor> results;
-		List<Actor> allActors = actorService.getAllActors();
-		results = extractActor(allActors, name);
+	public @ResponseBody List<Person> getActors(@RequestParam String name) {
+		List<Person> results;
+		List<Person> allPeople = actorService.getAllActors();
+		results = extractActor(allPeople, name);
 		return results;
 	}
 
@@ -68,12 +68,12 @@ public class ActorController {
 	 * Given list of all actors it iterates through list and returns new list
 	 * that contains given string.
 	 */
-	private List<Actor> extractActor(List<Actor> listOfActors, String nameOfActor) {
-		List<Actor> results = new ArrayList<Actor>();
-		for (Actor actor : listOfActors)
-			if (actor.getName().toLowerCase().contains(nameOfActor.toLowerCase())) {
-				actor.setActorFilms(null);
-				results.add(actor);
+	private List<Person> extractActor(List<Person> listOfPeople, String nameOfActor) {
+		List<Person> results = new ArrayList<Person>();
+		for (Person person : listOfPeople)
+			if (person.getFirstName().toLowerCase().contains(nameOfActor.toLowerCase())) {
+				//person.setActorFilms(null);
+				results.add(person);
 			}
 		return results;
 	}

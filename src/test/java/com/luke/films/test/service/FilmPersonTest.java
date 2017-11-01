@@ -3,6 +3,7 @@ package com.luke.films.test.service;
 import java.util.List;
 import java.util.Map;
 
+import com.luke.films.model.actor.Person;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,7 +19,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.films.model.actor.Actor;
 import com.luke.films.model.actor.ActorDao;
 import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.Film;
@@ -29,7 +29,7 @@ import com.luke.films.service.CastService;
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
 @WebAppConfiguration("WebContent")
 @ActiveProfiles(profiles = "test")
-public class FilmActorTest {
+public class FilmPersonTest {
 
 	
 	@Autowired
@@ -53,9 +53,9 @@ public class FilmActorTest {
 	
 	@Before
 	public void removeAllRows(){
-		List<Actor> actorList = actorDao.getAllActors();
-		if(actorList != null)
-			for(Actor a : actorList)
+		List<Person> personList = actorDao.getAllActors();
+		if(personList != null)
+			for(Person a : personList)
 				actorDao.deleteActor(a);
 		
 		List<Film> filmList = filmDao.getAllFilms();
@@ -68,20 +68,20 @@ public class FilmActorTest {
 	public void test(){
 		Film film = new Film("silence of the lambs", 1989, "silence of the lambs");
 		Film filmTest = new Film("Test film", 1990, "Test description");
-		Actor actor =  new Actor("Anthony Hopkins");
+		Person person =  new Person("Anthony Hopkins");
 		
-		Actor actor2 = new Actor("Jodie Foster");
+		Person person2 = new Person("Jodie Foster");
 		Session session = session();
 		Cast actorFilm = new Cast();
 		actorFilm.setFilm(film);
-		actorFilm.setActor(actor);
+		actorFilm.setPerson(person);
 		actorFilm.setRole("Hannibal");
 		
 	
 		
 		Cast actorFilm1 = new Cast();
 		actorFilm1.setFilm(film);
-		actorFilm1.setActor(actor2);
+		actorFilm1.setPerson(person2);
 		actorFilm1.setRole("Scarlet");
 		session.save(actorFilm1);
 		
@@ -90,16 +90,16 @@ public class FilmActorTest {
 		session.save(actorFilm);
 		session.save(actorFilm1);
 		
-		Map<Film, String> filmography = castService.getFilmography(actor);
+		Map<Film, String> filmography = castService.getFilmography(person);
 		for(Map.Entry<Film, String> entry : filmography.entrySet()) {
 			System.out.println(entry.getKey().getTitle() + " :AS: " + entry.getValue());
 		}
 		session().save(filmTest);
 		
-		Actor actorTest = new Actor("Test actor");
-		session().save(actorTest);
+		Person personTest = new Person("Test person");
+		session().save(personTest);
 		
-		System.out.println(actorDao.getActorByName(actorTest));
+		System.out.println(actorDao.getActorByName(personTest));
 		
 		tx.commit();
 		//sessionFactory.getCurrentSession().merge(actorFilm1);

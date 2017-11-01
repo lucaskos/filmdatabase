@@ -2,13 +2,13 @@ package com.luke.films.service;
 
 import java.util.List;
 
+import com.luke.films.model.actor.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
-import com.luke.films.model.actor.Actor;
 import com.luke.films.model.actor.ActorDao;
-import com.luke.films.model.cast.CastDao;
+
 
 @Component
 public class ActorService {
@@ -16,25 +16,25 @@ public class ActorService {
 	@Autowired
 	private ActorDao actorDao;
 
-	public List<Actor> getAllActors() {
+	public List<Person> getAllActors() {
 		return actorDao.getAllActors();
 	}
 
-	public void addActor(Actor actor) {
-		actorDao.addActor(actor);
+	public void addActor(Person person) {
+		actorDao.addActor(person);
 	}
 
 	// TODO add roles here under Security
-	@PreAuthorize(value = "hasRole('USER_PREMIUM')")
-	public void deleteActor(Actor actor) {
-		actorDao.deleteActor(actor);
+	//@PreAuthorize(value = "hasRole('USER_PREMIUM')")
+	public void deleteActor(Person person) {
+		actorDao.deleteActor(person);
 	}
 
-	public Actor getActorByName(Actor actor) {
-		return actorDao.getActorByName(actor);
+	public Person getActorByName(Person person) {
+		return actorDao.getActorByName(person);
 	}
 
-	public Actor getActorById(int id) {
+	public Person getActorById(int id) {
 		return actorDao.getActorById(id);
 	}
 

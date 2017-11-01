@@ -18,27 +18,27 @@ USE `films`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `actor`
+-- Table structure for table `person`
 --
 
-DROP TABLE IF EXISTS `actor`;
+DROP TABLE IF EXISTS `person`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `actor` (
+CREATE TABLE `person` (
   `actor_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
   PRIMARY KEY (`actor_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `actor`
+-- Dumping data for table `person`
 --
 
-LOCK TABLES `actor` WRITE;
-/*!40000 ALTER TABLE `actor` DISABLE KEYS */;
-INSERT INTO `actor` VALUES (39,'Keanu Reeves'),(47,'Lauren Fishborne'),(48,'Carrie-Anne Moss'),(49,'Hugo Weaving'),(51,'Johnny Depp'),(52,'Julia Roberts'),(53,'Chris Pratt'),(54,'Vin Diesel');
-/*!40000 ALTER TABLE `actor` ENABLE KEYS */;
+LOCK TABLES `person` WRITE;
+/*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` VALUES (39,'Keanu Reeves'),(47,'Lauren Fishborne'),(48,'Carrie-Anne Moss'),(49,'Hugo Weaving'),(51,'Johnny Depp'),(52,'Julia Roberts'),(53,'Chris Pratt'),(54,'Vin Diesel');
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -56,7 +56,7 @@ CREATE TABLE `actor_film` (
   PRIMARY KEY (`actor_film_id`,`actor_id`,`film_id`),
   KEY `fk_actor_has_film_film1_idx` (`film_id`),
   KEY `fk_actor_has_film_actor1_idx` (`actor_id`),
-  CONSTRAINT `fk_actor_has_film_actor1` FOREIGN KEY (`actor_id`) REFERENCES `actor` (`actor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_actor_has_film_actor1` FOREIGN KEY (`actor_id`) REFERENCES `person` (`actor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_actor_has_film_film1` FOREIGN KEY (`film_id`) REFERENCES `film` (`film_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

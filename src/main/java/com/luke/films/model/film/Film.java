@@ -14,39 +14,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.luke.films.model.FilmRelation;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.luke.films.model.cast.Cast;
 import com.luke.films.model.rating.Rating;
 
 @Entity
-@Table(name = "film")
+@Table(name = "FILM")
 public class Film {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "film_id")
 	private int filmId;
-
-	@Size(max = 60)
-	@NotBlank
 	private String title;
 	private Integer year;
-
-	@NotBlank
-	@Size(min = 10)
 	private String description;
 
 	@OneToMany(mappedBy = "film", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Cast> allCast = new HashSet<Cast>();
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "film", cascade = CascadeType.ALL)
-	private Set<Rating> rating = new HashSet<Rating>();
-
 	public Film() {
 
 	}
 
+	@OneToMany(targetEntity = FilmRelation.class, mappedBy = "filmId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<FilmRelation> filmRelations;
+
+	private Set<Rating> rating = new HashSet<Rating>();
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "film", cascade = CascadeType.ALL)
 	public Set<Rating> getRating() {
 		return rating;
 	}
@@ -70,6 +65,9 @@ public class Film {
 		this.allCast.add(actorsFilms);
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "FILM_ID")
 	public int getFilmId() {
 		return filmId;
 	}
@@ -78,6 +76,9 @@ public class Film {
 		this.filmId = filmId;
 	}
 
+	@Size(max = 60)
+	@NotBlank
+	@Column(name = "TITLE")
 	public String getTitle() {
 		return title;
 	}
@@ -86,6 +87,7 @@ public class Film {
 		this.title = title;
 	}
 
+	@Column(name = "YEAR")
 	public Integer getYear() {
 		return year;
 	}
@@ -94,6 +96,8 @@ public class Film {
 		this.year = year;
 	}
 
+	@NotBlank
+	@Size(min = 10)
 	public String getDescription() {
 		return description;
 	}
@@ -102,17 +106,7 @@ public class Film {
 		this.description = description;
 	}
 
-	public Set<Cast> getActorsFilms() {
-		return this.allCast;
-	}
 
-	public void setActorsFilms(Set<Cast> actorsFilms) {
-		this.allCast = actorsFilms;
-	}
-
-	public void addActorsFilms(Cast actorFilms) {
-		this.allCast.add(actorFilms);
-	}
 
 	@Override
 	public int hashCode() {

@@ -22,6 +22,9 @@ public class Comment {
     @JoinColumn(name = "OWNER_ID")
     private User user;
 
+    @Column(name = "title")
+    private String title;
+
     @NotBlank
     @Column(name = "TEXT")
     private String text;
@@ -47,29 +50,6 @@ public class Comment {
     public void setDepth(Integer depth) {
         this.depth = depth;
     }
-
-    //
-//    @ManyToOne
-//    private Comment comment;
-//
-//    @OneToMany(mappedBy = "comment")
-//    private List<Comment> children = new LinkedList<>();
-
-//    public Comment getComment() {
-//        return comment;
-//    }
-//
-//    public void setComment(Comment comment) {
-//        this.comment = comment;
-//    }
-//
-//    public List<Comment> getChildren() {
-//        return children;
-//    }
-//
-//    public void setChildren(List<Comment> children) {
-//        this.children = children;
-//    }
 
     @Column(name = "FILM_ID")
     private Integer filmId;
@@ -104,6 +84,14 @@ public class Comment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setFilmId(Integer filmId) {

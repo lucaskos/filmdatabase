@@ -1,6 +1,6 @@
 package com.luke.films.model.comment;
 
-import com.luke.films.model.actor.Actor;
+import com.luke.films.model.actor.Person;
 import com.luke.films.model.film.Film;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -70,14 +70,14 @@ public class CommentDaoImp implements CommentDao{
     }
 
     @Override
-    public void insertComment(Comment comment, Film film, Actor actor) {
+    public void insertComment(Comment comment, Film film, Person person) {
 
         if(film != null) {
             comment.setFilmId(film.getFilmId());
-        } else if(actor != null) {
-            comment.setActorId(actor.getId());
+        } else if(person != null) {
+            comment.setActorId(person.getId());
         } else {
-            log.info("Neither film nor actor available");
+            log.info("Neither film nor person available");
         }
 
         if(comment != null) {

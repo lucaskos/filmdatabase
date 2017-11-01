@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.luke.films.model.actor.Actor;
+import com.luke.films.model.actor.Person;
 import com.luke.films.model.cast.Cast;
 import com.luke.films.model.film.Film;
 import com.luke.films.service.ActorService;
@@ -38,15 +38,15 @@ public class ActorFilmController {
 	public String addActorToFilm(@RequestParam("actorId") String actorId, @RequestParam("filmId") String filmId,
 			@RequestParam() String role) {
 
-		Actor actor = actorService.getActorById(Integer.valueOf(actorId));
+		Person person = actorService.getActorById(Integer.valueOf(actorId));
 		Film film = filmsService.getFilmById(Integer.valueOf(filmId));
 
-		castService.addActorToFilm(film, actor, role);
+		castService.addActorToFilm(film, person, role);
 		return ControllerConstants.REDIRECT+ ControllerConstants.FILM_LIST;
 	}
 
 	@RequestMapping(value = "/film/{filmId}", method = RequestMethod.GET)
-	public String getFilmPage(@PathVariable int filmId, Model model, Actor actor, Cast actorFilm) {
+	public String getFilmPage(@PathVariable int filmId, Model model, Person person, Cast actorFilm) {
 		Film filmById = filmsService.getFilmById(filmId);
 		List<Cast> list = castService.getActors(filmById);
 		comments = commentDao.getFilmComments(filmId);
@@ -60,7 +60,7 @@ public class ActorFilmController {
 			}
 			model.addAttribute("filmRating", filmsService.getRating(filmById));
 			model.addAttribute(ControllerConstants.FILM, filmById);
-			model.addAttribute("noOfVotes", filmById.getRating().size());
+			model.addAttribute("noOfVotes", 0); //filmById.getRating().size());
 			model.addAttribute("actorFilm", new Cast());
 			model.addAttribute(ControllerConstants.COMMENTS_LIST, comments);
 			return ControllerConstants.FILM;
@@ -69,21 +69,21 @@ public class ActorFilmController {
 
 	@RequestMapping(value = "/actor/{actorId}", method = RequestMethod.GET)
 	public String getActorPage(@PathVariable("actorId") int actorId, Model model, Cast actorFilm) {
-		Actor actor = actorService.getActorById(actorId);
+		Person person = actorService.getActorById(actorId);
 
 		comments = commentDao.getActorComments(actorId);
 
-		if (actor == null) {
-			final String actorError = "No actor of id " + actorId + " found!";
+		if (person == null) {
+			final String actorError = "No person of id " + actorId + " found!";
 			throw new NullPointerException(actorError);
 		} else {
 
 			if(!comments.isEmpty()) {
 				model.addAttribute(ControllerConstants.COMMENTS_LIST, comments);
 			}
-			Map<Film, String> map = castService.getFilmography(actor);
+			Map<Film, String> map = castService.getFilmography(person);
 			model.addAttribute(ControllerConstants.FILMS, map);
-			model.addAttribute(ControllerConstants.ACTOR, actor);
+			model.addAttribute(ControllerConstants.ACTOR, person);
 			return ControllerConstants.ACTOR;
 		}
 	}

@@ -19,14 +19,14 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.luke.films.config.ApplicationConfigCore;
 import com.luke.films.config.HibernateConfig;
-import com.luke.films.model.actor.Actor;
+import com.luke.films.model.actor.Person;
 import com.luke.films.service.ActorService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
 @WebAppConfiguration("WebContent")
 @ActiveProfiles(profiles = "test")
-public class ActorServiceTest {
+public class PersonServiceTest {
 	@Autowired
 	private ActorService actorService;
 //TODO learn how  to mockuser
@@ -34,9 +34,9 @@ public class ActorServiceTest {
 	@WithMockUser(username = "admin", authorities = "ROLE_ADMIN", roles="ROLE_ADMIN")
 	public void deleteActors() {
 
-		List<Actor> allActors = actorService.getAllActors();
-		if (allActors != null) {
-			for (Actor a : allActors)
+		List<Person> allPeople = actorService.getAllActors();
+		if (allPeople != null) {
+			for (Person a : allPeople)
 				actorService.deleteActor(a);
 		}
 		System.out.println(actorService.getAllActors());
@@ -46,27 +46,27 @@ public class ActorServiceTest {
 	@WithMockUser(username = "lucaskos", authorities = "ROLE_USER")
 	public void addActor() {
 		assertNull(actorService.getAllActors());
-		Actor actor1 = new Actor("Keanu Reeves");
-		Actor actor2 = new Actor("Anthony Hopkins");
+		Person person1 = new Person("Keanu Reeves");
+		Person person2 = new Person("Anthony Hopkins");
 
-		actorService.addActor(actor1);
-		actorService.addActor(actor2);
+		actorService.addActor(person1);
+		actorService.addActor(person2);
 		assertNotNull(actorService.getAllActors());
 		
 		String name = "e";
-		List<Actor> allActors = actorService.getAllActors();
-		List<Actor> containList = new ArrayList<Actor>();
-		for (Actor actor : allActors)
-			if (actor.getName().contains(name))
-				containList.add(actor);
+		List<Person> allPeople = actorService.getAllActors();
+		List<Person> containList = new ArrayList<Person>();
+		for (Person person : allPeople)
+			if (person.getFirstName().contains(name))
+				containList.add(person);
 		System.out.println("\n\nContain list : " + containList);
 	}
 
 	@After
 	@WithMockUser(username = "admin", authorities = "ROLE_ADMIN", roles="ROLE_ADMIN")
 	public void deleteAllActors() {
-		List<Actor> allActors = actorService.getAllActors();
-		for (Actor a : allActors)
+		List<Person> allPeople = actorService.getAllActors();
+		for (Person a : allPeople)
 			System.out.println(a);
 		}
 }

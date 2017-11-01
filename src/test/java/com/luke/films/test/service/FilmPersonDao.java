@@ -24,7 +24,7 @@ import com.luke.films.service.ActorService;
 @ContextConfiguration(classes = { ApplicationConfigCore.class, HibernateConfig.class })
 @WebAppConfiguration("WebContent")
 @ActiveProfiles(profiles = "test")
-public class FilmActorDao {
+public class FilmPersonDao {
 
 	@Autowired
 	SessionFactory sessionFactory;

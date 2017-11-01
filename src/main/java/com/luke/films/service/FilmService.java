@@ -1,5 +1,6 @@
 package com.luke.films.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import com.luke.films.model.film.Film;
 import com.luke.films.model.film.FilmsDao;
 import com.luke.films.model.rating.Rating;
 import com.luke.films.model.user.User;
+import org.springframework.util.StringUtils;
 
 @Component("filmsService")
 @Transactional
@@ -36,7 +38,7 @@ public class FilmService {
 	}
 
 	public Film getFilmByTitle(String title) {
-		if (title.equals("") || title == null)
+		if (StringUtils.isEmpty(title))
 			return null;
 		else {
 			List<Film> list = filmsDao.getFilmsByTitle(title);
@@ -54,7 +56,7 @@ public class FilmService {
 	}
 
 	public float getRating(Film film) {
-		Set<Rating> ratingForFilm = getFilmById(film.getFilmId()).getRating();
+		Set<Rating> ratingForFilm = new HashSet<>();// getFilmById(film.getFilmId()).getRating();
 		if(ratingForFilm.size() < 1)
 			return 0.0f;
 		float calculateRating = calculateRating(ratingForFilm);
@@ -69,12 +71,11 @@ public class FilmService {
 	}
 	
 	public void rateFilm(Film film, User user, int rating) {
-		
-		
-		Set<Rating> userRating = film.getRating();
+
+		Set<Rating> userRating = new HashSet<>();//film.getRating();
 		
 		if(userRating.isEmpty()) {
-			
+
 			filmsDao.addRating(new Rating(rating, user, film));
 		} else {
 			Rating didUserRateFilm = didUserRateFilm(userRating, user);

@@ -2,6 +2,7 @@ package com.luke.films.model.film;
 
 import java.util.List;
 
+import com.luke.films.model.FilmRelation;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,6 +29,7 @@ public class FilmsDaoImpl implements FilmsDao {
 
 	@Override
 	public List<Film> getAllFilms() {
+
 		@SuppressWarnings("unchecked")
 		List<Film> list = sessionFactory.getCurrentSession().createQuery("from Film").list();
 		if (!list.isEmpty()) {
@@ -51,6 +53,7 @@ public class FilmsDaoImpl implements FilmsDao {
 	public Film getFilmById(int id) {
 		String query = "from Film where id = ?1";
 		List<?> list = session().createQuery(query).setParameter("1", id).list();
+		List<FilmRelation> allFilmRelations = session().createQuery("from FilmRelation where id = :id").setParameter("id", id).list();
 		if (!list.isEmpty()) {
 			return (Film) list.get(0);
 		} else {

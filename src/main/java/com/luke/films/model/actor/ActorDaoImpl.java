@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,44 +30,44 @@ public class ActorDaoImpl implements ActorDao {
 	}
 
 	@Override
-	public void addActor(Actor actor) {
-		session().save(actor);
+	public void addActor(Person person) {
+		session().save(person);
 	}
 
 	@Override
-	public List<Actor> getAllActors() {
+	public List<Person> getAllActors() {
 		CriteriaBuilder builder = session().getCriteriaBuilder();
 
-		CriteriaQuery<Actor> criteria = builder.createQuery(Actor.class);
-		Root<Actor> actorRoot = criteria.from(Actor.class);
+		CriteriaQuery<Person> criteria = builder.createQuery(Person.class);
+		Root<Person> actorRoot = criteria.from(Person.class);
 
 		criteria.select(actorRoot);
 
-		List<Actor> listOfAllActors = session().createQuery(criteria).getResultList();
+		List<Person> listOfAllPeople = session().createQuery(criteria).getResultList();
 
-		if (!listOfAllActors.isEmpty())
-			return listOfAllActors;
+		if (!listOfAllPeople.isEmpty())
+			return listOfAllPeople;
 		return null;
 	}
 
 	@Override
-	public void deleteActor(Actor actor) {
-		session().delete(actor);
+	public void deleteActor(Person person) {
+		session().delete(person);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Actor getActorByName(Actor actor) {
-		List<Actor> listOfActorsByName = session().createQuery("from Actor where name = ?1")
-				.setParameter("1", actor.getName()).list();
+	public Person getActorByName(Person person) {
+		List<Person> listOfActorsByName = session().createQuery("from Person where name = ?1")
+				.setParameter("1", person.getFirstName()).list();
 		if (listOfActorsByName.isEmpty())
 			return null;
 		else
 			return listOfActorsByName.get(0);
 	}
 
-	public Actor getActorById(int primaryKey) {
-		Actor actorById = session().get(Actor.class, primaryKey);
-		return actorById;
+	public Person getActorById(int primaryKey) {
+		Person personById = session().get(Person.class, primaryKey);
+		return personById;
 	}
 }

@@ -4,15 +4,15 @@ import java.util.List;
 
 public interface ActorDao {
 
-	List<Actor> getAllActors();
+	List<Person> getAllActors();
 	
-	void addActor(Actor actor);	
+	void addActor(Person person);
 	
-	void deleteActor(Actor actor);
+	void deleteActor(Person person);
 	
-	Actor getActorByName(Actor actor);
+	Person getActorByName(Person person);
 	
-	Actor getActorById(int id);
+	Person getActorById(int id);
 	
 	
 	

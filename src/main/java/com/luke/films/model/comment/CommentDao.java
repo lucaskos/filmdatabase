@@ -1,6 +1,6 @@
 package com.luke.films.model.comment;
 
-import com.luke.films.model.actor.Actor;
+import com.luke.films.model.actor.Person;
 import com.luke.films.model.film.Film;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface CommentDao {
 
     Comment getCommentById(int id);
 
-    void insertComment(Comment comment, Film film, Actor actor);
+    void insertComment(Comment comment, Film film, Person person);
 
     List<Comment> getAllHierarchyComment(int id);
 

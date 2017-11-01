@@ -11,10 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.luke.films.model.actor.Person;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.luke.films.model.actor.Actor;
 import com.luke.films.model.film.Film;
 
 @Entity
@@ -35,9 +35,9 @@ public class Cast implements Serializable {
 	@JoinColumn(name = "film_id")
 	private Film film;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "actor_id")
-	private Actor actor;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "actor_id")
+//	private Person person;
 
 	@Column(name = "role")
 	private String role;
@@ -46,9 +46,9 @@ public class Cast implements Serializable {
 
 	}
 	
-	public Cast(Film f, Actor a) {
+	public Cast(Film f) {
 		this.film = f;
-		this.actor = a;
+
 	}
 
 	public int getActorFilmId() {
@@ -75,17 +75,11 @@ public class Cast implements Serializable {
 		this.film = film;
 	}
 
-	public Actor getActor() {
-		return actor;
-	}
-
-	public void setActor(Actor actor) {
-		this.actor = actor;
-	}
-
-	@Override
-	public String toString() {
-		return "Cast [actorFilmId=" + actorFilmId + ", film=" + film + ", actor=" + actor + ", role=" + role + "]";
-	}
-
+//	public Person getPerson() {
+//		return person;
+//	}
+//
+//	public void setPerson(Person person) {
+//		this.person = person;
+//	}
 }
